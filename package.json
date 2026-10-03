@@ -1,0 +1,23 @@
+{
+  "name": "typeslasher",
+  "private": true,
+  "version": "1.6.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "build:prototype": "tsc --noEmit && vite build --config vite.prototype.config.ts",
+    "preview": "vite preview",
+    "check": "node tools/check-all.mjs",
+    "check:release": "node tools/check-release.mjs",
+    "play": "node tools/serve-release.mjs"
+  },
+  "dependencies": {
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.180.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7"
+  }
+}

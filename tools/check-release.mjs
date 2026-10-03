@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import {readFile,readdir,stat} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {gzipSync} from 'node:zlib';
+const root=fileURLToPath(new URL('../dist/',import.meta.url));
+for(const name of ['index.html','assets.html']){
+  const html=await readFile(resolve(root,name),'utf8');
+  assert.ok(!/https?:\/\//.test(html),'HTML must not need remote assets');
+  for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){
+    assert.ok(!match[1].startsWith('/'),'Release links must work in a subfolder');
+    const file=resolve(root,match[1]);await stat(file);
+  }
+}
+const css=await readFile(resolve(root,'fonts/fonts.css'),'utf8');
+assert.ok(!/https?:\/\//.test(css));
+for(const match of css.matchAll(/url\(([^)]+)\)/g))await stat(resolve(root,'fonts',match[1]));
+for(const font of ['dm-mono','outfit'])assert.match(await readFile(resolve(root,`fonts/${font}-OFL.txt`),'utf8'),/SIL OPEN FONT LICENSE/);
+let bytes=0;let gzipBytes=0;
+async function scan(path){for(const entry of await readdir(path,{withFileTypes:true})){const child=resolve(path,entry.name);if(entry.isDirectory())await scan(child);else{const buffer=await readFile(child);bytes+=buffer.length;gzipBytes+=gzipSync(buffer).length;}}}
+await scan(root);
+let optionalBytes=0;
+for(const pack of ['fresh','snacks','big','garden','market','pantry']){
+  const size=(await stat(resolve(root,`assets/typeslasher-${pack}-pack.glb`))).size;
+  assert.ok(size<6_000_000,`${pack} exceeds its independent 6 MB budget`);optionalBytes+=size;
+}
+// The Blender kitchen loads only when a player starts Sentence Slash.
+const kitchenBytes=(await stat(resolve(root,'assets/typeslasher-kitchen.glb'))).size;
+assert.ok(kitchenBytes<4_500_000,'Keep the optional kitchen under 4.5 MB');
+optionalBytes+=kitchenBytes;
+assert.ok(bytes-optionalBytes<8_000_000,'Keep the starter game under an 8 MB raw asset budget');
+console.log(`Passed: portable release links, local fonts/licenses, ${(bytes/1e6).toFixed(2)} MB raw / ${(gzipBytes/1e6).toFixed(2)} MB with gzip.`);

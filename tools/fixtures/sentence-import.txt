@@ -1,0 +1,3 @@
+The kiwi watched a shooting star.
+- Slice one word at a time.
+- Return to the home row.

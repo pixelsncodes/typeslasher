@@ -1,0 +1,67 @@
+{
+  "scene": "Midnight fruit kitchen - daylight",
+  "shelf_depth": 1.32,
+  "pendants": [],
+  "shelf_props": [
+    {
+      "name": "stacked dishes",
+      "front": 2.259999990463257,
+      "back": 3.319999933242798,
+      "wall_clearance": 0.187500066757202
+    },
+    {
+      "name": "stacked dishes.001",
+      "front": 2.259999990463257,
+      "back": 3.319999933242798,
+      "wall_clearance": 0.187500066757202
+    },
+    {
+      "name": "stacked dishes.002",
+      "front": 2.259999990463257,
+      "back": 3.319999933242798,
+      "wall_clearance": 0.187500066757202
+    },
+    {
+      "name": "stacked dishes.003",
+      "front": 2.259999990463257,
+      "back": 3.319999933242798,
+      "wall_clearance": 0.187500066757202
+    },
+    {
+      "name": "stacked dishes.004",
+      "front": 2.259999990463257,
+      "back": 3.319999933242798,
+      "wall_clearance": 0.187500066757202
+    },
+    {
+      "name": "stacked dishes.005",
+      "front": 2.259999990463257,
+      "back": 3.319999933242798,
+      "wall_clearance": 0.187500066757202
+    },
+    {
+      "name": "storage jar",
+      "front": 2.5799999237060547,
+      "back": 3.119999885559082,
+      "wall_clearance": 0.3875001144409178
+    },
+    {
+      "name": "jar lid",
+      "front": 2.559999942779541,
+      "back": 3.1399998664855957,
+      "wall_clearance": 0.36750013351440414
+    },
+    {
+      "name": "storage jar.001",
+      "front": 2.5799999237060547,
+      "back": 3.119999885559082,
+      "wall_clearance": 0.3875001144409178
+    },
+    {
+      "name": "jar lid.001",
+      "front": 2.559999942779541,
+      "back": 3.1399998664855957,
+      "wall_clearance": 0.36750013351440414
+    }
+  ]
+}

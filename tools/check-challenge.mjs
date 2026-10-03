@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import ts from 'typescript';
+const source=readFileSync(new URL('../src/challenge.ts',import.meta.url),'utf8');
+const {outputText}=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}});
+const {DIFFICULTIES,ChallengeDirector,chooseWord,selectTarget,completedFoods,unlockedThemes}=await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
+assert.deepEqual(Object.values(DIFFICULTIES).map(p=>p.capacity),[1,2,3,4]);
+const catalog=[{name:'apple'},{name:'avocado'},{name:'banana'},{name:'carrot'}];
+assert.equal(chooseWord(catalog,['apple'],0)?.name,'banana');
+assert.equal(chooseWord(catalog,['apple','banana','carrot'],0),undefined);
+const a={name:'apple'},b={name:'banana'};assert.equal(selectTarget([a,b],undefined,'b',x=>x.name),b);assert.equal(selectTarget([a,b],a,'b',x=>x.name),a);
+let easy=new ChallengeDirector('slicer');const initial=easy.budget(10000);for(let i=0;i<10;i++){for(let k=0;k<5;k++)easy.key(true);easy.resolve(true);}assert.ok(easy.budget(10000)<initial);
+let struggling=new ChallengeDirector('chef');for(let i=0;i<10;i++){struggling.key(i%2===0);struggling.resolve(i<5);}assert.ok(struggling.pressure<0);assert.ok(struggling.budget(10000)>DIFFICULTIES.chef.factor*10000);
+let fixed=new ChallengeDirector('master',false);for(let i=0;i<20;i++){fixed.key(false);fixed.resolve(false);}assert.equal(fixed.pressure,0);
+let bounded=new ChallengeDirector('master');for(let batch=0;batch<20;batch++)for(let i=0;i<10;i++){bounded.key(true);bounded.resolve(true);}assert.equal(bounded.pressure,3);assert.ok(bounded.budget(10000)>=DIFFICULTIES.master.min*10000);
+assert.equal(completedFoods([{mode:'prep',completed:6},{mode:'arcade',completed:11}]),11);assert.deepEqual(unlockedThemes(9),['midnight']);assert.deepEqual(unlockedThemes(10),['midnight','watermelon']);assert.equal(unlockedThemes(25).length,3);
+console.log('Passed: four capacities, distinct initials, lock behavior, harder/easier/fixed adaptation, pressure bounds, and theme milestones.');

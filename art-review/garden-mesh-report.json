@@ -1,0 +1,210 @@
+{
+  "food_tomato": {
+    "triangles": 6720,
+    "materials": [
+      "Leaf green",
+      "Leaf vein",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_tomato_left": {
+    "triangles": 3474,
+    "materials": [
+      "Leaf green",
+      "Leaf vein",
+      "Painted garden sculpted skin",
+      "tomato detailed cut flesh"
+    ]
+  },
+  "food_tomato_right": {
+    "triangles": 3502,
+    "materials": [
+      "Leaf green",
+      "Leaf vein",
+      "Painted garden sculpted skin",
+      "tomato detailed cut flesh"
+    ]
+  },
+  "food_cucumber": {
+    "triangles": 9860,
+    "materials": [
+      "Celery fine pale ribs",
+      "Leaf green",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_cucumber_left": {
+    "triangles": 5460,
+    "materials": [
+      "Celery fine pale ribs",
+      "cucumber detailed cut flesh",
+      "Leaf green",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_cucumber_right": {
+    "triangles": 4780,
+    "materials": [
+      "Celery fine pale ribs",
+      "cucumber detailed cut flesh",
+      "Leaf green",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_pepper": {
+    "triangles": 6944,
+    "materials": [
+      "Leaf green",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_pepper_left": {
+    "triangles": 5920,
+    "materials": [
+      "garden pale flesh",
+      "Leaf green",
+      "Painted garden sculpted skin",
+      "pepper detailed cut flesh",
+      "pepper seed membrane"
+    ]
+  },
+  "food_pepper_right": {
+    "triangles": 5956,
+    "materials": [
+      "garden pale flesh",
+      "Leaf green",
+      "Painted garden sculpted skin",
+      "pepper detailed cut flesh",
+      "pepper seed membrane.001"
+    ]
+  },
+  "food_radish": {
+    "triangles": 6146,
+    "materials": [
+      "garden pale flesh",
+      "Leaf green",
+      "Leaf vein",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_radish_left": {
+    "triangles": 3234,
+    "materials": [
+      "garden pale flesh",
+      "Leaf green",
+      "Leaf vein",
+      "Painted garden sculpted skin",
+      "radish detailed cut flesh"
+    ]
+  },
+  "food_radish_right": {
+    "triangles": 3268,
+    "materials": [
+      "garden pale flesh",
+      "Leaf green",
+      "Leaf vein",
+      "Painted garden sculpted skin",
+      "radish detailed cut flesh"
+    ]
+  },
+  "food_beet": {
+    "triangles": 4682,
+    "materials": [
+      "Beet burgundy stalk",
+      "Beet burgundy stalk.001",
+      "Beet burgundy stalk.002",
+      "Beet burgundy stalk.003",
+      "Painted garden sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_beet_left": {
+    "triangles": 2406,
+    "materials": [
+      "Beet burgundy stalk",
+      "Beet burgundy stalk.001",
+      "beet detailed cut flesh",
+      "Painted garden sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_beet_right": {
+    "triangles": 2440,
+    "materials": [
+      "Beet burgundy stalk.002",
+      "Beet burgundy stalk.003",
+      "beet detailed cut flesh",
+      "Painted garden sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_mushroom": {
+    "triangles": 6404,
+    "materials": [
+      "Mushroom umber gills",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_mushroom_left": {
+    "triangles": 3274,
+    "materials": [
+      "mushroom detailed cut flesh",
+      "Mushroom umber gills",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_mushroom_right": {
+    "triangles": 3274,
+    "materials": [
+      "mushroom detailed cut flesh",
+      "Mushroom umber gills",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_zucchini": {
+    "triangles": 4580,
+    "materials": [
+      "Leaf green",
+      "Painted garden sculpted skin"
+    ]
+  },
+  "food_zucchini_left": {
+    "triangles": 2366,
+    "materials": [
+      "Leaf green",
+      "Painted garden sculpted skin",
+      "zucchini detailed cut flesh"
+    ]
+  },
+  "food_zucchini_right": {
+    "triangles": 2374,
+    "materials": [
+      "Leaf green",
+      "Painted garden sculpted skin",
+      "zucchini detailed cut flesh"
+    ]
+  },
+  "food_onion": {
+    "triangles": 4948,
+    "materials": [
+      "Painted garden sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_onion_left": {
+    "triangles": 2582,
+    "materials": [
+      "onion detailed cut flesh",
+      "Painted garden sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_onion_right": {
+    "triangles": 2566,
+    "materials": [
+      "onion detailed cut flesh",
+      "Painted garden sculpted skin",
+      "Woody stems"
+    ]
+  }
+}

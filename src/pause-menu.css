@@ -1,0 +1,18 @@
+.pause-card{width:min(380px,calc(100vw - 40px));padding:30px!important;background:linear-gradient(145deg,#47314b,#30243e)!important;border:2px solid #9e758f!important;border-radius:22px!important;box-shadow:0 24px 70px #110d20a0;text-align:center;display:flex;flex-direction:column;gap:12px;max-height:90dvh;overflow:auto}
+.pause-card .pause-kicker{margin:0;color:#e5b6c9;font:11px 'DM Mono',monospace;letter-spacing:.18em}
+.pause-card h2{font:800 clamp(32px,5vw,42px) Outfit,sans-serif!important;letter-spacing:-.04em;margin:0 0 12px!important;color:#fff1d3}
+:is(#sentence-game,#pause-screen) .pause-card .pause-action{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;min-height:53px;padding:13px 18px;border:1px solid #88617f;border-radius:11px;background:#523b55;color:#fff1d3;font:700 18px Outfit,sans-serif;cursor:pointer;text-decoration:none;box-shadow:0 3px #20182c;transition:background .15s,transform .15s}
+:is(#sentence-game,#pause-screen) .pause-card .pause-action span{font-size:15px;color:#ceacc3;opacity:1;margin:0}
+:is(#sentence-game,#pause-screen) .pause-card .pause-action:hover{background:#634667;transform:translateY(-1px)}
+:is(#sentence-game,#pause-screen) .pause-card .pause-action:focus-visible{outline:3px solid #c0f2d3;outline-offset:4px}
+:is(#sentence-game,#pause-screen) .pause-card .pause-action.primary{background:#ffd453!important;color:#392532;border-color:#e7b749;box-shadow:0 4px #a77432!important;margin:0!important;order:0!important}
+:is(#sentence-game,#pause-screen) .pause-card .pause-action.primary span{color:#76522e}
+:is(#sentence-game,#pause-screen) .pause-card .pause-action.exit{background:#30243e;color:#e4c4d5;margin-top:4px}
+#sentence-game .sentence-pause-cover{position:fixed;padding:20px;gap:0;backdrop-filter:blur(8px);background:#1d1729bf}
+.pause-settings-extra{border-top:1px solid #765475;margin-top:20px;padding-top:16px;display:grid;gap:15px}
+.pause-settings-extra label{display:grid;gap:7px;color:#f4e3cf;font-size:14px}
+.pause-settings-extra .check-setting{display:flex;align-items:center}
+.pause-settings-extra p{font-size:12px;color:#cfb7cc;margin:0}
+.pause-settings-extra select{width:100%}
+.pause-settings-extra[hidden]{display:none!important}
+#pause-screen .pause-card{margin:auto}

@@ -1,0 +1,17 @@
+node_modules/
+dist/
+*.zip
+*.blend1
+*.blend2
+art-review/pre-*/
+.env
+.env.*
+!.env.example
+.vercel/
+.DS_Store
+Thumbs.db
+*.log
+__pycache__/
+.codex/
+.agents/
+.aws/

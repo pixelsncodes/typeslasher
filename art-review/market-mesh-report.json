@@ -1,0 +1,193 @@
+{
+  "food_lemon": {
+    "triangles": 5114,
+    "materials": [
+      "Leaf green",
+      "Leaf vein",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_lemon_left": {
+    "triangles": 2454,
+    "materials": [
+      "Leaf green",
+      "lemon detailed cut flesh",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_lemon_right": {
+    "triangles": 2848,
+    "materials": [
+      "Leaf green",
+      "Leaf vein",
+      "lemon detailed cut flesh",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_raspberry": {
+    "triangles": 24592,
+    "materials": [
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_raspberry_left": {
+    "triangles": 12914,
+    "materials": [
+      "Painted market sculpted skin",
+      "raspberry detailed cut flesh"
+    ]
+  },
+  "food_raspberry_right": {
+    "triangles": 12914,
+    "materials": [
+      "Painted market sculpted skin",
+      "raspberry detailed cut flesh"
+    ]
+  },
+  "food_blueberry": {
+    "triangles": 4520,
+    "materials": [
+      "Blueberry dusky crown",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_blueberry_left": {
+    "triangles": 2342,
+    "materials": [
+      "blueberry detailed cut flesh",
+      "Blueberry dusky crown",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_blueberry_right": {
+    "triangles": 2342,
+    "materials": [
+      "blueberry detailed cut flesh",
+      "Blueberry dusky crown",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_cherry": {
+    "triangles": 4540,
+    "materials": [
+      "Leaf green",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_cherry_left": {
+    "triangles": 3668,
+    "materials": [
+      "cherry detailed cut flesh",
+      "Leaf green",
+      "Painted market sculpted skin",
+      "Stone fruit carved pit",
+      "Woody stems"
+    ]
+  },
+  "food_cherry_right": {
+    "triangles": 2370,
+    "materials": [
+      "cherry detailed cut flesh",
+      "Leaf green",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_fig": {
+    "triangles": 4792,
+    "materials": [
+      "Painted market sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_fig_left": {
+    "triangles": 2456,
+    "materials": [
+      "fig detailed cut flesh",
+      "Painted market sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_fig_right": {
+    "triangles": 2484,
+    "materials": [
+      "fig detailed cut flesh",
+      "Painted market sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_pomegranate": {
+    "triangles": 4744,
+    "materials": [
+      "Painted market sculpted skin",
+      "Pomegranate russet crown"
+    ]
+  },
+  "food_pomegranate_left": {
+    "triangles": 15058,
+    "materials": [
+      "Painted market sculpted skin",
+      "pomegranate detailed cut flesh",
+      "Pomegranate russet crown",
+      "Ruby pomegranate arils"
+    ]
+  },
+  "food_pomegranate_right": {
+    "triangles": 15058,
+    "materials": [
+      "Painted market sculpted skin",
+      "pomegranate detailed cut flesh",
+      "Pomegranate russet crown",
+      "Ruby pomegranate arils"
+    ]
+  },
+  "food_dragonfruit": {
+    "triangles": 15460,
+    "materials": [
+      "Leaf green",
+      "Leaf vein",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_dragonfruit_left": {
+    "triangles": 8260,
+    "materials": [
+      "dragonfruit detailed cut flesh",
+      "Leaf green",
+      "Leaf vein",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_dragonfruit_right": {
+    "triangles": 8364,
+    "materials": [
+      "dragonfruit detailed cut flesh",
+      "Leaf green",
+      "Leaf vein",
+      "Painted market sculpted skin"
+    ]
+  },
+  "food_apricot": {
+    "triangles": 4524,
+    "materials": [
+      "Painted market sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_apricot_left": {
+    "triangles": 3674,
+    "materials": [
+      "apricot detailed cut flesh",
+      "Painted market sculpted skin",
+      "Stone fruit carved pit",
+      "Woody stems"
+    ]
+  },
+  "food_apricot_right": {
+    "triangles": 2356,
+    "materials": [
+      "apricot detailed cut flesh",
+      "Painted market sculpted skin",
+      "Woody stems"
+    ]
+  }
+}

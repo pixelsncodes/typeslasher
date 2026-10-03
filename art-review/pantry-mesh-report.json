@@ -1,0 +1,193 @@
+{
+  "food_bread": {
+    "triangles": 5544,
+    "materials": [
+      "Painted bakery crust",
+      "pantry pale flesh"
+    ]
+  },
+  "food_bread_left": {
+    "triangles": 2856,
+    "materials": [
+      "bread detailed cut flesh",
+      "Painted bakery crust",
+      "pantry pale flesh"
+    ]
+  },
+  "food_bread_right": {
+    "triangles": 2886,
+    "materials": [
+      "bread detailed cut flesh",
+      "Painted bakery crust",
+      "pantry pale flesh"
+    ]
+  },
+  "food_cheese": {
+    "triangles": 3308,
+    "materials": [
+      "cheese solid surface",
+      "cheese surface pores"
+    ]
+  },
+  "food_cheese_left": {
+    "triangles": 1886,
+    "materials": [
+      "cheese detailed cut flesh",
+      "cheese solid surface",
+      "cheese surface pores"
+    ]
+  },
+  "food_cheese_right": {
+    "triangles": 1582,
+    "materials": [
+      "cheese detailed cut flesh",
+      "cheese solid surface",
+      "cheese surface pores"
+    ]
+  },
+  "food_bagel": {
+    "triangles": 6336,
+    "materials": [
+      "Painted bakery crust",
+      "Toasted sesame seeds"
+    ]
+  },
+  "food_bagel_left": {
+    "triangles": 3176,
+    "materials": [
+      "bagel detailed cut flesh",
+      "Painted bakery crust",
+      "Toasted sesame seeds"
+    ]
+  },
+  "food_bagel_right": {
+    "triangles": 3272,
+    "materials": [
+      "bagel detailed cut flesh",
+      "Painted bakery crust",
+      "Toasted sesame seeds"
+    ]
+  },
+  "food_croissant": {
+    "triangles": 3116,
+    "materials": [
+      "Painted bakery crust"
+    ]
+  },
+  "food_croissant_left": {
+    "triangles": 1580,
+    "materials": [
+      "croissant detailed cut flesh",
+      "Painted bakery crust"
+    ]
+  },
+  "food_croissant_right": {
+    "triangles": 1580,
+    "materials": [
+      "croissant detailed cut flesh",
+      "Painted bakery crust"
+    ]
+  },
+  "food_tofu": {
+    "triangles": 3308,
+    "materials": [
+      "tofu solid surface",
+      "tofu surface pores"
+    ]
+  },
+  "food_tofu_left": {
+    "triangles": 1708,
+    "materials": [
+      "tofu detailed cut flesh",
+      "tofu solid surface",
+      "tofu surface pores"
+    ]
+  },
+  "food_tofu_right": {
+    "triangles": 1660,
+    "materials": [
+      "tofu detailed cut flesh",
+      "tofu solid surface",
+      "tofu surface pores"
+    ]
+  },
+  "food_potato": {
+    "triangles": 6080,
+    "materials": [
+      "Painted matte produce",
+      "Potato tiny eyes"
+    ]
+  },
+  "food_potato_left": {
+    "triangles": 3030,
+    "materials": [
+      "Painted matte produce",
+      "potato detailed cut flesh",
+      "Potato tiny eyes"
+    ]
+  },
+  "food_potato_right": {
+    "triangles": 3190,
+    "materials": [
+      "Painted matte produce",
+      "potato detailed cut flesh",
+      "Potato tiny eyes"
+    ]
+  },
+  "food_pumpkin": {
+    "triangles": 6944,
+    "materials": [
+      "Painted pantry sculpted skin",
+      "Woody stems"
+    ]
+  },
+  "food_pumpkin_left": {
+    "triangles": 5420,
+    "materials": [
+      "Painted pantry sculpted skin",
+      "pantry pale flesh",
+      "pumpkin detailed cut flesh",
+      "pumpkin seed membrane",
+      "Woody stems"
+    ]
+  },
+  "food_pumpkin_right": {
+    "triangles": 5456,
+    "materials": [
+      "Painted pantry sculpted skin",
+      "pantry pale flesh",
+      "pumpkin detailed cut flesh",
+      "pumpkin seed membrane.001",
+      "Woody stems"
+    ]
+  },
+  "food_celery": {
+    "triangles": 4906,
+    "materials": [
+      "Celery fine pale ribs",
+      "Celery tender green rib",
+      "Leaf green",
+      "Leaf vein"
+    ]
+  },
+  "food_celery_left": {
+    "triangles": 2790,
+    "materials": [
+      "celery detailed cut flesh",
+      "Celery fine pale ribs",
+      "Celery tender green rib",
+      "Leaf green",
+      "Leaf vein"
+    ]
+  },
+  "food_celery_right": {
+    "triangles": 2812,
+    "materials": [
+      "celery detailed cut flesh",
+      "Celery fine pale ribs",
+      "Celery tender green rib",
+      "Leaf green",
+      "Leaf vein"
+    ]
+  }
+}

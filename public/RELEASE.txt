@@ -1,0 +1,21 @@
+TYPESLASHER 1.0 — STATIC WEB RELEASE
+
+Serve this folder through HTTP or HTTPS, or upload its contents to a static web
+host. index.html is the game; assets.html is the 3D food review studio.
+Do not open index.html directly with a file:// URL.
+
+Use a desktop/laptop with a physical QWERTY keyboard. Start with Arcade, Sprout,
+and Relaxed pace. Escape pauses. Sound & feel controls music, volume, motion,
+graphics, and Beat Kitchen tap calibration.
+
+All fonts and food models are local. No login, analytics, or AI service is used.
+Progress saves on the current browser and site address. Use the same address
+each time to keep the same notebook. Clearing site storage clears progress.
+
+Food models, music sequence and effects were created for Typeslasher.
+Three.js license: assets/THREE-LICENSE.txt
+Outfit font license: fonts/outfit-OFL.txt
+DM Mono font license: fonts/dm-mono-OFL.txt
+
+Validated with Chromium on Windows. Firefox, Safari, other devices and physical
+audio setups need playtesting. There is no offline service worker in this release.

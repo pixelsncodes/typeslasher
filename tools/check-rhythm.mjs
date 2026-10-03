@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import ts from 'typescript';
+async function module(name){const {outputText}=ts.transpileModule(readFileSync(new URL(`../src/${name}.ts`,import.meta.url),'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}});return import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);}
+const {beatError,beatBonus,calibrationOffset,BeatLauncher}=await module('rhythm');
+assert.equal(beatBonus(0),25);assert.equal(beatBonus(590),25);assert.equal(beatBonus(591),0);assert.equal(beatBonus(410),25);
+assert.equal(beatBonus(620,120),25);assert.equal(beatBonus(620,0),0);assert.equal(beatError(450),-50);assert.equal(beatError(100,100),0);
+assert.equal(calibrationOffset([80,85,90,95,100,105,110,115]),98);
+assert.equal(calibrationOffset([0,0,0]),undefined);assert.equal(calibrationOffset([-200,-150,-100,-50,50,100,150,200]),undefined);
+assert.equal(calibrationOffset([0,0,0,0,0,0,0,NaN]),undefined);
+const launch=new BeatLauncher();assert.equal(launch.due(10,1700,true),true);assert.equal(launch.due(15,1700,true),false);
+assert.equal(launch.due(1510,1700,true),false);assert.equal(launch.due(2010,1700,false),false);assert.equal(launch.due(2510,1700,true),true);
+assert.equal(launch.due(9000,1700,true),true);assert.equal(launch.due(9001,1700,true),false,'No spawn backlog');
+launch.reset();assert.equal(launch.due(220,1700,true),false,'Late frames wait for a beat');assert.equal(launch.due(505,1700,true),true);
+const {RoundClock}=await module('round-timing');const clock=new RoundClock();clock.start(0);clock.tick(3000);clock.tick(3510);const before=beatError(clock.elapsed,70);
+clock.pause(3510);clock.tick(50000);clock.resume(50000);clock.tick(53000);assert.equal(beatError(clock.elapsed,70),before,'Pause/countdown preserve beat phase');
+const {emptyProgress,addSession,parseProgress}=await module('learning');
+let p=emptyProgress();const session={mode:'arcade',label:'sprout-relaxed-fixed',attempts:10,correct:10,score:100,completed:2,activeMs:20000};
+p=addSession(p,session,{});p=addSession(p,{...session,mode:'beat',label:'beat-sprout-relaxed-fixed',score:125},{});
+assert.equal(p.rounds,2);assert.equal(p.foods,4);assert.equal(p.best['sprout-relaxed-fixed'],100);assert.equal(p.best['beat-sprout-relaxed-fixed'],125);assert.deepEqual(parseProgress(JSON.stringify(p)),p);
+console.log('Passed: bonus boundaries, calibrated offsets, scattered taps, beat launches, no backlog, pause phase, and separate Beat Kitchen records.');
