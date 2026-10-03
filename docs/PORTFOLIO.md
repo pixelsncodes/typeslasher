@@ -17,8 +17,9 @@ Codex assisted development, Blender and Python supported the asset pipeline, and
 
 ## Visuals
 
+- `screenshots/home.jpg`: homepage artwork and arcade menu.
 - `screenshots/sentence-slash.png`: main kitchen gameplay image.
-- `screenshots/food-slash.jpg`: Food Slash with visible targets and finger guidance.
+- `screenshots/food-slash.jpg`: Food Slash with a sliced-open apple, visible targets, and finger guidance.
 - `screenshots/garden-assets.png`: whole foods and modeled cut interiors.
 - `screenshots/market-assets.png`: fruit anatomy and asset variety.
 - `screenshots/kitchen-render.png`: Blender kitchen review render.

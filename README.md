@@ -23,9 +23,15 @@ Finger hints and home-row drills help players practice. Adjustable pace, reduced
 
 ## Gameplay and art
 
+### Homepage artwork
+
+![Typeslasher homepage with dimensional lettering, sculpted foods, and arcade controls](docs/screenshots/home.jpg)
+
+The midnight snack arcade introduces the game with a food-filled counter, oversized keycaps, and a plum, cream, yellow, and mint palette.
+
 ### Food Slash
 
-![Flying food targets with an on-screen keyboard and finger guidance](docs/screenshots/food-slash.jpg)
+![An apple sliced open during Food Slash, alongside carrot and grape targets and finger guidance](docs/screenshots/food-slash.jpg)
 
 Each active food has a different first letter. Start typing its name to select it, then finish the word to cut the model. Longer words receive more time. Accuracy, combos, and completed slices shape the score.
 

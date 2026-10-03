@@ -1,6 +1,7 @@
 # Screenshot sources
 
-- `home.jpg` and `food-slash.jpg`: browser captures taken during GitHub preparation on 2026-10-03.
+- `home.jpg`: browser homepage capture taken during GitHub preparation on 2026-10-03.
+- `food-slash.jpg`: production-build browser capture taken on 2026-10-03, showing an apple split into its modeled halves after a successful typed word, alongside carrot and grape targets.
 - `sentence-slash.png`: saved version 1.6 gameplay checkpoint, copied unchanged from `art-review/pumpkin-kitchen-1.6.png`.
 - `garden-assets.png`, `market-assets.png`, and `pantry-assets.png`: Blender whole/cut review sheets, copied unchanged from the corresponding `art-review/*-review.png` files.
 - `kitchen-render.png`: Blender review render, copied unchanged from `art-review/kitchen-daylight-v2.png`.
