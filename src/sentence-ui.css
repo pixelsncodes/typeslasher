@@ -130,3 +130,26 @@
 .headline-word{display:inline-block;transform-origin:50% 90%}
 @media(max-width:760px){#sentence-setup-heading{font-size:clamp(34px,8vw,48px)}}
 @media(prefers-reduced-motion:reduce){.headline-word{transform:none!important}}
+.story-tabs{display:flex;gap:8px;padding:5px;border:1px solid #795771;border-radius:11px;background:#241b30}
+.story-tabs button{flex:1;min-width:0;border:0;border-radius:7px;padding:11px 8px;background:transparent;color:#d9bfd0;font-size:13px;font-weight:800}
+#sentence-game .story-tabs button[aria-selected=true]{background:#a8debd;color:#294135;box-shadow:0 3px #487058}
+.story-menu-hint{font-size:12px;color:#d9bfd0;margin:17px 0 10px}
+.story-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-height:min(37dvh,360px);overflow:auto;padding:2px 5px 8px 2px;scrollbar-width:thin;scrollbar-color:#a58da4 #241b30;overscroll-behavior:contain}
+#sentence-game .story-tile{position:relative;min-width:0;overflow:hidden;text-align:left;padding:0;border:2px solid #8b6b82;border-radius:12px;background:#fff1d8;color:#342436;box-shadow:0 4px #201725;transition:border-color .15s,transform .15s}
+#sentence-game .story-tile:hover{border-color:#d5acbf;transform:translateY(-1px)}
+#sentence-game .story-tile[aria-pressed=true]{border-color:#ffd453;box-shadow:0 4px #a77432}
+.story-tile img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:#fff1d8}
+.story-tile img[src*='/recipes/']{object-fit:contain}
+.story-tile-copy{display:grid;gap:3px;padding:10px;min-height:53px}
+.story-tile-copy b{font:800 13px/1.15 Outfit,Arial,sans-serif}
+.story-tile-copy small{font:500 9px/1.3 'DM Mono',monospace;color:#78596e}
+.story-check{position:absolute;right:7px;top:7px;display:none;width:24px;height:24px;place-items:center;border:2px solid #3a2932;border-radius:50%;background:#ffd453;color:#3a2932;font-size:13px;font-weight:800}
+.story-tile[aria-pressed=true] .story-check{display:grid}
+.sentence-editor .sentence-options{margin-top:17px}
+#custom-story-panel{padding-top:20px}
+#custom-story-panel>label{display:block;margin:0 0 10px;font-size:17px;font-weight:800}
+#custom-story-panel textarea{min-height:220px}
+#custom-story-hint{font-size:11px;line-height:1.5;color:#ccb6ca;margin:10px 0 0}
+#start-sentences:disabled{opacity:.5;cursor:default;transform:none}
+@media(max-width:760px){.story-tiles{grid-template-columns:repeat(2,minmax(0,1fr));max-height:360px}.story-tabs button{font-size:12px}.story-tile-copy b{font-size:13px}.story-tile-copy{padding:9px}}
+@media(prefers-reduced-motion:reduce){#sentence-game .story-tile{transition:none}#sentence-game .story-tile:hover{transform:none}}

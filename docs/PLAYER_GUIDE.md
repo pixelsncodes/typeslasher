@@ -62,9 +62,9 @@ same rest between fruits. The scene fills the cabinet width and uses a lower
 perspective camera. It loads on demand when starting paragraph practice.
 
 
-Choose **Sentence Slash**, then **Play** on the home screen. Paste or write a
-paragraph, load a UTF-8 `.txt` file, choose a story/recipe, or play a ten-order
-restaurant shift. Press **Start** to begin. **Game options** lets you choose
+Choose **Sentence Slash**, then **Play** on the home screen. Choose an illustrated story or recipe tile, or play a ten-order restaurant shift.
+The **+ Add your story** tab lets you write or paste your own passage. Your draft
+stays intact when you switch back to the story menu. Press **Start** to begin. **Game options** lets you choose
 **Gentle** for forgiving letter case or **Exact** for case-sensitive typing,
 Relaxed or Rush service, target pace, and your first recipe. Both typing styles
 require punctuation. Curly quotes and long dashes become ordinary keyboard
@@ -74,7 +74,9 @@ Each sentence is one order, with a fixed batch of ingredients. Ingredients lie
 naturally in the basket and on the board, then move through cutting and into the
 bowl. All cuts finish before the dish is served and the next batch arrives. Recipe
 cards show the current order and the next two. All ten dishes are used before a
-recipe repeats in a longer passage.
+recipe repeats in a longer passage. Each recipe has its own serving dish: mint,
+coral, wooden, garden, lilac, blue and handled soup bowls, plus roast, picnic
+and bakery plates. The dish changes with the order.
 
 Type the highlighted sentence to guide the blade. Each completed word advances
 the recipe; each completed sentence serves a dish. Spaces are ordinary typing
@@ -103,8 +105,7 @@ keeps paragraph typing available when 3D graphics cannot load.
 
 Starting a passage removes citation markers, links and URLs, and turns each
 bullet or numbered item into its own order. It also normalizes dashes and checks
-for characters unsupported by this English-keyboard version. A passage is limited to 10,000 source characters; `.txt` files
-must be smaller than 64 KiB. Finishing early records partial practice.
+for characters unsupported by this English-keyboard version. A custom story is limited to 10,000 source characters. Finishing early records partial practice.
 
 Your source passage stays in memory for this visit. It is not saved or sent
 anywhere; only recent practice results are saved in this browser. The Locker

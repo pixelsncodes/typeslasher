@@ -1,19 +1,15 @@
 import './sentence-ui.css';
 import './pause-menu.css';
 import './restaurant-orders.css';
-import { RESTAURANT_MENU, planOrders, type KitchenOrder } from './restaurant-orders';
+import { planOrders, type KitchenOrder } from './restaurant-orders';
 import { extractClipboardHtml, preparePassage, SentenceSession, type TypingStyle, type PreparedPassage } from './sentence-core';
 import { createSentenceProgress } from './sentence-progress';
 import { SentenceKitchen, type ServiceMode } from './sentence-game';
 import { createSentenceScene } from './sentence-scene';
 import { fingerFor } from './learning';
-import { RECIPES, RECIPE_STORIES, RECIPE_STORY_CHOICES, type RecipeId } from './kitchen-recipes';
-
-const samples = {
-  snacks: 'An apple wore a tiny chef hat. A kiwi joined the kitchen crew. They mixed pears and oranges in a bowl. Sweet mango made the fruit salad complete.',
-  space: 'Our spaceship landed beside a purple moon. A friendly robot offered us a map. We followed the glowing stars home.',
-  everyday: 'I opened my backpack and found a squeaky rubber duck. It had eaten my homework. The teacher laughed so hard she gave the duck a gold star.',
-};
+import { RECIPES, type RecipeId } from './kitchen-recipes';
+import { createGameConfirm } from './game-confirm';
+import { STORY_CHOICES, type StoryChoice } from './story-choices';
 
 export function createSentenceUI(options: { home: () => void; reduced: () => boolean; sound: () => void; progress: ReturnType<typeof createSentenceProgress>; settings:()=>void; quality?:()=>string; theme?:()=>string; muted?:()=>boolean; toggleMute?:()=>void; setReduced?:(value:boolean)=>void; letter?:(index:number)=>void; serve?:()=>void; stopSound?:()=>void }) {
   const progress = options.progress;
@@ -21,8 +17,11 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   document.body.append(root);
   root.innerHTML = `<div class="sentence-cabinet">
     <header class="sentence-nav"><button id="sentence-home" type="button">← TYPESLASHER</button><strong>SENTENCE <span>SLASH</span></strong><span id="sentence-step"></span></header>
-    <section class="sentence-page" data-page="editor"><div class="sentence-intro"><p class="sentence-kicker">BRING YOUR OWN WORDS</p><h1 id="sentence-setup-heading" tabindex="-1" aria-label="Are you hungry for a good story?"><span class="headline-stack" aria-hidden="true"><span class="headline-row"><span class="headline-word">Are</span> <span class="headline-word">you</span></span><span class="headline-row headline-gold"><span class="headline-word">hungry</span></span><span class="headline-row"><span class="headline-word">for</span> <span class="headline-word">a</span> <span class="headline-word">good</span></span><span class="headline-row headline-gold"><span class="headline-word">story?</span></span></span></h1><p>Type to guide the blade. Finish words to slice ingredients. Serve a fresh bowl with every sentence. Choose a story, paste a passage, or write your own. Your text stays in this browser.</p></div>
-      <div class="sentence-editor"><label for="passage-text">Your passage</label><textarea id="passage-text" spellcheck="false" placeholder="Paste or write your text here…"></textarea><div class="sentence-editor-tools"><label class="sentence-file">Choose .txt file<input id="passage-file" type="file" accept=".txt,text/plain"></label><span>Up to 10,000 characters</span></div><div class="sentence-samples"><span>Or choose a story:</span><button data-sample="snacks">Fruit adventure</button><button data-sample="space">Space mission</button><button data-sample="everyday">Funny day</button></div><details class="sentence-options"><summary>Game options</summary><div class="sentence-style"><span>Typing style</span><label><input type="radio" name="sentence-style" value="gentle" checked> Gentle · letter case optional</label><label><input type="radio" name="sentence-style" value="exact"> Exact · case and punctuation</label></div></details><p class="sentence-start-hint">Each sentence is one order. Ready for service?</p><p id="sentence-error" role="alert"></p><button class="sentence-primary" id="start-sentences">START ▶</button></div>
+    <section class="sentence-page" data-page="editor"><div class="sentence-intro"><p class="sentence-kicker">BRING YOUR OWN WORDS</p><h1 id="sentence-setup-heading" tabindex="-1" aria-label="Are you hungry for a good story?"><span class="headline-stack" aria-hidden="true"><span class="headline-row"><span class="headline-word">Are</span> <span class="headline-word">you</span></span><span class="headline-row headline-gold"><span class="headline-word">hungry</span></span><span class="headline-row"><span class="headline-word">for</span> <span class="headline-word">a</span> <span class="headline-word">good</span></span><span class="headline-row headline-gold"><span class="headline-word">story?</span></span></span></h1><p>Type to guide the blade. Finish words to slice ingredients. Serve a fresh dish with every sentence. Choose a story, paste a passage, or write your own. Your text stays in this browser.</p></div>
+      <div class="sentence-editor"><div class="story-tabs" role="tablist" aria-label="Choose your story"><button id="stories-tab" role="tab" aria-selected="true" aria-controls="stories-panel" tabindex="0">Story menu</button><button id="custom-story-tab" role="tab" aria-selected="false" aria-controls="custom-story-panel" tabindex="-1">+ Add your story</button></div>
+        <div id="stories-panel" role="tabpanel" aria-labelledby="stories-tab"><p class="story-menu-hint">Pick a story. We’ll bring the ingredients.</p><div class="story-tiles">${STORY_CHOICES.map(choice=>`<button class="story-tile" data-story="${choice.id}" aria-label="${choice.title}" aria-pressed="false"><img src="${import.meta.env.BASE_URL}assets/${choice.image}" alt="" width="384" height="256" loading="lazy"><span class="story-tile-copy"><b>${choice.title}</b><small>${preparePassage(choice.text,'gentle').sentences.length} orders</small></span><span class="story-check" aria-hidden="true">✓</span></button>`).join('')}</div></div>
+        <div id="custom-story-panel" role="tabpanel" aria-labelledby="custom-story-tab" hidden><label for="passage-text">What’s your story?</label><textarea id="passage-text" spellcheck="false" placeholder="Write a story or paste your text here…" aria-describedby="custom-story-hint"></textarea><p id="custom-story-hint">Every sentence becomes an order. Up to 10,000 characters. Your draft stays here when you choose another story.</p></div>
+        <details class="sentence-options"><summary>Game options</summary><div class="sentence-style"><span>Typing style</span><label><input type="radio" name="sentence-style" value="gentle" checked> Gentle · letter case optional</label><label><input type="radio" name="sentence-style" value="exact"> Exact · case and punctuation</label></div></details><p class="sentence-start-hint" id="story-selection" role="status">Pick something tasty to play.</p><p id="sentence-error" role="alert"></p><button class="sentence-primary" id="start-sentences" disabled>START ▶</button></div>
     </section>
     <section class="sentence-page sentence-stage" data-page="stage" hidden>
       <div class="sentence-stage-top"><div><p class="sentence-kicker">KITCHEN SERVICE</p><span id="sentence-progress"></span></div><div class="service-stats"><div><b id="service-score">0</b><small>POINTS</small></div><div><b id="service-wpm">—</b><small>WPM</small></div><div><b id="service-accuracy">—</b><small>ACCURACY</small></div><div class="service-combo"><b id="service-combo">×1</b><small id="service-streak">0 / 5 CLEAN WORDS</small><span id="service-marks" aria-hidden="true">▱ ▱ ▱ ▱ ▱</span></div></div><div class="service-tools"><button id="sentence-mute" aria-pressed="false">Sound on</button><button id="sentence-pause">Ⅱ Pause</button></div></div>
@@ -31,7 +30,7 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
       <div id="sentence-kitchen" aria-hidden="true"></div>
       <div class="sentence-reading"><div id="sentence-fx" aria-hidden="true"></div><div class="reading-heading"><p class="sentence-kicker">TYPE THIS SENTENCE</p><span id="service-mode-label">RELAXED · GENTLE</span></div><div class="sentence-text-window"><div id="active-sentence" aria-live="off"></div></div><p id="sentence-feedback" role="status">Start with the glowing character.</p><div class="up-next"><span>UP NEXT</span><p id="next-sentence"></p></div></div>
       <div class="sentence-stage-bottom"><span id="sentence-hint">Find your home row. Type the highlighted character.</span><label><input id="service-finger-hints" type="checkbox"> Finger hints</label><button id="sentence-finish">Finish early</button></div><input id="sentence-input" aria-label="Type the highlighted sentence here" autocomplete="off" autocapitalize="off" spellcheck="false"></section>
-    <section class="sentence-page sentence-result" data-page="result" hidden><p class="sentence-kicker" id="sentence-result-kicker">PASSAGE COMPLETE</p><h1 id="sentence-result-title" tabindex="-1">Words well sliced!</h1><div class="sentence-result-grid"><div><b id="sentence-accuracy">—</b><small>ACCURACY</small></div><div><b id="sentence-count">0</b><small>SENTENCES</small></div><div><b id="sentence-wpm">—</b><small>WPM</small></div></div><p id="sentence-result-copy"></p><div class="sentence-actions"><button class="sentence-primary" id="sentence-replay">PLAY AGAIN ↻</button><button id="sentence-edit">Edit text</button><button id="sentence-new">New passage</button><button id="sentence-result-home">Home</button></div><p class="sentence-privacy">Only your typing results are saved. Your passage stays in this visit.</p></section>
+    <section class="sentence-page sentence-result" data-page="result" hidden><p class="sentence-kicker" id="sentence-result-kicker">PASSAGE COMPLETE</p><h1 id="sentence-result-title" tabindex="-1">Words well sliced!</h1><div class="sentence-result-grid"><div><b id="sentence-accuracy">—</b><small>ACCURACY</small></div><div><b id="sentence-count">0</b><small>SENTENCES</small></div><div><b id="sentence-wpm">—</b><small>WPM</small></div></div><p id="sentence-result-copy"></p><div class="sentence-actions"><button class="sentence-primary" id="sentence-replay">PLAY AGAIN ↻</button><button id="sentence-edit">Edit story</button><button id="sentence-new">New passage</button><button id="sentence-result-home">Home</button></div><p class="sentence-privacy">Only your typing results are saved. Your passage stays in this visit.</p></section>
     <div class="sentence-countdown" hidden aria-live="assertive">3</div>
     <div class="sentence-pause-cover" hidden role="dialog" aria-modal="true" aria-label="Sentence Slash paused"><div class="pause-card"><p class="pause-kicker">THE KITCHEN CAN WAIT</p><h2>Game paused</h2><button id="sentence-resume" class="pause-action primary">Continue<span aria-hidden="true">↵</span></button><button id="sentence-retry" class="pause-action">Retry<span aria-hidden="true">↻</span></button><button id="sentence-settings" class="pause-action">Settings<span aria-hidden="true">⚙</span></button><button id="sentence-pause-home" class="pause-action exit">Exit<span aria-hidden="true">←</span></button></div></div>
   </div>`;
@@ -39,6 +38,32 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   const editor = $<HTMLTextAreaElement>('#passage-text');
   const input = $<HTMLInputElement>('#sentence-input');
   const error = $('#sentence-error');
+  const confirmation = createGameConfirm(options.reduced);
+  let storyTab:'stories'|'custom'='stories';
+  let selectedStory:StoryChoice|undefined;
+  function refreshStart(){
+    const ready=storyTab==='custom'?!!editor.value.trim():!!selectedStory;
+    $<HTMLButtonElement>('#start-sentences').disabled=!ready;
+    $('#story-selection').textContent=storyTab==='custom'?'Your words. Your next kitchen adventure.':selectedStory?`${selectedStory.title} · ready for service`:'Pick something tasty to play.';
+  }
+  function selectTab(tab:'stories'|'custom'){
+    storyTab=tab;
+    for(const [id,value] of [['stories','stories'],['custom-story','custom']] as const){
+      const button=$<HTMLButtonElement>(`#${id}-tab`),selected=tab===value;
+      button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;
+      $(`#${id}-panel`).hidden=!selected;
+    }
+    showError('');refreshStart();
+  }
+  $('#stories-tab').addEventListener('click',()=>selectTab('stories'));
+  $('#custom-story-tab').addEventListener('click',()=>selectTab('custom'));
+  $('.story-tabs').addEventListener('keydown',event=>{
+    const key=(event as KeyboardEvent).key;
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(key))return;
+    event.preventDefault();const tab=key==='Home'?'stories':key==='End'?'custom':storyTab==='stories'?'custom':'stories';
+    selectTab(tab);$(tab==='stories'?'#stories-tab':'#custom-story-tab').focus();
+  });
+  editor.addEventListener('input',()=>{showError('');refreshStart();});
   let recipe:RecipeId='fruit';
   const recipeControl=document.createElement('label');recipeControl.className='recipe-choice';
   recipeControl.innerHTML=`First order<select id="kitchen-recipe">${Object.entries(RECIPES).map(([id,value])=>`<option value="${id}">${value.title}</option>`).join('')}</select><small id="recipe-ingredients"></small><small>Different dishes follow. The full menu is served before a recipe repeats.</small>`;
@@ -47,19 +72,12 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   function updateRecipe(){ $('#recipe-ingredients').textContent=(recipe==='fruit'?RECIPES[recipe].items.slice(0,6):RECIPES[recipe].items).join(', '); }
   updateRecipe();
   $('#kitchen-recipe').addEventListener('change',()=>{recipe=$<HTMLSelectElement>('#kitchen-recipe').value as RecipeId;updateRecipe();});
-  $('.sentence-samples>span').insertAdjacentHTML('afterend','<button id=restaurant-menu class=restaurant-menu-button>Restaurant shift · 10 orders</button>');
-  $('#restaurant-menu').addEventListener('click',()=>{
-    const text=RESTAURANT_MENU.map(order=>order.sentence).join(' ');
-    if(editor.value.trim()&&editor.value!==text&&!confirm('Replace your passage with the restaurant menu?'))return;
-    editor.value=text;mode='rush';$<HTMLInputElement>('input[name=service-mode][value=rush]').checked=true;$('.service-pace').hidden=false;showError('');$('#start-sentences').focus();
-  });
-  $('.sentence-samples').insertAdjacentHTML('beforeend',RECIPE_STORY_CHOICES.map(choice=>`<button data-recipe-story="${choice.id}">${choice.title}</button>`).join(''));
-  root.querySelectorAll<HTMLButtonElement>('[data-recipe-story]').forEach(button=>button.addEventListener('click',()=>{
-    const id=button.dataset.recipeStory as keyof typeof RECIPE_STORIES;
-    const text=RECIPE_STORIES[id];
-    if(editor.value.trim()&&editor.value!==text&&!confirm('Replace the text in your editor with this recipe?'))return;
-    recipe=RECIPE_STORY_CHOICES.find(choice=>choice.id===id)!.recipe; $<HTMLSelectElement>('#kitchen-recipe').value=recipe;updateRecipe();
-    editor.value=text;showError('');editor.focus();
+  root.querySelectorAll<HTMLButtonElement>('[data-story]').forEach(button=>button.addEventListener('click',()=>{
+    selectedStory=STORY_CHOICES.find(choice=>choice.id===button.dataset.story)!;
+    recipe=selectedStory.recipe;$<HTMLSelectElement>('#kitchen-recipe').value=recipe;updateRecipe();
+    if(selectedStory.rush){mode='rush';$<HTMLInputElement>('input[name=service-mode][value=rush]').checked=true;$('.service-pace').hidden=false;}
+    root.querySelectorAll<HTMLButtonElement>('[data-story]').forEach(tile=>tile.setAttribute('aria-pressed',String(tile===button)));
+    showError('');refreshStart();
   }));
   $('.sentence-options').insertAdjacentHTML('beforeend','<p class="service-instructions">Type spaces normally. Backspace fixes mistakes; accepted letters stay in place.</p>');
   $('.sentence-result-grid').insertAdjacentHTML('afterend','<div class="service-result-extras"></div><div class="service-chart"></div>');
@@ -100,8 +118,8 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   const show = (page: string) => { stopHeadline(); shownPage = page; root.querySelectorAll<HTMLElement>('[data-page]').forEach(el => { el.hidden = el.dataset.page !== page; }); root.querySelector('.sentence-cabinet')!.setAttribute('data-view',page); $('#sentence-step').textContent = page === 'stage' ? 'KITCHEN SERVICE' : page === 'editor' ? 'READY TO PLAY' : page.toUpperCase(); if(page==='editor'){root.scrollTop=0;dropHeadline();} if(page!=='stage'){window.clearInterval(hudTimer);scene?.setActive(false);options.stopSound?.();} };
   const showError = (message: string) => { error.textContent = message; };
   function startPassage() {
-    try { prepared = preparePassage(editor.value, style); showError(''); }
-    catch (e) { showError((e as Error).message); editor.focus(); return; }
+    try { prepared = preparePassage(storyTab==='custom'?editor.value:selectedStory?.text??'', style); showError(''); }
+    catch (e) { showError((e as Error).message); if(storyTab==='custom')editor.focus();else $('[data-story]').focus(); return; }
     void begin();
   }
   const screen = root.querySelector<HTMLElement>('.sentence-reading')!;
@@ -224,7 +242,7 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     $('#sentence-count').textContent = `${session.completedSentences} / ${session.sentences.length}`;
     $('#sentence-wpm').textContent = snap.elapsed >= 15_000 ? String(Math.round(snap.correct / 5 / (snap.elapsed / 60000))) : '—';
     $('#sentence-result-title').textContent=partial?'A good start.':'Service complete!';
-    $('.service-result-extras').innerHTML=`<div><b>${kitchen.score.toLocaleString()}</b><small>POINTS</small></div><div><b>${kitchen.bestStreak}</b><small>BEST CLEAN STREAK</small></div><div><b>${kitchen.cleanSentences}</b><small>PERFECT BOWLS</small></div><div><b>${mode==='rush'?(kitchen.served?`${kitchen.freshOrders}/${kitchen.served}`:'—'):`${Math.round(snap.elapsed/1000)}s`}</b><small>${mode==='rush'?'SERVED FRESH':'ACTIVE TIME'}</small></div><div><b>${kitchen.lostOrders}</b><small>ORDERS LOST</small></div>`;
+    $('.service-result-extras').innerHTML=`<div><b>${kitchen.score.toLocaleString()}</b><small>POINTS</small></div><div><b>${kitchen.bestStreak}</b><small>BEST CLEAN STREAK</small></div><div><b>${kitchen.cleanSentences}</b><small>PERFECT DISHES</small></div><div><b>${mode==='rush'?(kitchen.served?`${kitchen.freshOrders}/${kitchen.served}`:'—'):`${Math.round(snap.elapsed/1000)}s`}</b><small>${mode==='rush'?'SERVED FRESH':'ACTIVE TIME'}</small></div><div><b>${kitchen.lostOrders}</b><small>ORDERS LOST</small></div>`;
     const weakest=[...kitchen.mistakes.entries()].sort((a,b)=>b[1]-a[1])[0];
     const comparisonKey=JSON.stringify([session.sentences,style,mode,pace]);const previousScore=comparisons.get(comparisonKey);
     const comparison=!partial&&previousScore!==undefined?` ${kitchen.score>=previousScore?'+':''}${kitchen.score-previousScore} points against your last complete service.`:'';
@@ -293,8 +311,15 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     } else { $('#sentence-feedback').textContent=result==='wrong'?'Not quite. Backspace to fix it.':''; render(); }
   }
   $('#sentence-home').addEventListener('click',home); $('#sentence-result-home').addEventListener('click',home); $('#sentence-pause-home').addEventListener('click',home);
-  $('#sentence-edit').addEventListener('click',() => { show('editor'); editor.focus(); });
-  $('#sentence-new').addEventListener('click',() => { editor.value = ''; prepared = null; show('editor'); editor.focus(); });
+  $('#sentence-edit').addEventListener('click',async() => {
+    if(storyTab==='stories'&&selectedStory){
+      if(editor.value.trim()&&editor.value!==selectedStory.text&&!await confirmation.ask({title:'Edit this story?',message:'This will replace your custom draft with the selected story. Keep your draft if you’re still working on it.',accept:'Edit story'}))return;
+      editor.value=selectedStory.text;
+    }
+    show('editor');selectTab('custom');editor.focus();
+  });
+  $('#sentence-new').textContent='Choose a story';
+  $('#sentence-new').addEventListener('click',() => { prepared = null; show('editor'); selectTab('stories'); $('#stories-tab').focus(); });
   $('#sentence-replay').addEventListener('click',begin);
   $('#start-sentences').addEventListener('click',startPassage);
   function updateMute(){const muted=options.muted?.()??false;$('#sentence-mute').textContent=muted?'Sound off':'Sound on';$('#sentence-mute').setAttribute('aria-pressed',String(muted));$<HTMLButtonElement>('#sentence-mute').disabled=!options.toggleMute;}
@@ -305,20 +330,12 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   $('#sentence-retry').addEventListener('click',begin);
   $('#sentence-settings').addEventListener('click',options.settings);
   root.querySelectorAll<HTMLInputElement>('input[name="sentence-style"]').forEach(radio => radio.addEventListener('change',() => { style = radio.value as TypingStyle; }));
-  root.querySelectorAll<HTMLButtonElement>('[data-sample]').forEach(button => button.addEventListener('click',() => { const text=samples[button.dataset.sample as keyof typeof samples]; if(editor.value.trim()&&editor.value!==text&&!confirm('Replace the text in your editor with this story?'))return; if(button.dataset.sample==='snacks'){recipe='fruit';$<HTMLSelectElement>('#kitchen-recipe').value=recipe;updateRecipe();} editor.value = text; showError(''); editor.focus(); }));
-  $<HTMLInputElement>('#passage-file').addEventListener('change',async event => {
-    const file = (event.target as HTMLInputElement).files?.[0]; if (!file) return;
-    if (!file.name.toLowerCase().endsWith('.txt') || file.size > 64 * 1024) { showError('Choose a .txt file smaller than 64 KiB.'); return; }
-    try { const bytes = await file.arrayBuffer(); const text = new TextDecoder('utf-8',{fatal:true}).decode(bytes); if (text.length > 10_000) throw Error('Keep your text under 10,000 characters.'); if(editor.value.trim()&&!confirm('Replace the text in your editor with this file?'))return; editor.value = text; showError(''); }
-    catch (e) { showError((e as Error).message); }
-    (event.target as HTMLInputElement).value = '';
-  });
   editor.addEventListener('paste',event => {
     const html = event.clipboardData?.getData('text/html'); if (!html) return;
     const blocks = extractClipboardHtml(html); if (!blocks.length) return;
     event.preventDefault();
     const text = blocks.map(block => (block.item ? '- ' : '') + block.text).join('\n');
-    editor.setRangeText(text,editor.selectionStart,editor.selectionEnd,'end');
+    editor.setRangeText(text,editor.selectionStart,editor.selectionEnd,'end');refreshStart();
   });
   input.addEventListener('paste',event => { event.preventDefault(); $('#sentence-feedback').textContent = 'Type this passage to practice.'; });
   input.addEventListener('beforeinput',event => event.preventDefault());
@@ -338,5 +355,5 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   pauseCover.addEventListener('keydown',event=>{if(event.key!=='Tab')return;const controls=Array.from(pauseCover.querySelectorAll<HTMLElement>('button,input'));const first=controls[0],last=controls[controls.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}});
   document.addEventListener('visibilitychange',() => { if (document.hidden && !root.hidden) pause(); });
   window.addEventListener('blur',() => { if (!root.hidden) pause(); });
-  return { open() { document.querySelector<HTMLElement>('#app')!.inert = true; root.hidden = false; show('editor'); $('#sentence-setup-heading').focus({preventScroll:true}); }, active: () => !root.hidden, hasPassage: () => !!editor.value.trim(), records: progress.records, resetProgress: progress.reset };
+  return { open() { document.querySelector<HTMLElement>('#app')!.inert = true; root.hidden = false; show('editor'); $('#sentence-setup-heading').focus({preventScroll:true}); }, active: () => !root.hidden, hasPassage: () => !!selectedStory||!!editor.value.trim(), records: progress.records, resetProgress: progress.reset };
 }

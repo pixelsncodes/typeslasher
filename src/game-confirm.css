@@ -1,0 +1,20 @@
+.game-confirm{width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 40px);overflow:auto;padding:30px;border:2px solid #a67b97;border-radius:22px;color:#fff4d8;background:radial-gradient(ellipse at 0 0,#62445d55,transparent 75%),linear-gradient(145deg,#47314b,#30243e);box-shadow:inset 0 0 0 5px #241b3040,0 8px 0 #17121f,0 24px 70px #110d2080;font-family:Outfit,Arial,sans-serif;text-align:left;animation:confirm-arrive .18s ease-out}
+.game-confirm::backdrop{background:#191321b8;backdrop-filter:blur(7px)}
+.game-confirm *{box-sizing:border-box}
+.game-confirm button{cursor:pointer;font-family:inherit}
+.game-confirm button:focus-visible{outline:3px solid #b7edce;outline-offset:4px}
+.game-confirm-close{position:absolute;right:15px;top:13px;width:32px;height:32px;padding:0;border:1px solid #88617f;border-radius:9px;background:#30243e;color:#e9cede;font-size:24px;line-height:1}
+.game-confirm-close:hover{background:#624563}
+.game-confirm-icon{display:grid;place-items:center;width:48px;height:48px;margin-bottom:20px;border:2px solid #263b32;border-radius:12px;background:#a8debd;color:#2f4338;box-shadow:0 4px #4b735b;font-size:31px;font-weight:800;transform:rotate(-5deg)}
+.game-confirm-kicker{margin:0 0 9px;color:#e5b6c9;font:500 9px/1.5 'DM Mono',monospace;letter-spacing:.17em}
+.game-confirm h2{margin:0;color:#fff1d3;font:800 clamp(27px,5vw,34px)/1.08 Outfit,Arial,sans-serif;letter-spacing:-.04em;text-shadow:0 2px #221728}
+#game-confirm-message{margin:16px 0 24px;color:#d9c2d4;font-size:15px;line-height:1.55;overflow-wrap:anywhere}
+.game-confirm-actions{display:flex;gap:12px;margin:0;padding:0}
+.game-confirm-actions button{flex:1;min-width:0;min-height:48px;padding:11px 13px;border:1px solid #88617f;border-radius:10px;background:#523b55;color:#fff1d3;box-shadow:0 3px #20182c;font-size:14px;font-weight:800;transition:transform .15s,background .15s}
+.game-confirm-actions button:hover{background:#634667;transform:translateY(-1px)}
+.game-confirm-actions .game-confirm-accept{border-color:#e7b749;background:#ffd453;color:#392532;box-shadow:0 4px #a77432}
+.game-confirm-actions .game-confirm-accept:hover{background:#ffe077}
+@keyframes confirm-arrive{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.game-confirm.calm{animation:none}.game-confirm.calm button{transition:none}
+@media(max-width:480px){.game-confirm{padding:25px}.game-confirm-actions{gap:9px}.game-confirm-actions button{padding:11px 9px;font-size:13px}}
+@media(prefers-reduced-motion:reduce){.game-confirm{animation:none}.game-confirm button{transition:none}.game-confirm-actions button:hover{transform:none}}

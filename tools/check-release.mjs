@@ -35,5 +35,11 @@ for(const name of await readdir(resolve(root,'assets/recipes'))){
   assert.ok(size<80_000,'Keep each recipe illustration under 80 KB');recipeBytes+=size;
 }
 assert.ok(recipeBytes<500_000,'Keep all recipe artwork under 500 KB');optionalBytes+=recipeBytes;
+let storyBytes=0;
+for(const name of ['fruit-adventure','space-mission','funny-day','restaurant-shift','little-kindness','helping-paws']){
+  const size=(await stat(resolve(root,`assets/stories/${name}.webp`))).size;
+  assert.ok(size<80_000,'Keep each illustrated story tile under 80 KB');storyBytes+=size;
+}
+assert.ok(storyBytes<300_000,'Keep story artwork under 300 KB');optionalBytes+=storyBytes;
 assert.ok(bytes-optionalBytes<8_000_000,'Keep the starter game under an 8 MB raw asset budget');
 console.log(`Passed: portable release links, local fonts/licenses, ${(bytes/1e6).toFixed(2)} MB raw / ${(gzipBytes/1e6).toFixed(2)} MB with gzip.`);

@@ -1,4 +1,30 @@
-# Current checkpoint — Restaurant orders and polished foods · 2026-10-09
+# Current checkpoint — Illustrated story menu and serving dishes · 2026-10-09
+
+- Sentence Slash now opens a six-tile story menu, with a separate “+ Add your
+  story” tab for writing or pasting. File upload is removed; choosing a story
+  preserves the custom draft. Start launches the selected story directly.
+- Six generated story illustrations match the game's rounded style:
+  Restaurant shift, Fruit adventure, Space mission, Funny day, Little kindness,
+  and Helping paws. The two new stories follow animal friends sharing shelter
+  and helping collect spilled apples, with five sentences each. Additional
+  recipe stories are kept out of the menu for now.
+- Each recipe uses its own serving vessel: seven bowls and three plates/platter,
+  including scalloped ceramics, a wooden bowl, and a handled soup bowl.
+- Confirmation dialogs use the game's colors, lettering, buttons and motion.
+
+Validation: all 17 automated suites, production build, and portable release
+checks pass. The ten serving models were reviewed from six views; a two-order
+browser session verified soup-to-picnic dish changes, food placement, and full
+service. Custom drafts, keyboard tabs, confirmation cancellation, and all tile
+images were checked in the browser. The new kindness/helping tiles both load,
+select their stories, and enable Start. Release: 36.08 MB raw / 18.73 MB gzip.
+Artwork prompts and previews are in art-review/stories; vessel review images
+and the interactive review page are in art-review/serving-dishes.
+Release destination: https://www.kaziahmed.net/typeslasher.
+
+---
+
+# Previous checkpoint — Restaurant orders and polished foods · 2026-10-09
 
 - Fixed ingredient batches move from basket to board to bowl, then serve as one
   sentence/order. Cuts finish before the next batch arrives.

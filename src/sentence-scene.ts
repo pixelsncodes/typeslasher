@@ -7,6 +7,8 @@ import { IngredientBatch, type KitchenOrder } from './restaurant-orders';
 import type { FoodKind } from './food-catalog';
 import { FOOD_CATALOG, type PackId } from './food-catalog';
 import { restingFoodModel } from './food-resting';
+import { createServingDish, SERVING_DISHES, servingSlot } from './serving-dishes';
+import type { RecipeId } from './kitchen-recipes';
 
 export type KitchenView = { ordinal: number; progress: number; served: number; total: number; multiplier: number; error: boolean };
 const BOARD = new THREE.Vector3(-.65, .19, .4), YAW = -.68;
@@ -24,6 +26,7 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
   const center = new THREE.Group(), tray = new THREE.Group();world.add(center,tray);
   center.position.copy(BOARD);center.rotation.y=YAW;
   let knife: THREE.Object3D, bowl: THREE.Object3D;
+  const dishes=new Map<RecipeId,THREE.Group>();
   let ready=false, active=false, frame=0, previous=0, time=0, lastDraw=0, currentOrdinal=-1;
   let serveStart=-1, currentCut: {born:number;ordinal:number;released:boolean}|undefined;
   const pending: (ServiceEffect & {ingredient?:number})[]=[];
@@ -57,6 +60,14 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
   }
   function beginOrder(next:KitchenOrder){
     reset();order=next;batch=new IngredientBatch(next.ingredients);
+    if(ready){
+      for(const dish of dishes.values())dish.visible=false;
+      let dish=dishes.get(next.recipe);
+      if(!dish){dish=createServingDish(next.recipe);dishes.set(next.recipe,dish);world.add(dish);}
+      bowl=dish;bowl.visible=true;bowl.position.set(3.9,.01,.25);
+    }
+    host.dataset.servingDish=next.recipe;
+    host.querySelector('.plate-caption')!.textContent=SERVING_DISHES[next.recipe].name.toUpperCase();
     host.classList.remove('order-empty');
     host.querySelector('.prep-caption')!.textContent=next.title.toUpperCase();
     host.querySelector('.kitchen-tickets span b')!.textContent=String(next.index+1).padStart(2,'0');
@@ -135,8 +146,7 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
     for(const piece of pieces){
       const p=reduced()?cutPose(CUT_END):cutPose(time-piece.born);
       const spread=piece.direction*p.spread*.30,sx=BOARD.x+Math.cos(YAW)*spread,sz=BOARD.z-Math.sin(YAW)*spread;
-      const angle=piece.slot*2.4;
-      const target=new THREE.Vector3(3.9+Math.cos(angle)*.48,.40+Math.floor(piece.slot/4)*.08,.25+Math.sin(angle)*.42);
+      const target=servingSlot(order!.recipe,piece.slot).add(new THREE.Vector3(3.9,.01,.25));
       piece.group.position.set(THREE.MathUtils.lerp(sx,target.x,p.transfer)+serveX,
         THREE.MathUtils.lerp(BOARD.y,target.y,p.transfer)+(reduced()?0:Math.sin(p.transfer*Math.PI)*1.35),
         THREE.MathUtils.lerp(sz,target.z,p.transfer));
@@ -166,8 +176,9 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
   new ResizeObserver(resize).observe(host);
   const kitchenReady = new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/typeslasher-kitchen.glb?v=2`).then(asset=>{
     try{
-      knife=asset.scene.getObjectByName('chef_knife')!;bowl=asset.scene.getObjectByName('service_bowl')!;
-      if(!knife||!bowl)throw new Error('Kitchen asset is incomplete');
+      knife=asset.scene.getObjectByName('chef_knife')!;const originalBowl=asset.scene.getObjectByName('service_bowl')!;
+      if(!knife||!originalBowl)throw new Error('Kitchen asset is incomplete');
+      originalBowl.visible=false;bowl=createServingDish('fruit');dishes.set('fruit',bowl as THREE.Group);world.add(bowl);bowl.position.set(3.9,.01,.25);
       renderer=new THREE.WebGLRenderer({antialias:true});renderer.setClearColor('#302335');
       renderer.domElement.className='kitchen-canvas';renderer.domElement.setAttribute('aria-hidden','true');
       renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();ready=false;host.classList.remove('has-food-models');});
@@ -207,7 +218,7 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
     },
     effect(effect:ServiceEffect){
       const callout=host.querySelector<HTMLElement>('.kitchen-callout')!;
-      callout.textContent=effect.type==='serve'?`${effect.fresh?'FRESH BOWL!':effect.clean?'PERFECT BOWL!':'BOWL READY!'}${effect.points?' +'+effect.points:''}`:`${effect.clean?'CLEAN CUT':'SLICED'} +${effect.points}`;
+      callout.textContent=effect.type==='serve'?`${effect.fresh?'FRESH ORDER!':effect.clean?'PERFECT DISH!':'ORDER READY!'}${effect.points?' +'+effect.points:''}`:`${effect.clean?'CLEAN CUT':'SLICED'} +${effect.points}`;
       callout.classList.toggle('serve-callout',effect.type==='serve');
       animate(callout,[{opacity:1,transform:'translate(-50%,5px)'},{opacity:1,offset:.65},{opacity:0,transform:'translate(-50%,-8px)'}],effect.type==='serve'?650:450);
       if(ready&&recipeReady&&order){

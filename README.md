@@ -17,7 +17,7 @@ Typeslasher is a browser typing arcade by **Kazi Ahmed**. It combines keyboard p
 | **Food Slash — Free Play** | Type the names of flying foods to slice them. Choose a food basket, pace, challenge, and a 30/60/90-second round. |
 | **Food Slash — Arcade** | Continue through rounds with gradually shorter typing windows and more simultaneous targets. |
 | **Food Slash — Beat Kitchen** | Finish words near the musical beat for an optional timing bonus. |
-| **Sentence Slash** | Paste a paragraph, import a local `.txt` file, or choose a story/recipe. Words cut a fixed batch of ingredients; sentences serve orders. Choose a story or your own text and press Start. Play relaxed or beat each recipe card’s timer. |
+| **Sentence Slash** | Choose an illustrated story/recipe tile or write/paste a passage under + Add your story. Words cut a fixed batch of ingredients; sentences serve orders. Choose a story or your own text and press Start. Play relaxed or beat each recipe card’s timer. |
 
 Finger hints and home-row drills help players practice. Adjustable pace, reduced motion, sound controls, and graphics presets make sessions easier to tailor. Recent results, key practice, and personal bests stay in the browser; no account is required.
 
@@ -76,7 +76,7 @@ The repository begins with a snapshot of the 1.6 project. Saved plans and releas
 | **Codex + built-in image generation** | AI-assisted development and documented visual references. |
 | **Web Audio API** | Synthesized music/effects and rhythm cues. |
 
-AI assistance is part of the development process. There are no AI requests, analytics, advertisements, or cloud saves during gameplay. Models and fonts are served locally by the site. Imported passages remain in memory for the current visit; recent practice results can be saved in browser storage.
+AI assistance is part of the development process. There are no AI requests, analytics, advertisements, or cloud saves during gameplay. Models and fonts are served locally by the site. Custom passages remain in memory for the current visit; recent practice results can be saved in browser storage.
 
 ## Run locally
 
@@ -100,7 +100,7 @@ npm run check:release
 npm run play
 ```
 
-The 16 check suites cover typing/timing, progression, local records, rhythm, paragraph scoring, kitchen sequencing, catalog rules, and exported food geometry. Production checks verify relative links, local font licenses, and asset size budgets. Saved browser playthroughs and remaining device coverage are documented in [STATUS.md](STATUS.md).
+The 17 check suites cover typing/timing, progression, local records, rhythm, paragraph scoring, kitchen sequencing, catalog rules, and exported food geometry. Production checks verify relative links, local font licenses, and asset size budgets. Saved browser playthroughs and remaining device coverage are documented in [STATUS.md](STATUS.md).
 
 `dist/` contains the static website. The build uses relative asset links for subfolder hosting. Play the published game at [kaziahmed.net/typeslasher](https://www.kaziahmed.net/typeslasher).
 
