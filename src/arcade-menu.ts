@@ -1,7 +1,6 @@
 import './arcade-menu.css';
-import * as THREE from 'three';
-import { foodModel, loadFoodAssets, lightFoodScene } from './food-assets';
-import { selectionTitle, foodsForPlay, FOOD_PACKS, type FoodSelection, type FoodKind, type PackId } from './food-catalog';
+import { createHomeArtwork } from './home-art';
+import { selectionTitle, foodsForPlay, FOOD_PACKS, type FoodSelection, type PackId } from './food-catalog';
 
 export type MenuSetup={basket:FoodSelection;mode:string;level:number;pace:number;adaptive:boolean;reduced:boolean;seconds:number};
 export function createArcadeMenu(options:{
@@ -21,14 +20,20 @@ try { if(localStorage.getItem('typeslasher-playstyle')==='sentence') playstyle='
 const el=document.createElement('div');el.id='arcade-menu';document.body.append(el);
 const game=document.querySelector<HTMLElement>('#app')!;game.inert=true;
 el.innerHTML=`
-  <main class="cabinet">
+  <main class="cabinet" data-view="home">
     <div class="cabinet-grain" aria-hidden="true"></div>
     <header class="game-nav"><button class="small-brand" data-go="home" aria-label="Typeslasher home">TYPE<span>SLASHER</span><i aria-hidden="true"></i></button><div><label class="motion-toggle"><input id="calm-preview" type="checkbox" ${state.reduced?'checked':''}> Less motion</label><button class="utility" data-info="settings">Settings <span aria-hidden="true">⚙</span></button></div></header>
     <section class="screen home-screen" data-screen="home" aria-labelledby="home-heading">
       <div class="hero-art">
         <p class="arcade-sign">THE MIDNIGHT SNACK ARCADE <span aria-hidden="true">✦</span></p>
-        <h1 id="home-heading" class="game-logo"><span>TYPE</span><strong>SLASHER</strong></h1>
-        <div class="food-stage" id="food-stage"><div class="orbit-stroke" aria-hidden="true"></div><canvas id="hero-food" aria-label="Sculpted food floating over an arcade counter"></canvas><span class="stage-spark spark-one" aria-hidden="true">✦</span><span class="stage-spark spark-two" aria-hidden="true">✦</span><span class="floating-key key-f" aria-hidden="true">F</span><span class="floating-key key-j" aria-hidden="true">J</span><div class="counter" aria-hidden="true"><span>FRESH WORDS. CLEAN CUTS.</span></div><p id="scene-status" role="status">Packing the food…</p></div>
+        <div class="food-stage" id="food-stage">
+          <svg class="logo-orbit" viewBox="0 0 1000 893" fill="none" aria-hidden="true"><path d="M860 147C1040 346 602 563 219 615C-17 647 40 455 376 350C564 291 716 254 792 204" stroke="#dd6684" stroke-width="14"/><path d="M860 142C1040 341 602 558 219 610C-17 642 40 450 376 345C564 286 716 249 792 199" stroke="#ffe8ac" stroke-width="7"/></svg>
+          <canvas id="hero-food" aria-hidden="true"></canvas>
+          <h1 id="home-heading" class="game-logo" data-float="0.5"><span>TYPE</span><strong>SLASHER</strong></h1>
+          <svg class="logo-orbit logo-orbit-front" viewBox="0 0 1000 893" fill="none" aria-hidden="true"><path d="M158 631C249 839 782 846 899 658C930 608 902 561 873 548" stroke="#dd6684" stroke-width="13"/><path d="M154 624C245 832 778 839 895 651C926 601 898 554 869 541" stroke="#ffe8ac" stroke-width="6"/></svg>
+          <span class="stage-spark spark-one" data-float="1.4" aria-hidden="true">✦</span><span class="stage-spark spark-two" data-float="3.2" aria-hidden="true">✦</span><span class="stage-spark spark-three" data-float="2.1" aria-hidden="true">✦</span><span class="stage-spark spark-four" data-float="4.2" aria-hidden="true">✦</span>
+          <span class="floating-key key-f" data-float="2.6" aria-hidden="true">F</span><span class="floating-key key-j" data-float="4.4" aria-hidden="true">J</span><p id="scene-status" role="status">Packing the food…</p>
+        </div>
         <p class="hero-motto">Ready. Set. <b>Slice.</b></p>
       </div>
       <nav class="home-actions" aria-label="Main menu"><span class="handwritten">Your next great slice starts here.</span><div class="playstyle-choice" role="group" aria-label="Playstyle"><button data-playstyle="food" aria-pressed="true">🍎 FOOD SLASH</button><button data-playstyle="sentence" aria-pressed="false">✦ SENTENCE SLASH</button></div><button class="play-key" data-play><span class="play-triangle" aria-hidden="true">▶</span><span id="home-play-label">PLAY<small>30 seconds + your final snack</small></span><kbd>↵</kbd></button><div class="current-setup"><p id="home-summary"></p><button class="change-link" data-go="setup">Change setup <span aria-hidden="true">→</span></button></div><button class="secondary-key training-key" data-info="training"><span class="key-icon" aria-hidden="true">F J</span><span>TRAINING<small>A little practice. A lot more confidence.</small></span><span aria-hidden="true">↗</span></button><button class="secondary-key locker-key" data-info="locker"><span class="key-icon" aria-hidden="true">✦</span><span>LOCKER<small>Your foods, looks & personal bests.</small></span><span aria-hidden="true">↗</span></button><p class="home-hint">A keyboard. Two hands. Plenty of time.</p></nav>
@@ -49,9 +54,12 @@ el.innerHTML=`
   <p class="menu-status" role="status" id="preview-status"></p>
   <dialog id="preview-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Close Locker">×</button><span class="section-kicker">YOUR LOCKER</span><h2 id="dialog-title"></h2><p id="dialog-copy"></p><div id="dialog-detail"></div><button class="back-key dialog-done">Back to menu</button></dialog>`;
 
+const artwork=createHomeArtwork(el.querySelector<HTMLElement>('#food-stage')!,state.reduced);
 const status=el.querySelector<HTMLElement>('#preview-status')!;
 function sync(){
   options.change({...state});
+  el.classList.toggle('reduced',state.reduced);
+  artwork.setReduced(state.reduced);
   el.querySelectorAll<HTMLButtonElement>('[data-playstyle]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.playstyle===playstyle)));
   el.querySelectorAll<HTMLButtonElement>('[data-play],#replay-preview').forEach(b=>{b.disabled=playstyle==='food'&&foodBusy;});
   el.querySelector<HTMLElement>('.current-setup')!.hidden=playstyle==='sentence';
@@ -83,7 +91,7 @@ function go(screen:string){
   const wipe=el.querySelector<HTMLElement>('.slash-transition')!;wipe.classList.remove('sweep');if(!state.reduced){void wipe.offsetWidth;wipe.classList.add('sweep');}
   sync();
   const focus=el.querySelector<HTMLElement>(`#${screen==='results'?'results':screen==='setup'?'setup':'home'}-heading`)!;focus.setAttribute('tabindex','-1');focus.focus({preventScroll:true});
-  if(screen==='home'){void updateScene();}else cancelAnimationFrame(frame);
+  if(screen==='home')artwork.start();else artwork.stop();
 }
 el.querySelectorAll<HTMLButtonElement>('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go!)));
 el.querySelectorAll<HTMLButtonElement>('[data-playstyle]').forEach(b=>b.addEventListener('click',()=>{playstyle=b.dataset.playstyle as 'food'|'sentence';try{localStorage.setItem('typeslasher-playstyle',playstyle);}catch{/* Optional. */}sync();}));
@@ -92,7 +100,7 @@ el.querySelectorAll<HTMLButtonElement>('[data-level]').forEach(b=>b.addEventList
 el.querySelectorAll<HTMLButtonElement>('[data-pace]').forEach(b=>b.addEventListener('click',()=>{state.pace=Number(b.dataset.pace);sync();}));
 el.querySelectorAll<HTMLButtonElement>('[data-basket]').forEach(b=>b.addEventListener('click',()=>{state.basket=b.dataset.basket as FoodSelection;sync();}));
 el.querySelector('#gentle-adjust')!.addEventListener('change',e=>{state.adaptive=(e.target as HTMLInputElement).checked;sync();});
-el.querySelector('#calm-preview')!.addEventListener('change',e=>{state.reduced=(e.target as HTMLInputElement).checked;sync();el.classList.toggle('reduced',state.reduced);if(state.screen==='home')animateScene();});
+el.querySelector('#calm-preview')!.addEventListener('change',e=>{state.reduced=(e.target as HTMLInputElement).checked;sync();});
 el.querySelectorAll<HTMLButtonElement>('[data-seconds]').forEach(b=>b.addEventListener('click',()=>{state.seconds=Number(b.dataset.seconds);sync();}));
 el.querySelector('#arcade-next')!.addEventListener('click',options.next);
 const launch=()=>playstyle==='sentence'?options.sentence():options.play();
@@ -110,37 +118,13 @@ window.addEventListener('keydown',e=>{
  if(e.key==='Escape'){go('home');return;}
  if(e.key==='Enter'&&!e.repeat&&!(e.target as HTMLElement).closest('button,input,summary,a,select')){e.preventDefault();launch();}
 });
-sync();el.classList.toggle('reduced',state.reduced);
-
-// One shared render surface. Basket thumbnails are small pre-rendered images.
-const canvas=el.querySelector<HTMLCanvasElement>('#hero-food')!;
-const stage=el.querySelector<HTMLElement>('#food-stage')!;
-let renderer:THREE.WebGLRenderer|undefined,scene:THREE.Scene,camera:THREE.OrthographicCamera;
-let frame=0,epoch=0,start=0;const posed:{model:THREE.Object3D;y:number;ry:number}[]=[];
-const heroes:Record<FoodSelection,FoodKind[]>={starter:['apple','banana','cookie','kiwi'],fresh:['orange','donut','lime','peach'],snacks:['popcorn','pretzel','muffin','waffle'],big:['pineapple','watermelon','strawberry','avocado'],garden:['tomato','pepper','radish','mushroom'],market:['lemon','fig','dragonfruit','cherry'],pantry:['bagel','pumpkin','cheese','croissant'],mixed:['grape','cookie','pear','apple']};
-function draw(){if(!renderer)return;const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.left=-4.3;camera.right=4.3;camera.top=4.3*h/w;camera.bottom=-camera.top;camera.updateProjectionMatrix();renderer.render(scene,camera);}
-function animateScene(){cancelAnimationFrame(frame);start=performance.now();function tick(t:number){if(el.hidden||document.hidden||state.screen!=='home')return;const progress=state.reduced?1:Math.min(1,(t-start)/650);const eased=1-(1-progress)**3;posed.forEach(({model,y,ry},i)=>{model.position.y=y-(1-eased)*(.5+i*.13);model.rotation.y=ry+(1-eased)*.24;});draw();if(progress<1)frame=requestAnimationFrame(tick);}frame=requestAnimationFrame(tick);}
-async function updateScene(){
-  const current=++epoch;const caption=el.querySelector<HTMLElement>('#scene-status')!;
-  try{
-    if(!renderer){renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));scene=new THREE.Scene();camera=new THREE.OrthographicCamera(-4,4,3,-3,.1,60);camera.position.set(0,0,15);lightFoodScene(renderer,scene);}
-    const pack:PackId=state.basket==='mixed'?'starter':state.basket;caption.textContent=`Packing ${FOOD_PACKS[pack].title.toLowerCase()}…`;
-    await loadFoodAssets([pack]);if(current!==epoch)return;
-    for(const {model} of posed)scene.remove(model);posed.length=0;
-    const layout=[[-2.6,.2,.94,-.3],[-.7,-.18,1.04,.2],[1.5,.27,.92,-.16],[2.75,-.65,.70,.34]];
-    heroes[state.basket].forEach((food,i)=>{const model=foodModel(food)!;const [x,y,scale,angle]=layout[i];model.position.set(x,y,0);model.scale.setScalar(scale);model.rotation.set(.12,angle,angle);scene.add(model);posed.push({model,y,ry:angle});});
-    caption.textContent='';animateScene();
-  }catch{caption.innerHTML='Food preview could not load. <button id="retry-scene">Try again</button>';el.querySelector('#retry-scene')!.addEventListener('click',()=>void updateScene());}
-}
-new ResizeObserver(()=>{if(!el.hidden&&state.screen==='home')draw();}).observe(stage);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(frame);else if(state.screen==='home')draw();});
-void updateScene();
+sync();
 
 
 return {
- refreshPreferences(){Object.assign(state,options.setup());sync();el.classList.toggle('reduced',state.reduced);},
+ refreshPreferences(){Object.assign(state,options.setup());sync();},
  home(){Object.assign(state,options.setup());go('home');},
- hide(){el.hidden=true;game.inert=false;state.screen='game';cancelAnimationFrame(frame);},
+ hide(){el.hidden=true;game.inert=false;state.screen='game';artwork.stop();},
  visible:()=>!el.hidden,
  loading(label:string,busy:boolean){foodBusy=busy;status.textContent=playstyle==='sentence'?'':label;el.querySelectorAll<HTMLButtonElement>('[data-play],#replay-preview').forEach(b=>{b.disabled=playstyle==='food'&&busy;});},
  results(data:{accuracy:string;score:number;foods:number;best:boolean;message:string;total:number;next?:{title:string;unlock:number};round?:number}){
