@@ -1,124 +1,194 @@
-# Typeslasher
+<div align="center">
 
-**Type a word. Slice a snack. Turn a paragraph into a kitchen service.**
+# TYPE SLASHER
 
-Typeslasher is a browser typing arcade by **Kazi Ahmed**. It combines keyboard practice with 50 custom 3D foods, a cozy modeled kitchen, and immediate visual feedback. Built with TypeScript, Three.js, and Blender through an iterative, AI-assisted development process.
+### Type a word. Slice a snack. Serve a story.
 
-![Sentence Slash gameplay in the pumpkin soup kitchen](docs/screenshots/sentence-slash.png)
+A playful 3D typing arcade by **Kazi Ahmed**, built for a keyboard and a little appetite.
 
-**Current version:** 1.6.0 · **Platform:** desktop/laptop browser with a physical QWERTY keyboard
+**[▶ PLAY THE GAME](https://www.kaziahmed.net/typeslasher)** · **[Player guide](docs/PLAYER_GUIDE.md)** · **[How it was made](docs/DEVELOPMENT.md)** · **[Explore the 3D foods](https://www.kaziahmed.net/typeslasher/assets.html)**
 
-[Development story](docs/DEVELOPMENT.md) · [Player guide](docs/PLAYER_GUIDE.md) · [Asset pipeline](ASSETS.md) · [Credits](THIRD_PARTY_NOTICES.md)
+![The current Typeslasher home screen, with floating sliced foods, dimensional lettering, and mint and yellow arcade buttons](docs/screenshots/home-current.png)
 
-## What you can play
+![50 sculpted foods, 6 illustrated stories, 10 kitchen recipes, and 2 playstyles](docs/screenshots/project-stats.svg)
 
-| Playstyle | What happens |
-| --- | --- |
-| **Food Slash — Free Play** | Type the names of flying foods to slice them. Choose a food basket, pace, challenge, and a 30/60/90-second round. |
-| **Food Slash — Arcade** | Continue through rounds with gradually shorter typing windows and more simultaneous targets. |
-| **Food Slash — Beat Kitchen** | Finish words near the musical beat for an optional timing bonus. |
-| **Sentence Slash** | Choose an illustrated story/recipe tile or write/paste a passage under + Add your story. Words cut a fixed batch of ingredients; sentences serve orders. Choose a story or your own text and press Start. Play relaxed or beat each recipe card’s timer. |
+**Version 1.6.0** · TypeScript · Three.js · Blender · Vite
 
-Finger hints and home-row drills help players practice. Adjustable pace, reduced motion, sound controls, and graphics presets make sessions easier to tailor. Recent results, key practice, and personal bests stay in the browser; no account is required.
+</div>
 
-## Gameplay and art
+## A small arcade for your keyboard
 
-### Homepage artwork
+Typeslasher turns typing practice into visible, satisfying progress. Flying foods split when you finish their names. In the restaurant kitchen, your words prepare ingredients and your sentences serve orders. Practice for a quick round, follow a story, or bring a passage of your own.
 
-![Typeslasher homepage with dimensional lettering, sculpted foods, and arcade controls](docs/screenshots/home.jpg)
+The game runs in a desktop or laptop browser with a physical **QWERTY keyboard**. No account is required. Scores and practice records stay in your browser.
 
-The snack arcade introduces the game with a food-filled counter, oversized keycaps, and a plum, cream, yellow, and mint palette.
+## Choose your way to play
 
-### Food Slash
+| Playstyle / mode | The idea | What you control |
+| --- | --- | --- |
+| **Food Slash · Free Play** | A single snack-slicing round. Type a food's name and watch it split. | Food basket, pace, 1–4 targets, and a 30/60/90-second round. |
+| **Food Slash · Arcade** | Keep going through successive rounds. New foods get less typing time, and another target joins every three rounds, up to four. | Starting challenge, basket, and pace; take a breather between rounds. |
+| **Food Slash · Beat Kitchen** | The same typing loop with a 120 BPM rhythm. Finish near a beat for a bonus. | Normal food settings, music/effects, and an optional timing adjustment. |
+| **Sentence Slash · Relaxed service** | Follow a story or your own passage. Prepare and serve each sentence without an order deadline. | Story, Gentle/Exact typing, and the first recipe. |
+| **Sentence Slash · Rush service** | Each order has a freshness timer. Serve it before time runs out. | Story, typing style, first recipe, and a 20/30/45/60 WPM target pace. |
 
-![An apple sliced open during Food Slash, alongside carrot and grape targets and finger guidance](docs/screenshots/food-slash.jpg)
+### Food Slash: ready, set, slice
 
-Each active food has a different first letter. Start typing its name to select it, then finish the word to cut the model. Longer words receive more time. Accuracy, combos, and completed slices shape the score.
+![A freshly sliced cookie beside an apple and banana, with word timers and a colored keyboard guide](docs/screenshots/food-slash-current.png)
 
-### Whole foods and cut interiors
+Start a word with its first letter to select that food. Active targets have distinct initials, so your choice is unambiguous. Finish the word to slice it; no Enter key is needed. Longer names receive more time. Clean typing builds a combo up to **×5**.
 
-![Garden harvest: intact models and their complementary cut pieces](docs/screenshots/garden-assets.png)
-
-The 50 foods span seven packs: Original favorites, Fresh picks, Snack break, Big bites, Garden harvest, Fruit market, and Pantry & comfort. Every food has an intact model and two modeled cut pieces. Seeds, peel, pits, crumb, rings, and hollow interiors make slicing part of the art as well as the scoring.
+**Sprout, Slicer, Chef, and Master** offer one, two, three, and four simultaneous targets. Free Play can gently adjust future deadlines as you improve. Beat Kitchen adds **25 points** for a finish within 90 milliseconds of a beat; missing the beat adds no extra penalty.
 
 <details>
-<summary>More asset screenshots</summary>
+<summary><strong>See the food basket and round setup</strong></summary>
 
-![Fruit market whole and cut asset review](docs/screenshots/market-assets.png)
+![Food Slash setup with Free Play, Arcade, Beat Kitchen, challenge levels, and illustrated food baskets](docs/screenshots/setup-current.png)
 
-![Pantry and comfort whole and cut asset review](docs/screenshots/pantry-assets.png)
-
-![Blender kitchen review render](docs/screenshots/kitchen-render.png)
-
-The food sheets and kitchen render show the actual Blender assets. Gameplay captures show the browser version. Generated concept references live separately in `design/`.
+Seven packs cover fruit, vegetables, snacks, and pantry favorites. Choose Original favorites, Fresh picks, Snack break, Big bites, Garden harvest, Fruit market, Pantry & comfort, or a mixed basket. Every pack is available immediately.
 
 </details>
 
-## How it was developed
+### Sentence Slash: are you hungry for a good story?
 
-The project grew in stages: establish a reliable typing loop, replace simple shapes with modeled foods, build practice and progression, refine the arcade interface, introduce paragraph typing, then expand the kitchen and food catalog.
+Choose one of six illustrated stories, or use **+ Add your story** to write or paste your own text. Your draft stays intact while you browse the menu. Press **Start** to head straight into the kitchen.
 
-Human direction and review guided the work, with Codex assisting planning, implementation, debugging, and iteration. Blender and Python produced editable models and browser-ready GLB exports. Built-in image generation supplied kitchen concepts and whole/cut food reference sheets; those references guided modeling rather than replacing the playable geometry.
+<table>
+<tr>
+<td align="center" width="33%"><img src="public/assets/stories/restaurant-shift.webp" width="240" alt="A cozy restaurant pass with dishes and a service bell"><br><strong>Restaurant shift</strong><br>10 orders · A full kitchen service</td>
+<td align="center" width="33%"><img src="public/assets/stories/fruit-adventure.webp" width="240" alt="An apple chef, kiwi, and pear preparing fruit salad"><br><strong>Fruit adventure</strong><br>4 orders · A tiny kitchen crew</td>
+<td align="center" width="33%"><img src="public/assets/stories/space-mission.webp" width="240" alt="A friendly robot with a spaceship under glowing stars"><br><strong>Space mission</strong><br>3 orders · Follow the stars home</td>
+</tr>
+<tr>
+<td align="center"><img src="public/assets/stories/funny-day.webp" width="240" alt="A rubber duck peeking out of a school backpack"><br><strong>Funny day</strong><br>3 orders · A duck ate the homework</td>
+<td align="center"><img src="public/assets/stories/little-kindness.webp" width="240" alt="Bunny sharing a yellow umbrella with a little mouse"><br><strong>Little kindness</strong><br>5 orders · Make room for a friend</td>
+<td align="center"><img src="public/assets/stories/helping-paws.webp" width="240" alt="Bear helping Hedgehog gather spilled apples"><br><strong>Helping paws</strong><br>5 orders · A tumble becomes a picnic</td>
+</tr>
+</table>
 
-Iteration changed both appearance and behavior. The asset records document revised kiwi anatomy, ruby grape materials, and pineapple detail. Kitchen refinements addressed camera framing, cut/transfer order, punctuation handling, and animation backlogs during fast typing. The game counts every word while keeping decorative cuts responsive to the player's current input.
+*The story tiles use generated illustrations created for the game. The kitchen and food in gameplay are rendered 3D models.*
 
-The repository begins with a snapshot of the 1.6 project. Saved plans and release checkpoints preserve its earlier development story. Read the [full process and tool breakdown](docs/DEVELOPMENT.md).
+![Sentence Slash showing recipe cards, a fixed ingredient basket, the cutting board, and a handled soup bowl](docs/screenshots/sentence-kitchen-current.png)
 
-## Tools used
+Every sentence becomes an order with a **fixed batch of ingredients**. One ingredient moves onto the board at a time. Word progress guides the cuts, pieces collect in the serving dish, and the completed sentence serves the order. All cuts finish before the next batch arrives.
 
-| Tool | Purpose |
+```mermaid
+flowchart LR
+  A[Ingredient basket] --> B[One item on the board]
+  B --> C[Type words and slice]
+  C --> D[Collect in the dish]
+  D --> E[Complete sentence and serve]
+  E --> F[Next order arrives]
+  F --> A
+  style A fill:#a4d8bd,color:#283d35,stroke:#5f8f78
+  style B fill:#fff0ce,color:#302139,stroke:#b99160
+  style C fill:#ffdc65,color:#302139,stroke:#bc8b40
+  style D fill:#a4d8bd,color:#283d35,stroke:#5f8f78
+  style E fill:#cfb4df,color:#302139,stroke:#8e699e
+  style F fill:#fff0ce,color:#302139,stroke:#b99160
+```
+
+Recipe cards show the current order and the next two. The **ten-recipe menu cycles through every dish before repeating**. In Rush, the active card's timer starts when the order reaches the kitchen; queued orders wait. An expired order clears the basket, board, and dish, signals the loss, and moves on. Pausing and cut/serve animations do not consume the order timer.
+
+**Gentle** ignores letter case; **Exact** requires it. Both include punctuation. Spaces are normal typing, and Backspace corrects the marked mistake. Longer sessions show a speed chart, alongside accuracy, points, streaks, served orders, and lost orders.
+
+### A different dish for every recipe
+
+![Ten rendered serving vessels: mint, coral, wooden, garden, lilac, blue and handled soup bowls, plus roast, picnic and bakery plates](docs/screenshots/serving-dishes.png)
+
+Fruit mixes, salads, roasted vegetables, berries, tofu, soup, picnics, and bakery breakfasts each have their own vessel. Seven bowls, two plates, and a roast platter include scalloped rims, wood grain, oval shapes, and soup handles. Food placement follows the selected dish's shape and depth.
+
+## Practice, comfort, and progress
+
+- **Training / Prep School:** four home-row lessons, a finger guide, and local key-level practice records. The guide suggests fingers; it does not detect your physical hand position.
+- **Locker:** recent sessions, personal bests, and earned kitchen looks. Watermelon Pop unlocks after 10 lifetime slices; Citrus Rush after 25.
+- **Sound & feel:** synthesized music and effects, separate volume controls, mute, reduced motion, and optional camera nudges.
+- **Graphics:** Battery saver, Balanced, and Crisp presets. Menus and paused scenes avoid continuous rendering; food packs and the kitchen load when needed.
+- **Local text:** custom passages remain in memory for the current visit. Only practice results and preferences may be stored locally. Game code makes no runtime AI requests and includes no advertising or analytics.
+
+| Control | Action |
 | --- | --- |
-| **TypeScript + HTML/CSS** | Gameplay logic, input, scoring, menus, and responsive UI. |
-| **Three.js** | 3D rendering, GLB loading, lighting, and slice/kitchen animations. |
-| **Blender + Blender MCP** | Editable food and kitchen assets, scene refinement, and review. |
-| **Python** | Procedural modeling, texture work, export, and asset/menu renders. |
-| **Vite + Node.js + npm** | Local development, static builds, and automated checks. |
-| **Codex + built-in image generation** | AI-assisted development and documented visual references. |
-| **Web Audio API** | Synthesized music/effects and rhythm cues. |
+| **Letters** | Select and slice flying foods, or type the highlighted sentence. |
+| **Space / punctuation** | Type them normally in Sentence Slash. |
+| **Backspace** | Correct a marked Sentence Slash mistake. |
+| **Escape** | Pause. Continue, Retry, Settings, and Exit are available in both playstyles. |
 
-AI assistance is part of the development process. There are no AI requests, analytics, advertisements, or cloud saves during gameplay. Models and fonts are served locally by the site. Custom passages remain in memory for the current visit; recent practice results can be saved in browser storage.
+## How it was made
 
-## Run locally
+Typeslasher is a project by **Kazi Ahmed**, developed through human direction, hands-on review, and AI-assisted iteration with **Codex**. The work grew from a typing loop into a small food arcade and then a restaurant service.
 
-Install **Node.js 22.12+**, then:
+| Part | Tools and process |
+| --- | --- |
+| **Game and interface** | TypeScript, semantic HTML/CSS, and Three.js handle input, timing, scoring, local progress, menus, 3D rendering, and animation. Vite produces the static release. |
+| **50 playable foods** | Blender, Blender MCP, and Python produce editable meshes, painted materials, interior details, and GLB exports. Each food has an intact model and two complementary cut pieces. |
+| **Kitchen** | A generated concept guided an editable Blender scene with daylight, a sink, plants, utensils, textured counters, and a cutting board. |
+| **Serving dishes** | Three.js geometry creates ten closed, hollow bowls and plates, with recipe-specific shapes, materials, rims, handles, and food placement. |
+| **Illustrated cards** | Built-in GPT image generation created the recipe cards and six story illustrations. Optimized WebP files are saved with the project; prompts and originals are preserved. |
+| **Sound** | The Web Audio API synthesizes music, effects, and rhythm cues. No third-party music recordings are used. |
+| **Review and release** | Automated checks, browser playthroughs, Blender turnarounds, and the interactive food studio validate the result. The static game is published through the portfolio's Vercel deployment. |
+
+The latest food pass refined silhouettes, cut interiors, relative scale, and natural resting poses. All 50 foods were reviewed from **seven views**; the serving dishes from **six views**. The floating home artwork reacts gently to the pointer, and the story headline drops into place with a small landing bounce. Reduced motion offers a still presentation.
+
+<details>
+<summary><strong>Explore the food art and development records</strong></summary>
+
+![Browser food studio comparing the game sizes of avocado, broccoli, sandwich, pineapple, strawberry, and watermelon](art-review/food-polish/scale-preview.png)
+
+The [live food studio](https://www.kaziahmed.net/typeslasher/assets.html) lets you rotate whole and cut models, inspect multiple views, and compare game sizes. Editable Blender files remain in the repository.
+
+- [Full development story and architecture](docs/DEVELOPMENT.md)
+- [Food modeling/export pipeline](ASSETS.md)
+- [Whole/cut food reference prompts](design/food-expansion/PROMPTS.md)
+- [Story illustration prompts](art-review/stories/PROMPTS.md) and [kindness/helping prompts](art-review/stories/KINDNESS-PROMPTS.md)
+- [Release checkpoints and review evidence](STATUS.md)
+
+</details>
+
+## Run it locally
+
+Use **Node.js 22.12+** and npm:
 
 ```sh
+git clone https://github.com/pixelsncodes/typeslasher.git
+cd typeslasher
 npm ci
 npm run dev
 ```
 
-Open the address printed by Vite, normally `http://localhost:5173/`. Use a physical QWERTY keyboard. Open `/assets.html` for the rotatable whole/cut food studio.
-
-On Windows, `Play Typeslasher.cmd` serves an existing production build at `http://127.0.0.1:5173/`. Run `npm run build` first. Progress is specific to the browser and site address.
-
-## Check and build
+Open the address printed by Vite, normally `http://localhost:5173/`. Open `/assets.html` for the food studio. Progress belongs to the browser and site address, so local and published games keep separate records.
 
 ```sh
-npm run check
-npm run build
-npm run check:release
-npm run play
+npm run check          # 17 suites: gameplay, timing, scoring, records and 3D assets
+npm run build          # Type-check and build the static site
+npm run check:release  # Portable links, local fonts/licenses and asset budgets
+npm run play           # Serve the production build on 127.0.0.1:5173
 ```
 
-The 17 check suites cover typing/timing, progression, local records, rhythm, paragraph scoring, kitchen sequencing, catalog rules, and exported food geometry. Production checks verify relative links, local font licenses, and asset size budgets. Saved browser playthroughs and remaining device coverage are documented in [STATUS.md](STATUS.md).
+On Windows, **Play Typeslasher.cmd** also serves an existing build. The `dist/` folder is the deployable site; relative asset links support subfolder hosting. See the [player guide](docs/PLAYER_GUIDE.md) for the full controls and setup details.
 
-`dist/` contains the static website. The build uses relative asset links for subfolder hosting. Play the published game at [kaziahmed.net/typeslasher](https://www.kaziahmed.net/typeslasher).
-
-## Project structure
+## Inside the repository
 
 ```text
-src/              Gameplay, UI, rendering, audio, and local progress
-public/assets/    Browser-ready food packs and kitchen GLB
-public/fonts/     Local fonts and their licenses
-tools/            Modeling/export scripts and automated checks
-design/           Art references, prompts, textures, and UI prototype notes
-art-review/       Saved visual reviews and gameplay checkpoints
-docs/             Player guide, development story, and showcase screenshots
-*.blend           Editable Blender source projects
+src/              Gameplay, menus, rendering, audio, and local progress
+public/assets/    Food/kitchen GLBs, recipe cards, and story artwork
+public/fonts/     Locally served fonts and their licenses
+tools/            Modeling/export scripts and 17 automated check suites
+design/           Concepts, reference prompts, textures, and interface studies
+art-review/       Turnarounds, original generated artwork, and browser reviews
+docs/             Player guide, development story, and current screenshots
+typeslasher-*.blend  Editable food packs and kitchen projects
 ```
 
 ## Credits and reuse
 
-Project foods, kitchen, synthesized audio, and game code were created for Typeslasher with the development tools described above. Three.js uses the MIT license; Outfit and DM Mono use the SIL Open Font License. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the bundled notices.
+Project code, foods, kitchen, serving dishes, synthesized audio, and illustrations were created for Typeslasher using the workflow above. Three.js uses the MIT license; **Outfit** and **DM Mono** use the SIL Open Font License. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for credits and bundled license paths.
 
-No project-wide reuse license has been selected yet. The repository is public for inspection; third-party components retain their own licenses.
+No project-wide reuse license has been selected. This public repository is available for inspection; third-party components retain their own licenses.
+
+<div align="center">
+
+**A keyboard. Two hands. Plenty of time.**
+
+**[Ready for your next slice? Play Typeslasher →](https://www.kaziahmed.net/typeslasher)**
+
+</div>

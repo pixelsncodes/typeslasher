@@ -2,7 +2,38 @@
 
 The game now uses 50 Blender foods across seven separately loaded packs. Each
 has a whole model and two bisected pieces with closed interior surfaces:
-150 named food roots in total. The original eight-food pack remains revision 5.
+150 named food roots in total. The current catalog loads Original favorites
+revision 6, Big bites revision 3, and revision 2 of the other five packs.
+
+## Current art pass — proportions, resting poses, and serving dishes
+
+The latest pass refines all 50 food models and their cut pieces, including
+silhouettes and materials seen from the side, underside, and cut view. The seven
+editable Blender projects match the exported packs. Turnarounds, generation
+records, and browser checkpoints are saved in `art-review/food-polish/`.
+
+- `src/food-proportions.ts` defines relative game sizes; a strawberry or raspberry
+  stays much smaller than a watermelon.
+- `src/food-sizing.ts` shares a calibrated frame between intact and cut pieces.
+- `src/food-resting.ts` applies grounded preparation poses in the basket and on
+  the cutting board, including horizontal elongated foods.
+- `tools/check-food-proportions.mjs` checks every whole/cut frame, resting bounds,
+  grounding, and shared scale.
+
+Each recipe also selects one of ten serving vessels from `src/serving-dishes.ts`.
+These are Three.js-generated bowls, plates, and a platter, with closed profiles,
+usable inner floors, rim variations, wooden grain, and soup handles. They are
+reviewed in `art-review/serving-dishes/`, and validated by
+`tools/check-serving-dishes.mjs`. There is no separate serving-vessel GLB pack.
+
+Recipe and story illustrations are static generated artwork, independent of the
+playable geometry. Their optimized WebP assets live in `public/assets/recipes/`
+and `public/assets/stories/`; originals and exact prompts are in the matching
+`art-review` folders. The six story tiles total about 176 KB. Production budgets
+allow 80 KB per illustration and 300 KB for the combined story artwork.
+
+The sections below retain the original expansion and modeling history. Review
+the current source and saved Blender project before regenerating an older revision.
 
 ## Version 1.6 — garden, market, and pantry
 

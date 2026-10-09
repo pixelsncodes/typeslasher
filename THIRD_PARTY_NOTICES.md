@@ -8,6 +8,12 @@
   food expansion prompts are recorded in `design/kitchen-v2/REFERENCE_PROMPT.md`
   and `design/food-expansion/PROMPTS.md`. These references are distinct from
   the playable 3D models and Blender review renders.
+- Generated recipe cards and six story illustrations are also used as static
+  artwork in the game. Originals and prompts are in `art-review/recipes/`
+  and `art-review/stories/`; optimized WebP files are in
+  `public/assets/recipes/` and `public/assets/stories/`.
+- The ten recipe-specific serving bowls and plates use original Three.js
+  geometry and procedural material work in `src/serving-dishes.ts`.
 - The kitchen music pattern, synthesized sound effects, and slice visuals are
   original project code. No third-party music recordings are included.
 - Three.js: MIT license; copyright its authors. Source and license:

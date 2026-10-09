@@ -51,18 +51,18 @@ controls sit under Settings, which leaves the game paused until Continue.
 ## Sentence Slash — Kitchen Service
 
 The kitchen now uses the approved Blender scene, with daylight, textured surfaces,
-a sink, plants, utensils and an open mixing bowl. Ten recipe baskets include
+a sink, plants, utensils and recipe-specific bowls and plates. Ten recipe baskets include
 fruit mix, citrus and tropical, orchard, garden salad, roasted vegetables, berry
 bowl, tofu salad, pumpkin soup, picnic plate, and bakery breakfast. Recipes use
 appropriate produce and pantry ingredients, with no cookies in the bowls.
 The knife cuts before the halves separate and land in the
-bowl; the board rests for a quarter second before the next fruit appears. Sentence
+dish; the board rests briefly before the next ingredient appears. Sentence
 transitions wait until serving finishes. Less motion uses instant cuts with the
 same rest between fruits. The scene fills the cabinet width and uses a lower
 perspective camera. It loads on demand when starting paragraph practice.
 
 
-Choose **Sentence Slash**, then **Play** on the home screen. Choose an illustrated story or recipe tile, or play a ten-order restaurant shift.
+Choose **Sentence Slash**, then **Play** on the home screen. The six illustrated stories are Restaurant shift (ten orders), Fruit adventure, Space mission, Funny day, Little kindness, and Helping paws.
 The **+ Add your story** tab lets you write or paste your own passage. Your draft
 stays intact when you switch back to the story menu. Press **Start** to begin. **Game options** lets you choose
 **Gentle** for forgiving letter case or **Exact** for case-sensitive typing,
@@ -96,7 +96,7 @@ If an order expires, it is counted as lost, the ingredients clear, and the next
 order begins. A short shake signals the loss; Less motion uses a still alert.
 Pauses, cutting animations, and sentence transitions do not consume order time.
 
-Results include clean-word streak, perfect bowls, and a speed chart for longer
+Results include clean-word streak, perfect dishes, and a speed chart for longer
 sessions. Replay compares points against the previous completed service for the
 same passage, typing style, and pace during this visit. Scores from different
 passages are not directly comparable. Sound, Less motion, graphics quality, and
