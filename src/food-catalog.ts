@@ -33,13 +33,13 @@ const entries: [FoodKind,PackId,FoodDefinition['category'],number,number][] = [
 ];
 export const FOOD_CATALOG: readonly FoodDefinition[] = entries.map(([name,pack,category,color,accent])=>({name,kind:name,pack,category,color,accent,letters:name.length,keys:[...new Set(name)].sort().join(''),beginner:name.length<=6}));
 export const FOOD_PACKS = {
-  starter:{title:'Original favorites',file:'typeslasher-food-pack.glb',revision:5,description:'8 familiar foods · 4–6 letters'},
-  fresh:{title:'Fresh picks',file:'typeslasher-fresh-pack.glb',revision:1,description:'6 new foods · 4–6 letters'},
-  snacks:{title:'Snack break',file:'typeslasher-snacks-pack.glb',revision:1,description:'6 snacks · 3–7 letters'},
-  big:{title:'Big bites',file:'typeslasher-big-pack.glb',revision:2,description:'6 longer words · 7–10 letters'},
-  garden:{title:'Garden harvest',file:'typeslasher-garden-pack.glb',revision:1,description:'8 garden foods · 4–8 letters'},
-  market:{title:'Fruit market',file:'typeslasher-market-pack.glb',revision:1,description:'8 juicy fruits · 3–11 letters'},
-  pantry:{title:'Pantry & comfort',file:'typeslasher-pantry-pack.glb',revision:1,description:'8 comforting foods · 4–9 letters'},
+  starter:{title:'Original favorites',file:'typeslasher-food-pack.glb',revision:6,description:'8 familiar foods · 4–6 letters'},
+  fresh:{title:'Fresh picks',file:'typeslasher-fresh-pack.glb',revision:2,description:'6 new foods · 4–6 letters'},
+  snacks:{title:'Snack break',file:'typeslasher-snacks-pack.glb',revision:2,description:'6 snacks · 3–7 letters'},
+  big:{title:'Big bites',file:'typeslasher-big-pack.glb',revision:3,description:'6 longer words · 7–10 letters'},
+  garden:{title:'Garden harvest',file:'typeslasher-garden-pack.glb',revision:2,description:'8 garden foods · 4–8 letters'},
+  market:{title:'Fruit market',file:'typeslasher-market-pack.glb',revision:2,description:'8 juicy fruits · 3–11 letters'},
+  pantry:{title:'Pantry & comfort',file:'typeslasher-pantry-pack.glb',revision:2,description:'8 comforting foods · 4–9 letters'},
 } as const;
 export const selectionTitle=(selection:FoodSelection)=>selection==='mixed'?'Mixed basket':FOOD_PACKS[selection].title;
 export const validSelection=(value:unknown):value is FoodSelection=>value==='mixed'||typeof value==='string'&&Object.hasOwn(FOOD_PACKS,value);

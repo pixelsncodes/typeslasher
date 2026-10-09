@@ -8,7 +8,7 @@
     ]
   },
   "food_tomato_left": {
-    "triangles": 3474,
+    "triangles": 3462,
     "materials": [
       "Leaf green",
       "Leaf vein",
@@ -17,7 +17,7 @@
     ]
   },
   "food_tomato_right": {
-    "triangles": 3502,
+    "triangles": 3490,
     "materials": [
       "Leaf green",
       "Leaf vein",
@@ -88,7 +88,7 @@
     ]
   },
   "food_radish_left": {
-    "triangles": 3234,
+    "triangles": 3210,
     "materials": [
       "garden pale flesh",
       "Leaf green",
@@ -98,7 +98,7 @@
     ]
   },
   "food_radish_right": {
-    "triangles": 3268,
+    "triangles": 3240,
     "materials": [
       "garden pale flesh",
       "Leaf green",
@@ -119,19 +119,21 @@
     ]
   },
   "food_beet_left": {
-    "triangles": 2406,
+    "triangles": 2418,
     "materials": [
-      "Beet burgundy stalk",
       "Beet burgundy stalk.001",
+      "Beet burgundy stalk.002",
+      "Beet burgundy stalk.003",
       "beet detailed cut flesh",
       "Painted garden sculpted skin",
       "Woody stems"
     ]
   },
   "food_beet_right": {
-    "triangles": 2440,
+    "triangles": 2448,
     "materials": [
-      "Beet burgundy stalk.002",
+      "Beet burgundy stalk",
+      "Beet burgundy stalk.001",
       "Beet burgundy stalk.003",
       "beet detailed cut flesh",
       "Painted garden sculpted skin",

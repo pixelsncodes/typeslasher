@@ -28,5 +28,12 @@ for(const pack of ['fresh','snacks','big','garden','market','pantry']){
 const kitchenBytes=(await stat(resolve(root,'assets/typeslasher-kitchen.glb'))).size;
 assert.ok(kitchenBytes<4_500_000,'Keep the optional kitchen under 4.5 MB');
 optionalBytes+=kitchenBytes;
+// Recipe artwork is requested only by the optional Sentence Slash order rail.
+let recipeBytes=0;
+for(const name of await readdir(resolve(root,'assets/recipes'))){
+  assert.match(name,/\.webp$/);const size=(await stat(resolve(root,'assets/recipes',name))).size;
+  assert.ok(size<80_000,'Keep each recipe illustration under 80 KB');recipeBytes+=size;
+}
+assert.ok(recipeBytes<500_000,'Keep all recipe artwork under 500 KB');optionalBytes+=recipeBytes;
 assert.ok(bytes-optionalBytes<8_000_000,'Keep the starter game under an 8 MB raw asset budget');
 console.log(`Passed: portable release links, local fonts/licenses, ${(bytes/1e6).toFixed(2)} MB raw / ${(gzipBytes/1e6).toFixed(2)} MB with gzip.`);

@@ -1,7 +1,7 @@
 # Typeslasher 1.6
 
 A keyboard typing arcade with two playstyles: slice 50 sculpted 3D foods, or
-turn your own paragraph into a midnight kitchen service. Finger guidance and
+turn your own paragraph into a restaurant kitchen service. Finger guidance and
 an optional musical food challenge make short practice sessions inviting.
 
 ## Play on this computer
@@ -48,7 +48,7 @@ pause menu. Retry resets the current round or passage; Arcade Retry keeps its
 round number. Exit returns home. Sound, motion, graphics, food pace, and guide
 controls sit under Settings, which leaves the game paused until Continue.
 
-## Sentence Slash — Midnight Service
+## Sentence Slash — Kitchen Service
 
 The kitchen now uses the approved Blender scene, with daylight, textured surfaces,
 a sink, plants, utensils and an open mixing bowl. Ten recipe baskets include
@@ -62,28 +62,37 @@ same rest between fruits. The scene fills the cabinet width and uses a lower
 perspective camera. It loads on demand when starting paragraph practice.
 
 
-Choose **Sentence Slash** on the home screen. Paste a paragraph, load a UTF-8
-`.txt` file, or pick a story or one of nine recipe passages. Review the cleaned sentences,
-then choose **Gentle** for forgiving letter case or **Exact** for case-sensitive
-typing. Both styles preserve and require punctuation. Curly quotes and long dashes
-are converted to their ordinary keyboard equivalents. Type the highlighted
-sentence to guide a floating blade. Each completed word slices an ingredient;
-each sentence serves a bowl. Fast typing replaces waiting decorative cuts, and
-sentence completion discards the waiting cuts before serving. Scoring still
-counts every word. The next sentence is visible underneath.
-Spaces are ordinary typing characters. Correct mistakes with Backspace; accepted
-characters stay committed. Use **Escape** to pause the kitchen and its clocks.
+Choose **Sentence Slash**, then **Play** on the home screen. Paste or write a
+paragraph, load a UTF-8 `.txt` file, choose a story/recipe, or play a ten-order
+restaurant shift. Press **Start** to begin. **Game options** lets you choose
+**Gentle** for forgiving letter case or **Exact** for case-sensitive typing,
+Relaxed or Rush service, target pace, and your first recipe. Both typing styles
+require punctuation. Curly quotes and long dashes become ordinary keyboard
+characters.
+
+Each sentence is one order, with a fixed batch of ingredients. Ingredients lie
+naturally in the basket and on the board, then move through cutting and into the
+bowl. All cuts finish before the dish is served and the next batch arrives. Recipe
+cards show the current order and the next two. All ten dishes are used before a
+recipe repeats in a longer passage.
+
+Type the highlighted sentence to guide the blade. Each completed word advances
+the recipe; each completed sentence serves a dish. Spaces are ordinary typing
+characters. Correct mistakes with Backspace; accepted characters stay committed.
+Use **Escape** to pause the kitchen and its clocks.
 
 **Relaxed service** is untimed. Every five clean words increases the next word's
 multiplier, up to ×5. Mistakes reset the streak. A perfect sentence earns 100
 bonus points. The HUD shows points, accuracy, combo, and passage progress; WPM
 appears after 15 seconds of active typing. Optional finger hints cover mapped keys.
 
-**Rush service** adds a freshness gauge at 20, 30, 45, or 60 target WPM. Each
-sentence receives time according to its length, with a minimum 12 seconds and
-a four-second allowance. The timer begins on that sentence's first attempt.
-Serving while fresh earns 150 extra points. A cooled order can still be finished.
-Pauses and sentence transitions never consume freshness or typing time.
+**Rush service** gives each active recipe card a timer at 20, 30, 45, or 60
+target WPM. Time is based on sentence length, with a minimum 12 seconds and a
+four-second allowance. The clock starts when the order reaches the kitchen,
+including idle time; queued orders wait. Serving in time earns 150 extra points.
+If an order expires, it is counted as lost, the ingredients clear, and the next
+order begins. A short shake signals the loss; Less motion uses a still alert.
+Pauses, cutting animations, and sentence transitions do not consume order time.
 
 Results include clean-word streak, perfect bowls, and a speed chart for longer
 sessions. Replay compares points against the previous completed service for the
@@ -92,10 +101,9 @@ passages are not directly comparable. Sound, Less motion, graphics quality, and
 the selected kitchen look apply to the new scene. A simple illustrated board
 keeps paragraph typing available when 3D graphics cannot load.
 
-The preview removes citation markers, links and URLs, and turns each bullet or
-numbered item into its own slice. It also normalizes dashes and checks for
-characters unsupported by this English-keyboard version. Review the preview
-before playing. A passage is limited to 10,000 source characters; `.txt` files
+Starting a passage removes citation markers, links and URLs, and turns each
+bullet or numbered item into its own order. It also normalizes dashes and checks
+for characters unsupported by this English-keyboard version. A passage is limited to 10,000 source characters; `.txt` files
 must be smaller than 64 KiB. Finishing early records partial practice.
 
 Your source passage stays in memory for this visit. It is not saved or sent

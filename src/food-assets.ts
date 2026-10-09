@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { FOOD_IDS, FOOD_CATALOG, FOOD_PACKS, type FoodKind, type PackId } from './food-catalog';
+import { foodFrame, applyFoodFrame } from './food-sizing';
 
 export const FOOD_KINDS = FOOD_IDS;
 export type { FoodKind } from './food-catalog';
@@ -56,6 +57,19 @@ export function foodModel(kind: FoodKind, part: '' | '_left' | '_right' = ''): T
   group.add(source.clone(true));
   group.userData.assetSource = 'blender';
   return group;
+}
+
+const foodFrames = new Map<FoodKind,{scale:number;center:THREE.Vector3}>();
+/** Whole and both halves share one size and origin, even after the cut opens. */
+export function gameFoodModel(kind:FoodKind,part:''|'_left'|'_right'=''):THREE.Group|undefined {
+  const model=foodModel(kind,part);if(!model)return;
+  let frame=foodFrames.get(kind);
+  if(!frame){
+    frame=foodFrame(foodModel(kind)!,kind);
+    foodFrames.set(kind,frame);
+  }
+  applyFoodFrame(model,frame);
+  const group=new THREE.Group();group.add(model);group.userData.assetSource='blender';return group;
 }
 
 // The review room and game use exactly the same lighting and color pipeline.

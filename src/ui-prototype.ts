@@ -17,7 +17,7 @@ el.innerHTML=`
     <header class="game-nav"><button class="small-brand" data-go="home" aria-label="Typeslasher preview home">TYPE<span>SLASHER</span><i aria-hidden="true"></i></button><div><label class="motion-toggle"><input id="calm-preview" type="checkbox" ${state.reduced?'checked':''}> Less motion</label><button class="utility" data-info="settings">Settings <span aria-hidden="true">⚙</span></button></div></header>
     <section class="screen home-screen" data-screen="home" aria-labelledby="home-heading">
       <div class="hero-art">
-        <p class="arcade-sign">THE MIDNIGHT SNACK ARCADE <span aria-hidden="true">✦</span></p>
+        <p class="arcade-sign">THE SNACK ARCADE <span aria-hidden="true">✦</span></p>
         <h1 id="home-heading" class="game-logo"><span>TYPE</span><strong>SLASHER</strong></h1>
         <div class="food-stage" id="food-stage"><div class="orbit-stroke" aria-hidden="true"></div><canvas id="hero-food" aria-label="Sculpted food floating over an arcade counter"></canvas><span class="stage-spark spark-one" aria-hidden="true">✦</span><span class="stage-spark spark-two" aria-hidden="true">✦</span><span class="floating-key key-f" aria-hidden="true">F</span><span class="floating-key key-j" aria-hidden="true">J</span><div class="counter" aria-hidden="true"><span>FRESH WORDS. CLEAN CUTS.</span></div><p id="scene-status" role="status">Packing the food…</p></div>
         <p class="hero-motto">Ready. Set. <b>Slice.</b></p>

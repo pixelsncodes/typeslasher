@@ -1,0 +1,93 @@
+{
+  "reference": "Existing generated recipe-card illustrations in art-review/recipes",
+  "style": "Rounded stylized food, warm color, restrained surface detail, broad matte highlights",
+  "scale": "One shared longest-dimension table across arcade, kitchen, and size-comparison studio; ratios compressed for readability",
+  "review_views": [
+    "front",
+    "left",
+    "back",
+    "right",
+    "top",
+    "bottom",
+    "cut faces"
+  ],
+  "foods_reviewed": 50,
+  "views_reviewed": 350,
+  "shape_fixes": [
+    "Plump strawberry shoulders and rounded tip",
+    "Continuous hollow raspberry with clean cut faces",
+    "Compact grape bunch",
+    "Three-dimensional carrot, radish, beet and celery foliage",
+    "Cupped radial dragonfruit bracts",
+    "Short blueberry calyx",
+    "Thicker bagel, donut and croissant",
+    "Closed sandwich layer gaps",
+    "Rounded triangular cheese wedge",
+    "Visible mushroom underside gills"
+  ],
+  "validation": [
+    "All 16 check suites passed",
+    "TypeScript and production build passed",
+    "Release budgets passed",
+    "Berry order cut, served and advanced in browser",
+    "Shared-scale whole/cut comparison checked in browser"
+  ],
+  "packs": [
+    {
+      "pack": "starter",
+      "foods": 8,
+      "asset": "public/assets/typeslasher-food-pack.glb",
+      "bytes": 6198992,
+      "sha256": "0ee905eb04f98b1d833c69962f3fda5245bb1c5541e5b37617588f5cb0cc1927",
+      "review_sheet": "after-starter.png"
+    },
+    {
+      "pack": "fresh",
+      "foods": 6,
+      "asset": "public/assets/typeslasher-fresh-pack.glb",
+      "bytes": 3093652,
+      "sha256": "ca743622fe2b62f6be6c207c7bcc35ed29283c5ba18f65941a5fb7637175f779",
+      "review_sheet": "after-fresh.png"
+    },
+    {
+      "pack": "snacks",
+      "foods": 6,
+      "asset": "public/assets/typeslasher-snacks-pack.glb",
+      "bytes": 4881376,
+      "sha256": "612901d353f9996c7fe1abdcaa336f3d6b54e24ee03ca9fe5b413b6bba0630f8",
+      "review_sheet": "after-snacks.png"
+    },
+    {
+      "pack": "big",
+      "foods": 6,
+      "asset": "public/assets/typeslasher-big-pack.glb",
+      "bytes": 4493596,
+      "sha256": "87a67b26ba4c7d8640e21374bb8ebac780141a7615097bf7d5a15fb9341b14db",
+      "review_sheet": "after-big.png"
+    },
+    {
+      "pack": "garden",
+      "foods": 8,
+      "asset": "public/assets/typeslasher-garden-pack.glb",
+      "bytes": 3346872,
+      "sha256": "cef6acfdd690f2700197ec98b4e1cfb725a591bbd14e9c7be7064d07c8002e8d",
+      "review_sheet": "after-garden.png"
+    },
+    {
+      "pack": "market",
+      "foods": 8,
+      "asset": "public/assets/typeslasher-market-pack.glb",
+      "bytes": 4962900,
+      "sha256": "00ed49c3d1b9301c5247c6292140b67fa5554984802458f91e015dcbffe150cb",
+      "review_sheet": "after-market.png"
+    },
+    {
+      "pack": "pantry",
+      "foods": 8,
+      "asset": "public/assets/typeslasher-pantry-pack.glb",
+      "bytes": 3026768,
+      "sha256": "0ee44bb9e830839f8921940ecc0c52641804040a87377e37d6e9256f4b4f4f02",
+      "review_sheet": "after-pantry.png"
+    }
+  ]
+}

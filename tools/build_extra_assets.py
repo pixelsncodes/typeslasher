@@ -148,15 +148,15 @@ def triangular_layer(parent,name,z,thickness,material,inset=0):
     return o
 def sandwich():
     r=root('food_sandwich');crust=mat('Bread crust','b77b3f',.75)
-    for z in (-.34,.34):
-        triangular_layer(r,'Sandwich bread crust',z,.23,crust)
-        triangular_layer(r,'Sandwich bread face',z+(1 if z>0 else -1)*.123,.025,SOFT_BREAD,.065)
-    triangular_layer(r,'Cheese triangle',-.08,.085,CHEESE,.02)
-    triangular_layer(r,'Lettuce triangle',.05,.085,LEAF,-.035)
-    for x,y in [(-.55,-.32),(-.45,.30),(.1,-.42)]:ellipsoid(r,'Tomato slice',(x,y,.14),(.34,.34,.06),TOMATO,24,12)
+    for z in (-.25,.25):
+        triangular_layer(r,'Sandwich bread crust',z,.28,crust)
+        triangular_layer(r,'Sandwich bread face',z+(1 if z>0 else -1)*.143,.025,SOFT_BREAD,.065)
+    triangular_layer(r,'Cheese triangle',-.07,.10,CHEESE,.02)
+    triangular_layer(r,'Lettuce triangle',.015,.10,LEAF,-.035)
+    for x,y in [(-.55,-.32),(-.45,.30),(.1,-.42)]:ellipsoid(r,'Tomato slice',(x,y,.075),(.34,.34,.065),TOMATO,24,12)
     for i in range(16):
         x=random.uniform(-.78,.45);y=random.uniform(-.65,.7)
-        if x+y<.1:ellipsoid(r,'Bread crumb pore',(x,y,.483),(.016,.013,.002),crust,8,4)
+        if x+y<.1:ellipsoid(r,'Bread crumb pore',(x,y,.408),(.016,.013,.002),crust,8,4)
     return r
 def pineapple():
     r=root('food_pineapple');N=160;M=88;verts=[];faces=[];colors=[]
@@ -221,12 +221,17 @@ def pineapple_interior(parent,sign):
         for i in range(N):
             a=j*N+i;b=j*N+(i+1)%N;f=(a,b,b+N,a+N);faces.append(f if sign>0 else tuple(reversed(f)))
     mesh(parent,'Pineapple juicy flesh and fibrous core',verts,faces,PINE_FLESH,colors)
+def strawberry_point(t,a):
+    radius=.91*max(0,math.sin(t))**.82*(.78+.22*math.cos(t))
+    y=.82*math.cos(t)-(.095*math.exp(-(radius/.23)**2) if t<math.pi/2 else 0)
+    return Vector((radius*math.cos(a),y,radius*math.sin(a)))
+
 def strawberry():
     r=root('food_strawberry');N=72;M=44;verts=[];faces=[];colors=[]
-    def point(t,a):return Vector((.85*math.sin(t)*(.70+.30*math.cos(t))*math.cos(a),.89*math.cos(t),.85*math.sin(t)*(.70+.30*math.cos(t))*math.sin(a)))
+    point=strawberry_point
     for j in range(M+1):
         for i in range(N):
-            p=point(math.pi*j/M,TAU*i/N);verts.append(p);colors.append(mix(color('a8152b'),color('ed3942'),.55+.18*noise.noise(p*8)))
+            p=point(math.pi*j/M,TAU*i/N);verts.append(p);colors.append(mix(color('c9243c'),color('f45960'),.55+.08*noise.noise(p*8)))
     for j in range(M):
         for i in range(N):a=j*N+i;b=j*N+(i+1)%N;faces.append((a,b,b+N,a+N))
     mesh(r,'Heart shaped strawberry',verts,faces,SKIN,colors)
@@ -238,8 +243,8 @@ def strawberry():
             seed=ellipsoid(r,'Strawberry seed',p+n*.006,(.018,.030,.012),seedmat,10,6)
             seed.data.transform(Matrix.Translation(p)@Matrix.Rotation(math.pi/2-a,4,'Y')@Matrix.Translation(-p))
     for i in range(6):
-        a=TAU*i/6;leaf(r,'Strawberry crown',(0,.94,0),(.58*math.cos(a),.76,.58*math.sin(a)),.14)
-    tube(r,'Strawberry stem',[(0,.80,0),(.07,1.10,0)],[.04,.025],LEAF,8)
+        a=TAU*i/6;leaf(r,'Strawberry crown',(0,.78,0),(.57*math.cos(a),.63,.57*math.sin(a)),.14,normal=(0,1,0))
+    tube(r,'Strawberry stem',[(0,.74,0),(.07,1.0,0)],[.04,.025],LEAF,8)
     return r
 def watermelon():
     r=root('food_watermelon')
@@ -320,7 +325,8 @@ for parent in roots:
             for j in range(R+1):
                 t=max(.0001,j/R)
                 for i in range(N):
-                    a=TAU*i/N;y=.86*math.cos(a)*t;z=.85*math.sin(a)*(.70+.30*math.cos(a))*.95*t
+                    a=TAU*i/N;p=strawberry_point(math.acos(math.cos(a)),math.pi/2)
+                    y=p.y*.97*t;z=math.copysign(p.z,math.sin(a))*.95*t
                     verts.append((-sign*.008,y,z));core=math.exp(-(z/(.05+.14*max(0,y+.8)))**2)
                     colors.append(mix(color('ed626c'),color('f6c6a8'),core*.72))
             for j in range(R):

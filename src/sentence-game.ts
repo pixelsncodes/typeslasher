@@ -10,13 +10,14 @@ export class SentenceKitchen {
   readonly totalCharacters: number;
   readonly mode: ServiceMode;
   readonly pace: number;
-  score = 0; streak = 0; bestStreak = 0; cleanSentences = 0; served = 0; freshOrders = 0; cuts = 0;
+  score = 0; streak = 0; bestStreak = 0; cleanSentences = 0; served = 0; freshOrders = 0; cuts = 0; lostOrders = 0;
   samples: SpeedSample[] = [];
   mistakes = new Map<string, number>();
   private dirtyWords = new Set<string>();
   private dirtySentences = new Set<number>();
   private awarded = new Set<string>();
   private servedIds = new Set<number>();
+  private expiredIds = new Set<number>();
   private tokenMultipliers = new Map<string, number>();
   private starts = new Map<number, number>();
   private lastSample = 0;
@@ -28,6 +29,11 @@ export class SentenceKitchen {
     this.totalCharacters = sentences.reduce((sum, text) => sum + text.length, 0);
   }
   get multiplier() { return Math.min(5, 1 + Math.floor(this.streak / 5)); }
+  startOrder(sentence: number, activeMs: number) { if(!this.starts.has(sentence))this.starts.set(sentence,activeMs); }
+  expire(sentence: number, activeMs: number) {
+    if(this.mode!=='rush'||this.servedIds.has(sentence)||this.expiredIds.has(sentence)||this.freshness(sentence,activeMs)>0)return false;
+    this.expiredIds.add(sentence);this.lostOrders++;this.streak=0;return true;
+  }
   allowance(sentence: number) { return Math.max(12_000, 4000 + 60_000 * (this.tokens[sentence]?.at(-1)?.end ?? 0) / (5 * this.pace)); }
   freshness(sentence: number, activeMs: number) {
     const start = this.starts.get(sentence);
@@ -40,6 +46,7 @@ export class SentenceKitchen {
   consume(events: SentenceEvent[], activeMs: number): ServiceEffect[] {
     const effects: ServiceEffect[] = [];
     for (const event of events) {
+      if(this.expiredIds.has(event.sentence))continue;
       if (!this.starts.has(event.sentence)) this.starts.set(event.sentence, activeMs);
       if (event.type === 'sentence') {
         if (this.servedIds.has(event.sentence)) continue;

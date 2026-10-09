@@ -5,10 +5,10 @@ Reference sheets are in design/food-expansion. Geometry, baked interior textures
 and editable material names are preserved in each independent .blend source.
 """
 from pathlib import Path
-import bpy, bmesh, math, random, json
+import bpy, bmesh, math, random, json, sys
 from mathutils import Vector, Matrix, noise
 BASE=Path(__file__).resolve().parent.parent
-PACK=globals().get('PACK','garden')
+PACK=globals().get('PACK',sys.argv[sys.argv.index('--')+1] if '--' in sys.argv else 'garden')
 NAMES={'garden':['tomato','cucumber','pepper','radish','beet','mushroom','zucchini','onion'],
        'market':['lemon','raspberry','blueberry','cherry','fig','pomegranate','dragonfruit','apricot'],
        'pantry':['bread','cheese','bagel','croissant','tofu','potato','pumpkin','celery']}[PACK]
@@ -37,7 +37,7 @@ BAKE=mat('Painted bakery crust','ffffff',.62,.06,True)
 
 def sculpt(parent,name,scale,dark,light,shape=None,segments=64,rings=36,material=PAINT):
     o=ellipsoid(parent,name,(0,0,0),scale,material,segments,rings,
-        lambda p,j,i:mix(color(dark),color(light),max(0,min(1,.48+.14*p.y+.17*noise.noise(p*19)+.12*noise.noise(p*4)))))
+        lambda p,j,i:mix(color(dark),color(light),max(0,min(1,.59+.12*p.y+.055*noise.noise(p*19)+.08*noise.noise(p*4)))))
     if shape:
         for v in o.data.vertices:v.co=shape(v.co)
     return o
@@ -48,7 +48,7 @@ def stemleaf(r,y,leaf_end=None,green=False):
 
 def crown(r,y,radius=.35,number=5):
     for i in range(number):
-        a=TAU*i/number;leaf(r,'Pointed calyx',(0,y,0),(radius*math.cos(a),y-.12,radius*math.sin(a)),.065)
+        a=TAU*i/number;leaf(r,'Pointed calyx',(0,y,0),(radius*math.cos(a),y-.12,radius*math.sin(a)),.065,normal=(0,1,0))
 
 def body(name):
     r=root('food_'+name)
@@ -77,9 +77,9 @@ def body(name):
         beet=name=='beet'; sculpt(r,'Tapered '+name+' root',(.78,.78,.77),'59122d' if beet else 'b91c46','a94752' if beet else 'ed5577',lambda p:Vector((p.x*(1+.14*p.y),p.y,p.z*(1+.14*p.y))))
         tube(r,'Fine root tail',[(0,-.7,0),(.07,-.93,0),(.23,-1.13,.025)],[.09,.036,.004],STEM if beet else CREAM,9)
         for i in range(4):
-            x=(i-1.5)*.13;end=(x*2,1.18+(i%2)*.2,.06)
-            tube(r,'Leaf stalk',[(x,.69,0),(x*1.5,1,0),end],[.035,.027,.012],mat('Beet burgundy stalk','822638',.65) if beet else LEAF,7)
-            if not beet:leaf(r,'Radish serrated leaf',(x*.9,.89,0),(x*2.7,1.54,.12),.16,serration=.22)
+            a=TAU*i/4+.35;dx,dz=math.cos(a),math.sin(a);end=(dx*.28,1.18+(i%2)*.2,dz*.28)
+            tube(r,'Leaf stalk',[(dx*.08,.69,dz*.08),(dx*.18,1,dz*.18),end],[.035,.027,.012],mat('Beet burgundy stalk','822638',.65) if beet else LEAF,7)
+            if not beet:leaf(r,'Radish serrated leaf',(dx*.16,.89,dz*.16),(dx*.48,1.54,dz*.48),.16,serration=.22,normal=(dx,.2,dz))
     elif name=='onion':
         profile(r,'Layered red onion skin',[(.01,-.85),(.24,-.80),(.62,-.58),(.87,-.1),(.82,.30),(.59,.58),(.25,.80),(.08,1.03),(.01,1.1)],PAINT,lambda p,a,t:mix(color('63233d'),color('c46a8c'),.40+.14*math.sin(47*a+3*p.y)+.13*noise.noise(p*5)),72,4)
         for i in range(8):
@@ -88,32 +88,32 @@ def body(name):
     elif name=='mushroom':
         profile(r,'Continuous mushroom cap and stalk',[(.01,-.87),(.27,-.86),(.26,-.35),(.26,.02),(.72,.06),(.87,.26),(.82,.52),(.61,.76),(.26,.88),(.01,.90)],PAINT,lambda p,a,t:mix(color('a98158'),color('f0dfbe'),.35+.17*noise.noise(p*23)+(.45 if p.y<.04 else .02)),72,4)
         for i in range(54):
-            a=TAU*i/54;tube(r,'Fine underside gill',[(.28*math.cos(a),.065,.28*math.sin(a)),(.69*math.cos(a),.075,.69*math.sin(a)),(.81*math.cos(a),.18,.81*math.sin(a))],[.009,.012,.006],GILL,4)
+            a=TAU*i/54;tube(r,'Fine underside gill',[(.28*math.cos(a),.012,.28*math.sin(a)),(.69*math.cos(a),.034,.69*math.sin(a)),(.81*math.cos(a),.14,.81*math.sin(a))],[.009,.012,.006],GILL,4)
     elif name=='lemon':
         sculpt(r,'Pebbled lemon peel',(.81,1.02,.80),'d79909','f6da3d',lambda p:Vector((p.x,p.y*(1+.10*abs(p.y)**4),p.z))*(1+.004*noise.noise(p*80)))
         ellipsoid(r,'Lemon blossom tip',(0,-1.1,0),(.07,.06,.07),PAINT,16,8,lambda p,j,i:color('ddba27'))
         stemleaf(r,1.07,(.47,1.39,.06),True)
     elif name=='raspberry':
         # Individual drupelets arranged on an open cup; the top is genuinely hollow.
-        for j in range(7):
-            y=-.72+j*.205;rad=.22+.40*math.sin((j+1)/9*math.pi);count=round(rad*34)
+        for j,(y,rad) in enumerate([(-.57,.18),(-.34,.36),(-.10,.48),(.15,.53),(.39,.49)]):
+            count=max(6,round(rad*28))
             for i in range(count):
-                a=TAU*(i+(j%2)*.5)/count
-                ellipsoid(r,'Raspberry hollow cup drupelet',(rad*math.cos(a),y,rad*math.sin(a)),(.135,.14,.135),PAINT,14,8,lambda p,k,l:mix(color('a92243'),color('ed6175'),.45+.12*p.y))
-        ellipsoid(r,'Raspberry closed cup base',(0,-.78,0),(.21,.12,.21),PAINT,16,10,lambda p,j,i:color('b8324e'))
+                a=TAU*(i+(j%2)*.5)/count;variation=1+.055*math.sin(i*7.31+j*3.7)
+                ellipsoid(r,'Raspberry hollow cup drupelet',(rad*math.cos(a),y+.012*math.sin(i*4.8),rad*math.sin(a)),(.16*variation,.158,.16*variation),PAINT,16,10,lambda p,k,l:mix(color('bd3153'),color('ef6d83'),.56+.10*p.y))
+        ellipsoid(r,'Raspberry closed cup base',(0,-.57,0),(.23,.19,.23),PAINT,20,12,lambda p,j,i:color('d94e6a'))
     elif name=='blueberry':
         sculpt(r,'Blueberry waxy bloom',(.82,.70,.82),'263950','8292b6',lambda p:Vector((p.x,p.y-.12*math.exp(-(p.x*p.x+p.z*p.z)/.12) if p.y>0 else p.y,p.z)))
         calyx=mat('Blueberry dusky crown','33435a',.7)
         for i in range(5):
             a=TAU*i/5;u=Vector((math.cos(a),0,math.sin(a)));v=Vector((-math.sin(a),0,math.cos(a)))
-            start=Vector((0,.61,0));points=[start+u*.10-v*.055,start+u*.10+v*.055,start+u*.29+Vector((0,.13,0))]
-            o=mesh(r,'Blueberry calyx point',points,[(0,1,2)],calyx);m=o.modifiers.new('Calyx thickness','SOLIDIFY');m.thickness=.012
+            start=Vector((0,.605,0));points=[start+u*.075-v*.07,start+u*.075+v*.07,start+u*.25+Vector((0,.035,0))]
+            o=mesh(r,'Blueberry calyx point',points,[(0,1,2)],calyx);m=o.modifiers.new('Calyx thickness','SOLIDIFY');m.thickness=.025
     elif name in ('cherry','apricot'):
         cherry=name=='cherry';sculpt(r,'Stone fruit '+name+' skin',(.84,.79,.82),'711227' if cherry else 'e37829','d7434d' if cherry else 'ffd06b',lambda p:Vector((p.x,p.y-.095*math.exp(-(p.x*p.x+p.z*p.z)/.08) if p.y>0 else p.y,p.z*(1-.025*math.exp(-(p.x/.05)**2)))))
         if cherry:tube(r,'Long arched cherry stem',[(0,.67,0),(.05,1.13,0),(.30,1.55,.03),(.49,1.68,.05)],[.025,.022,.020,.016],LEAF,8)
         else:stemleaf(r,.69)
     elif name=='fig':
-        profile(r,'Fig tapered neck',[(.01,-.82),(.36,-.85),(.70,-.63),(.82,-.21),(.71,.19),(.49,.50),(.25,.80),(.10,.99),(.01,1.04)],PAINT,lambda p,a,t:mix(color('493552'),color('968155'),.27+.17*math.sin(21*a+p.y)+.20*max(0,p.y)),72,4)
+        profile(r,'Fig tapered neck',[(.01,-.82),(.36,-.85),(.70,-.63),(.82,-.21),(.71,.19),(.49,.50),(.25,.80),(.10,.99),(.01,1.04)],PAINT,lambda p,a,t:mix(color('684361'),color('a18486'),.37+.065*math.sin(21*a+p.y)+.16*max(0,p.y)),72,4)
         stemleaf(r,1.0)
     elif name=='pomegranate':
         sculpt(r,'Pomegranate leathery skin',(.90,.86,.90),'a42332','e96d61',lambda p:Vector((p.x*(1+.015*math.cos(6*math.atan2(p.z,p.x))),p.y,p.z)))
@@ -125,8 +125,21 @@ def body(name):
         for row in range(5):
             y=-.75+row*.38;radius=.76*math.sqrt(1-(y/1.09)**2)
             for i in range(6):
-                a=TAU*(i+(row%2)*.5)/6;start=(radius*math.cos(a),y,radius*math.sin(a));end=((radius+.20)*math.cos(a),y+.40,(radius+.20)*math.sin(a))
-                leaf(r,'Dragon fruit green tipped scale',start,end,.095,LEAF)
+                a=TAU*(i+(row%2)*.5)/6
+                # Cupped bracts wrap the fruit radially, so side and back views
+                # have the same fleshy silhouette as the front.
+                radial=Vector((math.cos(a),0,math.sin(a)));side=Vector((-math.sin(a),0,math.cos(a)))
+                verts=[];faces=[];colors=[]
+                for j in range(9):
+                    t=j/8;center=radial*(radius-.045+.25*t*t)+Vector((0,y+.40*t,0))
+                    w=.145*math.sin(math.pi*(.15+.85*t))**.8
+                    for k in (-1,0,1):
+                        verts.append(center+side*w*k+radial*.045*(1-abs(k))*math.sin(math.pi*t))
+                        colors.append(mix(color('d44c83'),color('94b95c'),t**1.3))
+                for j in range(8):
+                    for k in range(2):q=j*3+k;faces.append((q,q+1,q+4,q+3))
+                o=mesh(r,'Dragon fruit cupped green tipped scale',verts,faces,PAINT,colors)
+                m=o.modifiers.new('Fleshy bract thickness','SOLIDIFY');m.thickness=.032
     elif name in ('bread','potato'):
         bread=name=='bread'
         produce=sculpt(r,'Rustic loaf crust' if bread else 'Russet potato skin',(.74,1.12,.66),'a56c29' if bread else '886638','eec07b' if bread else 'cda46c',lambda p:p*(1+.022*noise.noise(p*6)),material=BAKE if bread else MATTE)
@@ -151,14 +164,14 @@ def body(name):
         bpy.ops.mesh.primitive_cube_add(size=2);o=bpy.context.object;o.name='Golden cheese wedge' if name=='cheese' else 'Soft tofu block';o.parent=r;o.scale=(.75,.82,.62)
         bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
         if name=='cheese':
-            for v in o.data.vertices:v.co.z+=.25*v.co.y;v.co.x*=.72 if v.co.y>0 else 1
-        m=o.modifiers.new('Soft handmade edges','BEVEL');m.width=.065 if name=='tofu' else .035;m.segments=3
+            for v in o.data.vertices:v.co.x*=.09 if v.co.y>0 else 1
+        m=o.modifiers.new('Soft handmade edges','BEVEL');m.width=.075 if name=='tofu' else .05;m.segments=4
         o.data.materials.append(mat(name+' solid surface','f3cd6a' if name=='cheese' else 'f0e9d3',.62))
         # Fine embedded surface speckles, restrained at the play scale.
         speck=mat(name+' surface pores','cfad59' if name=='cheese' else 'd5cdb7',.8)
         for i in range(65):
-            x=random.uniform(-.63,.63);y=random.uniform(-.72,.72);z=.623+(.25*y if name=='cheese' else 0)
-            if name=='cheese':x*=.8
+            x=random.uniform(-.63,.63);y=random.uniform(-.72,.72);z=.623
+            if name=='cheese':x*=1-.91*(y+.82)/1.64
             s=random.uniform(.007,.016);ellipsoid(r,'Small '+name+' pore',(x,y,z),(s,s*.75,.002),speck,8,4)
     elif name=='bagel':
         # Torus lies in the XY plane, with a through-hole that remains open after cuts.
@@ -166,24 +179,24 @@ def body(name):
         for i in range(N):
             a=TAU*i/N
             for j in range(M):
-                b=TAU*j/M;rr=.64+.30*math.cos(b);p=Vector((rr*math.cos(a),rr*math.sin(a),.28*math.sin(b)))
-                verts.append(p);colors.append(mix(color('ad672c'),color('e8af59'),.40+.16*noise.noise(p*35)+.18*abs(math.sin(b))))
+                b=TAU*j/M;rr=.64+.30*math.cos(b);p=Vector((rr*math.cos(a),rr*math.sin(a),.38*math.sin(b)))
+                verts.append(p);colors.append(mix(color('b67436'),color('f0bf72'),.53+.065*noise.noise(p*35)+.18*abs(math.sin(b))))
         for i in range(N):
             for j in range(M):faces.append((i*M+j,((i+1)%N)*M+j,((i+1)%N)*M+(j+1)%M,i*M+(j+1)%M))
         mesh(r,'Bagel with true open center',verts,faces,BAKE,colors)
         sesame=mat('Toasted sesame seeds','e7d09a',.72)
         for i in range(60):
-            a=random.random()*TAU;rr=random.uniform(.47,.8);z=.28*math.sqrt(max(0,1-((rr-.64)/.30)**2))
+            a=random.random()*TAU;rr=random.uniform(.47,.8);z=.38*math.sqrt(max(0,1-((rr-.64)/.30)**2))
             ellipsoid(r,'Bagel sesame seed',(rr*math.cos(a),rr*math.sin(a),z+.01),(.012,.032,.009),sesame,8,4)
     elif name=='croissant':
         verts=[];faces=[];colors=[];N=64;M=24
         for j in range(N+1):
-            t=j/N;a=-1.32+t*2.64;center=Vector((1.0*math.sin(a),.42-.88*math.cos(a),0));n=Vector((math.sin(a),-math.cos(a),0));rad=.032+.37*math.sin(math.pi*t)**.75
+            t=j/N;a=-1.32+t*2.64;center=Vector((1.0*math.sin(a),.42-.88*math.cos(a),0));n=Vector((math.sin(a),-math.cos(a),0));rad=.045+.39*math.sin(math.pi*t)**.75
             # Rolling layers make a crescent, with tapered tips and a ridged crust.
-            layer=1+.042*math.cos(13*math.pi*t)
+            layer=1+.075*math.cos(13*math.pi*t)
             for i in range(M):
-                b=TAU*i/M;p=center+rad*layer*(n*math.cos(b)+Vector((0,0,.88*math.sin(b))));verts.append(p)
-                colors.append(mix(color('92501f'),color('e8aa4c'),.46+.16*noise.noise(p*24)+.18*math.cos(13*math.pi*t)))
+                b=TAU*i/M;p=center+rad*layer*(n*math.cos(b)+Vector((0,0,1.10*math.sin(b))));verts.append(p)
+                colors.append(mix(color('ad672b'),color('efbb69'),.62+.055*noise.noise(p*24)+.12*math.cos(13*math.pi*t)))
         for j in range(N):
             for i in range(M):a=j*M+i;b=j*M+(i+1)%M;faces.append((a,a+M,b+M,b))
         faces.extend([tuple(reversed(range(M))),tuple(N*M+i for i in range(M))]);mesh(r,'Laminated crescent croissant',verts,faces,BAKE,colors)
@@ -202,7 +215,9 @@ def body(name):
         for i in range(9):
             a=math.pi*i/8;pts=[(.30*(1-.28*j/16)*math.cos(a),-1.2+2.4*j/16,.13*math.sin(j/16*math.pi)+.30*(1-.28*j/16)*math.sin(a)+.006) for j in range(17)]
             tube(r,'Celery lengthwise fiber',pts,[.007]*len(pts),RIB,4)
-        for i in range(3):leaf(r,'Celery leafy sprig',(0,1.12,.07),((i-1)*.34,1.55,.12),.13,serration=.25)
+        for i in range(3):
+            a=TAU*i/3;dx,dz=math.cos(a),math.sin(a)
+            leaf(r,'Celery leafy sprig',(0,1.12,.07),(dx*.30,1.55,.07+dz*.30),.13,serration=.25,normal=(dx,.2,dz))
     return r
 
 def pixel(name,y,z):
@@ -321,6 +336,21 @@ roots=[]
 for name in NAMES:
     r=body(name);roots.append(r)
     for o in list(r.children):clean(o)
+    if name=='raspberry':
+        # Unite touching drupelets before slicing. Independent coplanar caps
+        # otherwise overlap and flicker black; the hollow cup stays open.
+        bpy.ops.object.select_all(action='DESELECT')
+        for o in r.children:o.select_set(True)
+        bpy.context.view_layer.objects.active=list(r.children)[0];bpy.ops.object.join();o=bpy.context.object
+        m=o.modifiers.new('Continuous raspberry skin','REMESH');m.mode='VOXEL';m.voxel_size=.028;m.use_smooth_shade=True
+        bpy.ops.object.modifier_apply(modifier=m.name)
+        m=o.modifiers.new('Rounded drupelet seams','SMOOTH');m.factor=.5;m.iterations=2;bpy.ops.object.modifier_apply(modifier=m.name)
+        o.data.materials.clear();o.data.materials.append(PAINT)
+        for p in o.data.polygons:p.material_index=0;p.use_smooth=True
+        for a in list(o.data.color_attributes):o.data.color_attributes.remove(a)
+        a=o.data.color_attributes.new(name='Color',type='FLOAT_COLOR',domain='POINT')
+        for v,c in zip(o.data.vertices,a.data):c.color=(*mix(color('bd3153'),color('ef6d83'),.56+.10*v.co.y+.035*noise.noise(v.co*13)),1)
+        clean(o)
     cm=cutmat(name)
     for sign,suffix in ((-1,'left'),(1,'right')):
         half=root(r.name+'_'+suffix);roots.append(half)

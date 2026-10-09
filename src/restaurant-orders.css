@@ -1,0 +1,24 @@
+.order-rail{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;margin:16px 18px 8px;scrollbar-width:thin;scrollbar-color:#806783 #302335}
+.order-card{display:grid;grid-template-columns:80px minmax(0,1fr);gap:8px 12px;align-items:center;min-width:0;padding:10px;background:#fff1d8;color:#342436;border:2px solid #76596a;border-radius:14px;box-shadow:0 4px 0 #201725;position:relative}
+.order-card.current{border-color:#e9be63;box-shadow:0 4px 0 #94713e}
+.order-card.queued{background:#e8dddf}
+.order-card img{width:80px;height:80px;border-radius:9px;object-fit:cover}
+.order-card-footer{grid-column:1/-1}
+.order-card-copy{flex:1;min-width:0}.order-label{font:9px 'DM Mono',monospace;letter-spacing:1px;color:#77536b}
+.order-card h2{font-size:19px;line-height:1.15;margin:5px 0;font-weight:800}
+.order-ingredients{font-size:10px;line-height:1.4;margin:0;color:#785d70;max-height:28px;overflow:hidden}
+.order-timer{height:6px;background:#d6c0bc;border-radius:5px;overflow:hidden}.order-timer i{display:block;height:100%;width:100%;background:#527e66;transition:width .2s linear}
+.queued .order-timer i{background:#ab93b3}.order-time{display:block;font:10px 'DM Mono',monospace;margin-top:5px;color:#65455a}
+.order-card.urgent .order-timer i{background:#d35b54}.order-card.urgent{border-color:#d35b54}
+.order-card.expired{background:#eed1ce;border-color:#c75459}.order-card.expired .order-label{color:#a33243}.order-card.expired .order-timer i{width:0!important}
+#order-alert{margin:0 20px;min-height:19px;font-size:12px;color:#ffc2ac}
+#sentence-game #sentence-kitchen{height:clamp(210px,calc(100dvh - 535px),380px);min-height:210px}
+.restaurant-menu-button{background:#a6d9c0!important;color:#292133!important;border-color:#779c86!important;font-weight:800}
+.art-unavailable img{display:none}.art-unavailable:before{content:'✦';font-size:42px;color:#987847}
+.service-result-extras{grid-template-columns:repeat(5,1fr)}
+.order-shake .sentence-cabinet{animation:order-shake .45s ease-out}
+@keyframes order-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.service-reduced .order-timer i{transition:none}
+.order-empty .kitchen-fallback{visibility:hidden}
+@media(max-width:1050px){.order-card{grid-template-columns:64px minmax(0,1fr);gap:8px;padding:8px}.order-card img{width:64px;height:64px}.order-card h2{font-size:16px}.order-ingredients{font-size:9px}.order-label{font-size:8px}}
+@media(max-width:760px){.order-rail{display:flex;overflow-x:auto;padding-bottom:6px;margin:12px 12px 4px;scroll-snap-type:x proximity}.order-card{grid-template-columns:80px minmax(0,1fr);min-width:265px;scroll-snap-align:start}.order-card.current{min-width:300px}.order-card img{width:80px;height:80px}#sentence-game #sentence-kitchen{height:230px;min-height:230px}.service-result-extras{grid-template-columns:repeat(3,1fr)}}

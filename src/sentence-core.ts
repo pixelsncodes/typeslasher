@@ -79,6 +79,7 @@ export type SentenceEvent =
 export class SentenceSession {
   readonly sentences: string[];
   index = 0; cursor = 0; error = ''; attempts = 0; correct = 0; completed = false;
+  skipped = 0;
   private started: number | null = null;
   private pausedAt: number | null = null;
   private finishedAt: number | null = null;
@@ -88,8 +89,16 @@ export class SentenceSession {
   constructor(sentences: string[], style: TypingStyle = 'exact') { if (!sentences.length) throw Error('No sentences'); this.sentences = sentences; this.style = style; }
   get current() { return this.sentences[this.index]; }
   get next() { return this.sentences[this.index + 1]; }
-  get completedSentences() { return this.completed ? this.sentences.length : this.index; }
+  get completedSentences() { return (this.completed ? this.sentences.length : this.index) - this.skipped; }
+  get resolvedCharacters() { return this.sentences.slice(0,this.index).reduce((sum,text)=>sum+text.length,0) + (this.completed?this.current.length:this.cursor); }
   get active() { return this.elapsed(); }
+  start(now = performance.now()) { if(this.started===null){this.started=now;this.pausedMs=0;} }
+  skip(now = performance.now()): 'slash' | 'finished' | 'ignored' {
+    if(this.completed)return 'ignored';
+    this.events=[];this.skipped++;this.cursor=0;this.error='';
+    if(this.index+1===this.sentences.length){this.completed=true;this.finishedAt=now;return 'finished';}
+    this.index++;return 'slash';
+  }
   elapsed(now = performance.now()) { return this.started === null ? 0 : Math.max(0, (this.finishedAt ?? this.pausedAt ?? now) - this.started - this.pausedMs); }
   pause(now = performance.now()) { if (this.pausedAt === null) this.pausedAt = now; }
   resume(now = performance.now()) { if (this.pausedAt !== null) { this.pausedMs += now - this.pausedAt; this.pausedAt = null; } }

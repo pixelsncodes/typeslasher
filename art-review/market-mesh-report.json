@@ -25,20 +25,20 @@
     ]
   },
   "food_raspberry": {
-    "triangles": 24592,
+    "triangles": 33016,
     "materials": [
       "Painted market sculpted skin"
     ]
   },
   "food_raspberry_left": {
-    "triangles": 12914,
+    "triangles": 17018,
     "materials": [
       "Painted market sculpted skin",
       "raspberry detailed cut flesh"
     ]
   },
   "food_raspberry_right": {
-    "triangles": 12914,
+    "triangles": 17146,
     "materials": [
       "Painted market sculpted skin",
       "raspberry detailed cut flesh"
@@ -141,28 +141,22 @@
     ]
   },
   "food_dragonfruit": {
-    "triangles": 15460,
+    "triangles": 7480,
     "materials": [
-      "Leaf green",
-      "Leaf vein",
       "Painted market sculpted skin"
     ]
   },
   "food_dragonfruit_left": {
-    "triangles": 8260,
+    "triangles": 3874,
     "materials": [
       "dragonfruit detailed cut flesh",
-      "Leaf green",
-      "Leaf vein",
       "Painted market sculpted skin"
     ]
   },
   "food_dragonfruit_right": {
-    "triangles": 8364,
+    "triangles": 3874,
     "materials": [
       "dragonfruit detailed cut flesh",
-      "Leaf green",
-      "Leaf vein",
       "Painted market sculpted skin"
     ]
   },

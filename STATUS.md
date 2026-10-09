@@ -1,3 +1,27 @@
+# Current checkpoint — Restaurant orders and polished foods · 2026-10-09
+
+- Fixed ingredient batches move from basket to board to bowl, then serve as one
+  sentence/order. Cuts finish before the next batch arrives.
+- Ten illustrated recipe cards rotate through the full menu before repeating.
+  Rush timers start in the kitchen; expired orders clear and count as lost.
+- All 50 food models use calibrated proportions, polished geometry/materials,
+  and natural resting poses in the basket and on the board. Seven editable
+  Blender packs match the exported models; all foods were reviewed from seven views.
+- Sentence Slash uses Play → choose/write/paste/import text → Start. Game options
+  retain typing style, service pace, and first recipe without a preview page.
+- “Are you hungry for a good story?” drops into a stacked headline on entry,
+  with a small landing bounce. Reduced motion shows it immediately.
+
+Validation: all 16 automated suites, production build, and portable release checks
+pass. Browser checks covered direct story/custom starts, setup controls, fixed
+inventory/varied orders, natural resting poses, headline replay, reduced motion,
+and narrow layout. Release: 35.89 MB raw / 18.55 MB gzip. Review evidence is saved
+under art-review/food-polish and art-review/recipes.
+
+Earlier checkpoints follow.
+
+---
+
 # Current checkpoint — Typeslasher 1.6 / 50 modeled foods
 
 ## New assets — 2026-10-01

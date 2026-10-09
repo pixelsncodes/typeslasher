@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { loadFoodAssets, foodModel, lightFoodScene } from './food-assets';
+import { loadFoodAssets, gameFoodModel, lightFoodScene } from './food-assets';
 import './styles.css';
 import './pause-menu.css';
 import { arcadeRound, validRoundSeconds, type RoundSeconds } from './arcade-run';
@@ -71,7 +71,7 @@ app.innerHTML = `
     <section id="start-screen" class="overlay start-screen">
       <div class="start-orbit orbit-a"></div><div class="start-orbit orbit-b"></div>
       <div class="start-content">
-        <p class="eyebrow">THE MIDNIGHT SNACK ARCADE</p>
+        <p class="eyebrow">THE SNACK ARCADE</p>
         <h1>Type fast.<br><em>Slice snacks.</em></h1>
         <p class="intro">Food flies. You type its name. Every word becomes a perfect slice.</p>
         <label class="pace-control">Typing pace<select class="pace-select" aria-label="Typing pace"><option value="relaxed">Relaxed · plenty of time</option><option value="steady">Steady · comfortable challenge</option><option value="brisk">Brisk · quicker slices</option></select></label>
@@ -310,7 +310,7 @@ canvas.addEventListener('webglcontextlost', event => {
 canvas.addEventListener('webglcontextrestored', () => { needsRender = true; showToast('Graphics ready. Resume when you are ready.'); });
 document.querySelector('.brand')!.addEventListener('click', event => { event.preventDefault(); if (running) togglePause(true); else { resultsScreen.classList.add('hidden');startScreen.classList.remove('hidden');playButton.focus(); } });
 
-function createFood(def: FoodDefinition) { return foodModel(def.kind)!; }
+function createFood(def: FoodDefinition) { return gameFoodModel(def.kind)!; }
 
 function positionFood(item: Food, progress: number) {
   const capacity=DIFFICULTIES[difficulty].capacity;
@@ -410,7 +410,7 @@ function sliceFood(now: number) {
   scoreEl.textContent = formatScore(score); comboEl.textContent = `×${Math.min(combo, 5)}`;
   const halves: THREE.Group[] = [];
   for (const direction of [-1, 1]) {
-    const half = foodModel(food.definition.kind, direction < 0 ? '_left' : '_right')!;
+    const half = gameFoodModel(food.definition.kind, direction < 0 ? '_left' : '_right')!;
     half.position.copy(food.group.position); half.rotation.copy(food.group.rotation); half.scale.copy(food.group.scale);
     half.userData.direction = direction; foodLayer.add(half); halves.push(half);
   }

@@ -23,14 +23,14 @@
     ]
   },
   "food_cheese": {
-    "triangles": 3308,
+    "triangles": 3420,
     "materials": [
       "cheese solid surface",
       "cheese surface pores"
     ]
   },
   "food_cheese_left": {
-    "triangles": 1886,
+    "triangles": 1982,
     "materials": [
       "cheese detailed cut flesh",
       "cheese solid surface",
@@ -38,7 +38,7 @@
     ]
   },
   "food_cheese_right": {
-    "triangles": 1582,
+    "triangles": 1646,
     "materials": [
       "cheese detailed cut flesh",
       "cheese solid surface",
@@ -89,14 +89,14 @@
     ]
   },
   "food_tofu": {
-    "triangles": 3308,
+    "triangles": 3420,
     "materials": [
       "tofu solid surface",
       "tofu surface pores"
     ]
   },
   "food_tofu_left": {
-    "triangles": 1708,
+    "triangles": 1772,
     "materials": [
       "tofu detailed cut flesh",
       "tofu solid surface",
@@ -104,7 +104,7 @@
     ]
   },
   "food_tofu_right": {
-    "triangles": 1660,
+    "triangles": 1724,
     "materials": [
       "tofu detailed cut flesh",
       "tofu solid surface",
@@ -171,7 +171,7 @@
     ]
   },
   "food_celery_left": {
-    "triangles": 2790,
+    "triangles": 2852,
     "materials": [
       "celery detailed cut flesh",
       "Celery fine pale ribs",
@@ -181,7 +181,7 @@
     ]
   },
   "food_celery_right": {
-    "triangles": 2812,
+    "triangles": 2624,
     "materials": [
       "celery detailed cut flesh",
       "Celery fine pale ribs",

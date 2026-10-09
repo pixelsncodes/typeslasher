@@ -133,7 +133,7 @@ def donut():
     def surface(u,v,extra=0):
         minor=.31*(1+.027*math.sin(5*u)+.017*math.cos(9*u));major=.69
         rad=major+(minor+extra)*math.cos(v)
-        return (rad*math.cos(u),rad*math.sin(u),(minor*.8+extra)*math.sin(v))
+        return (rad*math.cos(u),rad*math.sin(u),(minor*1.10+extra)*math.sin(v))
     for i in range(N):
         u=TAU*i/N
         for j in range(M):

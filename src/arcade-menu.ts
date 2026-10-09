@@ -25,7 +25,7 @@ el.innerHTML=`
     <header class="game-nav"><button class="small-brand" data-go="home" aria-label="Typeslasher home">TYPE<span>SLASHER</span><i aria-hidden="true"></i></button><div><label class="motion-toggle"><input id="calm-preview" type="checkbox" ${state.reduced?'checked':''}> Less motion</label><button class="utility" data-info="settings">Settings <span aria-hidden="true">⚙</span></button></div></header>
     <section class="screen home-screen" data-screen="home" aria-labelledby="home-heading">
       <div class="hero-art">
-        <p class="arcade-sign">THE MIDNIGHT SNACK ARCADE <span aria-hidden="true">✦</span></p>
+        <p class="arcade-sign">THE SNACK ARCADE <span aria-hidden="true">✦</span></p>
         <div class="food-stage" id="food-stage">
           <svg class="logo-orbit" viewBox="0 0 1000 893" fill="none" aria-hidden="true"><path d="M860 147C1040 346 602 563 219 615C-17 647 40 455 376 350C564 291 716 254 792 204" stroke="#dd6684" stroke-width="14"/><path d="M860 142C1040 341 602 558 219 610C-17 642 40 450 376 345C564 286 716 249 792 199" stroke="#ffe8ac" stroke-width="7"/></svg>
           <canvas id="hero-food" aria-hidden="true"></canvas>
@@ -63,8 +63,7 @@ function sync(){
   el.querySelectorAll<HTMLButtonElement>('[data-playstyle]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.playstyle===playstyle)));
   el.querySelectorAll<HTMLButtonElement>('[data-play],#replay-preview').forEach(b=>{b.disabled=playstyle==='food'&&foodBusy;});
   el.querySelector<HTMLElement>('.current-setup')!.hidden=playstyle==='sentence';
-  const ready=options.sentenceReady();
-  el.querySelector('#home-play-label')!.innerHTML=playstyle==='sentence'?(ready?'PLAY<small>Your passage is ready</small>':'ADD TEXT<small>Paste a passage or try a story</small>'):`PLAY<small>${state.seconds} seconds + your final snack</small>`;
+  el.querySelector('#home-play-label')!.innerHTML=playstyle==='sentence'?'PLAY<small>Choose a story or bring your words</small>':`PLAY<small>${state.seconds} seconds + your final snack</small>`;
   el.querySelector<HTMLInputElement>('#gentle-adjust')!.checked=state.adaptive;
   el.querySelector<HTMLInputElement>('#calm-preview')!.checked=state.reduced;
   const summary=`${state.mode} · ${levels[state.level]} · ${selectionTitle(state.basket)} · ${state.seconds}s`;

@@ -2,17 +2,19 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { foodModel, lightFoodScene, loadFoodAssets } from './food-assets';
 import type { ServiceEffect } from './sentence-game';
-import { FRUIT_MIX, cutPose, CUT_END, FruitCadence } from './sentence-motion';
-import { RECIPES, type RecipeId } from './kitchen-recipes';
+import { cutPose, CUT_END, FruitCadence } from './sentence-motion';
+import { IngredientBatch, type KitchenOrder } from './restaurant-orders';
+import type { FoodKind } from './food-catalog';
 import { FOOD_CATALOG, type PackId } from './food-catalog';
+import { restingFoodModel } from './food-resting';
 
 export type KitchenView = { ordinal: number; progress: number; served: number; total: number; multiplier: number; error: boolean };
 const BOARD = new THREE.Vector3(-.65, .19, .4), YAW = -.68;
-export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>boolean; quality:()=>string; recipe?:()=>RecipeId}) {
-  host.innerHTML = `<div class="kitchen-sign"><span>MIDNIGHT PREP KITCHEN</span></div>
+export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>boolean; quality:()=>string}) {
+  host.innerHTML = `<div class="kitchen-sign"><span>PREP KITCHEN</span></div>
     <div class="kitchen-tickets"><span>ORDER <b>01</b></span><span class="served-ticket">SERVED <b>0</b></span></div>
     <div class="kitchen-fallback"><i class="fallback-food"></i><span class="fallback-slices"></span></div>
-    <div class="kitchen-caption prep-caption">FRUIT MIX</div><div class="kitchen-caption cut-caption">ONE WORD · ONE CUT</div><div class="kitchen-caption plate-caption">READY TO SERVE</div>
+    <div class="kitchen-caption prep-caption">FRUIT MIX</div><div class="kitchen-caption cut-caption">CHOP · PLATE · SERVE</div><div class="kitchen-caption plate-caption">READY TO SERVE</div>
     <div class="kitchen-callout"></div><div class="kitchen-word-charge"><i></i></div>`;
   let view: KitchenView = {ordinal:0,progress:0,served:0,total:1,multiplier:1,error:false};
   let renderer: THREE.WebGLRenderer | undefined;
@@ -24,23 +26,45 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
   let knife: THREE.Object3D, bowl: THREE.Object3D;
   let ready=false, active=false, frame=0, previous=0, time=0, lastDraw=0, currentOrdinal=-1;
   let serveStart=-1, currentCut: {born:number;ordinal:number;released:boolean}|undefined;
-  const pending: ServiceEffect[]=[];
+  const pending: (ServiceEffect & {ingredient?:number})[]=[];
   const cadence = new FruitCadence();
   const pieces: {group:THREE.Group;born:number;direction:number;slot:number}[]=[];
   let pieceCount=0, fallbackCount=0;
+  let order:KitchenOrder|undefined, batch:IngredientBatch|undefined, intakeStart=-1;
+  const basketModels=new Map<number,THREE.Group>();
+  const scheduled=new Set<number>();
   const animations = new Set<Animation>();
   const reduced = () => settings.reduced();
-  let recipeReady=false, loadedRecipe='', recipeEpoch=0;
-  function prepareRecipe(){
-    const id=settings.recipe?.()??'fruit';
-    if(id===loadedRecipe&&recipeReady)return;
-    const epoch=++recipeEpoch;loadedRecipe=id;recipeReady=false;center.visible=false;tray.clear();
+  let recipeReady=false;
+  async function prepare(orders:readonly KitchenOrder[]){
+    recipeReady=false;
     host.dataset.ingredients='loading';
-    const packs=[...new Set(RECIPES[id].items.map(kind=>FOOD_CATALOG.find(food=>food.kind===kind)!.pack))] as PackId[];
-    void loadFoodAssets(packs).then(()=>{
-      if(epoch!==recipeEpoch)return;
-      recipeReady=true;host.dataset.ingredients='ready';if(ready)host.classList.add('has-food-models');select();draw();
-    }).catch(()=>{if(epoch===recipeEpoch){host.dataset.ingredients='failed';host.classList.remove('has-food-models');}});
+    try {
+      const packs=[...new Set(orders.flatMap(order=>order.ingredients.map(kind=>FOOD_CATALOG.find(food=>food.kind===kind)!.pack)))] as PackId[];
+      await Promise.all([loadFoodAssets(packs),kitchenReady]);
+      recipeReady=true;host.dataset.ingredients='ready';
+      if(ready)host.classList.add('has-food-models');
+    }catch{host.dataset.ingredients='failed';host.classList.remove('has-food-models');}
+  }
+  function basketPosition(index:number){const cols=order?.ingredients.length===7?4:3;return new THREE.Vector3(-5.55+(index%cols)*(cols===4?.55:.77),.12,.7-Math.floor(index/cols)*.75);}
+  function select(){
+    if(!ready||!recipeReady||!batch||!order||currentCut||serveStart>=0||!cadence.ready(time))return;
+    if(batch.board!==undefined)return;
+    const index=batch.basket[0];
+    if(index===undefined||!batch.take(index))return;
+    currentOrdinal=index;tray.remove(basketModels.get(index)!);basketModels.delete(index);
+    center.clear();center.add(model(order.ingredients[index]));center.visible=true;intakeStart=time;
+  }
+  function beginOrder(next:KitchenOrder){
+    reset();order=next;batch=new IngredientBatch(next.ingredients);
+    host.classList.remove('order-empty');
+    host.querySelector('.prep-caption')!.textContent=next.title.toUpperCase();
+    host.querySelector('.kitchen-tickets span b')!.textContent=String(next.index+1).padStart(2,'0');
+    if(ready&&recipeReady)for(let index=0;index<next.ingredients.length;index++){
+      const fruit=model(next.ingredients[index]);fruit.scale.setScalar(.70);fruit.position.copy(basketPosition(index));fruit.rotation.y=YAW+(index%3-1)*.22+Math.floor(index/3)*.25;
+      tray.add(fruit);basketModels.set(index,fruit);
+    }
+    select();draw();
   }
   function animate(el: Element, frames: Keyframe[], duration: number) {
     if(reduced())return;
@@ -48,25 +72,10 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
     animations.add(animation);animation.onfinish=()=>animations.delete(animation);
     if(!active)animation.pause();
   }
-  function model(ordinal:number, part:''|'_left'|'_right'='') {
-    const ingredients=settings.recipe?RECIPES[settings.recipe()].items:FRUIT_MIX;
-    const kind=ingredients[ordinal%ingredients.length],food=foodModel(kind,part)!;
-    // Both halves use the whole fruit's origin and scale so closed cut faces meet.
-    const bounds=new THREE.Box3().setFromObject(foodModel(kind)!);
-    const size=bounds.getSize(new THREE.Vector3()),middle=bounds.getCenter(new THREE.Vector3());
-    const scale=1.14/Math.max(size.x,size.y,size.z);
-    food.scale.setScalar(scale);food.position.set(-middle.x*scale,-bounds.min.y*scale,-middle.z*scale);
-    food.traverse(node=>{if(node instanceof THREE.Mesh){node.castShadow=true;node.receiveShadow=true;}});
-    const group=new THREE.Group();group.add(food);return group;
-  }
-  function select(ordinal=view.ordinal) {
-    if(!ready || !recipeReady || !cadence.ready(time) || ordinal===currentOrdinal)return;
-    currentOrdinal=ordinal;center.clear();center.add(model(ordinal));center.visible=true;tray.clear();
-    for(let n=0;n<5;n++){
-      const fruit=model(ordinal+n+1);fruit.scale.setScalar(.70);
-      fruit.position.set(-5.55+(n%3)*.77,.12,.7-Math.floor(n/3)*.75);
-      fruit.rotation.y=n*.65;tray.add(fruit);
-    }
+  function model(kind:FoodKind, part:''|'_left'|'_right'='') {
+    const group=restingFoodModel(foodModel(kind,part)!,foodModel(kind)!,kind);
+    group.traverse(node=>{if(node instanceof THREE.Mesh){node.castShadow=true;node.receiveShadow=true;}});
+    return group;
   }
   function resize() {
     if(!renderer || !host.clientWidth || !host.clientHeight)return;
@@ -74,13 +83,15 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
     renderer.setPixelRatio(Math.min(devicePixelRatio,settings.quality()==='low'?1:settings.quality()==='high'?2:1.5));
     renderer.setSize(width,height,false);
     camera.aspect=width/height;
+    // On wide, shallow windows keep the entire prep surface in view.
+    camera.lookAt(0,Math.max(.15,Math.min(1,1-(camera.aspect-3)*.35)),-.9);
     // Fit the island horizontally. Perspective keeps the rear counter at a natural depth.
     camera.fov=THREE.MathUtils.radToDeg(2*Math.atan(7.05/(camera.aspect*15.4)));
     camera.updateProjectionMatrix();draw();
   }
   function addPieces(ordinal:number,born:number) {
     for(const direction of [-1,1]){
-      const group=model(ordinal,direction<0?'_left':'_right');world.add(group);
+      const group=model(order!.ingredients[ordinal],direction<0?'_left':'_right');world.add(group);
       pieces.push({group,born,direction,slot:pieceCount++%12});
       if(pieces.length>16)world.remove(pieces.shift()!.group);
     }
@@ -90,17 +101,24 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
     if(!ready || currentCut || serveStart>=0 || !pending.length)return;
     const next=pending[0];
     if(next.type==='serve'){
-      if(pieces.some(p=>time-p.born<CUT_END))return;
+      if(!batch?.complete||pieces.some(p=>time-p.born<CUT_END))return;
       pending.shift();serveStart=time;center.visible=false;
     }else{
       if(!cadence.ready(time))return;
-      pending.shift();select(next.ordinal);currentCut={born:time,ordinal:next.ordinal,released:false};
+      select();
+      const index=next.ingredient!;
+      if(batch?.board!==index||(!reduced()&&time-intakeStart<.32))return;
+      pending.shift();batch.cut(index);currentCut={born:time,ordinal:index,released:false};
     }
   }
   function draw() {
     if(!renderer || !ready || !recipeReady || !host.isConnected)return;
     startNext();
     if(!currentCut&&!pending.length&&serveStart<0&&cadence.ready(time))select();
+    if(batch?.board!==undefined){
+      const t=reduced()?1:Math.min(1,(time-intakeStart)/.32),start=basketPosition(batch.board);
+      center.position.lerpVectors(start,BOARD,t);center.position.y+=Math.sin(t*Math.PI)*.5;center.scale.setScalar(.7+t*.3);
+    }else{center.position.copy(BOARD);center.scale.setScalar(1);}
     const age=currentCut?time-currentCut.born:0,pose=cutPose(age);
     knife.position.copy(BOARD);knife.position.y+=currentCut?pose.blade:1.35+view.progress*.13;
     knife.rotation.set(0,YAW,0);
@@ -109,7 +127,7 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
       if(age>=CUT_END||reduced()){
         // If motion was disabled midway through a cut, settle all its pieces first.
         if(reduced())for(const piece of pieces)piece.born=Math.min(piece.born,time-CUT_END);
-        currentCut=undefined;cadence.finish(time);center.visible=false;
+        batch?.settle(currentCut.ordinal);currentCut=undefined;cadence.finish(time);center.visible=false;
       }
     }
     const serving=serveStart<0?0:reduced()?1:Math.min(1,(time-serveStart)/.55),serveX=reduced()?0:serving*serving*8;
@@ -126,6 +144,7 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
       piece.group.scale.setScalar(1-p.transfer*.45);
     }
     if(serveStart>=0 && serving>=1){clearBowl();serveStart=-1;bowl.position.x=3.9;}
+    host.dataset.basket=JSON.stringify(batch?.basket??[]);host.dataset.bowl=JSON.stringify(batch?.bowl??[]);host.dataset.board=String(batch?.board??'');
     host.dataset.fruitVisible=String(center.visible);
     host.dataset.fruitOrdinal=String(currentOrdinal);
     host.dataset.prepPhase=currentCut?'cutting':!cadence.ready(time)?'resting':serveStart>=0?'serving':'ready';
@@ -145,8 +164,7 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
     if(value){resize();frame=requestAnimationFrame(tick);}
   }
   new ResizeObserver(resize).observe(host);
-  prepareRecipe();
-  void new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/typeslasher-kitchen.glb?v=2`).then(asset=>{
+  const kitchenReady = new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/typeslasher-kitchen.glb?v=2`).then(asset=>{
     try{
       knife=asset.scene.getObjectByName('chef_knife')!;bowl=asset.scene.getObjectByName('service_bowl')!;
       if(!knife||!bowl)throw new Error('Kitchen asset is incomplete');
@@ -166,14 +184,24 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
       host.prepend(renderer.domElement);ready=true;host.classList.add('has-food-models');select();resize();
     }catch{renderer?.dispose();renderer=undefined;host.classList.remove('has-food-models');}
   }).catch(()=>{/* Typing and feedback remain available if graphics cannot load. */});
+  function reset(){
+    host.classList.add('order-empty');
+    animations.forEach(animation=>animation.cancel());animations.clear();clearBowl();pending.length=0;
+    batch?.clear();batch=undefined;order=undefined;center.clear();center.visible=false;tray.clear();basketModels.clear();scheduled.clear();
+    currentCut=undefined;serveStart=-1;currentOrdinal=-1;intakeStart=-1;fallbackCount=0;cadence.reset();
+    if(bowl)bowl.position.x=3.9;
+    host.querySelector('.kitchen-callout')!.textContent='';host.querySelector('.fallback-slices')!.textContent='';
+    host.dataset.basket='[]';host.dataset.bowl='[]';host.dataset.board='';draw();
+  }
   return {
-    setActive,
+    setActive,prepare,beginOrder,reset,
+    abort(){reset();host.querySelector('.kitchen-callout')!.textContent='ORDER LOST';},
     get busy(){return ready&&(pending.length>0||!!currentCut||serveStart>=0||pieces.some(p=>time-p.born<CUT_END));},
     update(next:KitchenView){
-      view=next;if(!currentCut&&!pending.length&&serveStart<0)select();
+      view=next;
       host.style.setProperty('--word-charge',String(view.progress));
       host.classList.toggle('kitchen-error',view.error);host.classList.toggle('kitchen-calm',reduced());
-      host.querySelector('.kitchen-tickets span b')!.textContent=String(Math.min(view.total,view.served+1)).padStart(2,'0');
+
       host.querySelector('.served-ticket b')!.textContent=String(view.served);
       if(!active||reduced())draw();
     },
@@ -182,23 +210,14 @@ export function createSentenceScene(host: HTMLElement, settings: {reduced:()=>bo
       callout.textContent=effect.type==='serve'?`${effect.fresh?'FRESH BOWL!':effect.clean?'PERFECT BOWL!':'BOWL READY!'}${effect.points?' +'+effect.points:''}`:`${effect.clean?'CLEAN CUT':'SLICED'} +${effect.points}`;
       callout.classList.toggle('serve-callout',effect.type==='serve');
       animate(callout,[{opacity:1,transform:'translate(-50%,5px)'},{opacity:1,offset:.65},{opacity:0,transform:'translate(-50%,-8px)'}],effect.type==='serve'?650:450);
-      if(ready){
-        // Keep feedback near the typing: replace waiting cuts with the latest word.
-        // Sentence completion discards waiting cuts and serves after the active cut.
-        for(let index=pending.length-1;index>=0;index--){
-          if(pending[index].type==='cut')pending.splice(index,1);
-        }
-        pending.push(effect);
+      if(ready&&recipeReady&&order){
+        if(effect.type==='serve')pending.push(effect);
+        else order.cutOrdinals.forEach((ordinal,index)=>{
+          if(ordinal===effect.ordinal&&!scheduled.has(index)){scheduled.add(index);pending.push({...effect,ingredient:index});}
+        });
       }
       fallbackCount=effect.type==='serve'?0:fallbackCount+1;
       host.querySelector('.fallback-slices')!.textContent='◒ '.repeat(Math.min(5,fallbackCount));draw();
-    },
-    reset(){
-      animations.forEach(animation=>animation.cancel());animations.clear();clearBowl();pending.length=0;
-      currentCut=undefined;serveStart=-1;currentOrdinal=-1;time=0;fallbackCount=0;cadence.reset();
-      view={ordinal:0,progress:0,served:0,total:1,multiplier:1,error:false};
-      host.querySelector('.prep-caption')!.textContent=settings.recipe?RECIPES[settings.recipe()].title.toUpperCase():'FRUIT MIX';
-      host.querySelector('.kitchen-callout')!.textContent='';host.querySelector('.fallback-slices')!.textContent='';prepareRecipe();select();draw();
     },
   };
 }

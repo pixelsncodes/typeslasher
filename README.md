@@ -17,7 +17,7 @@ Typeslasher is a browser typing arcade by **Kazi Ahmed**. It combines keyboard p
 | **Food Slash — Free Play** | Type the names of flying foods to slice them. Choose a food basket, pace, challenge, and a 30/60/90-second round. |
 | **Food Slash — Arcade** | Continue through rounds with gradually shorter typing windows and more simultaneous targets. |
 | **Food Slash — Beat Kitchen** | Finish words near the musical beat for an optional timing bonus. |
-| **Sentence Slash** | Paste a paragraph, import a local `.txt` file, or choose a story/recipe. Words cut ingredients; sentences serve bowls. Play relaxed or race the freshness gauge. |
+| **Sentence Slash** | Paste a paragraph, import a local `.txt` file, or choose a story/recipe. Words cut a fixed batch of ingredients; sentences serve orders. Choose a story or your own text and press Start. Play relaxed or beat each recipe card’s timer. |
 
 Finger hints and home-row drills help players practice. Adjustable pace, reduced motion, sound controls, and graphics presets make sessions easier to tailor. Recent results, key practice, and personal bests stay in the browser; no account is required.
 
@@ -27,7 +27,7 @@ Finger hints and home-row drills help players practice. Adjustable pace, reduced
 
 ![Typeslasher homepage with dimensional lettering, sculpted foods, and arcade controls](docs/screenshots/home.jpg)
 
-The midnight snack arcade introduces the game with a food-filled counter, oversized keycaps, and a plum, cream, yellow, and mint palette.
+The snack arcade introduces the game with a food-filled counter, oversized keycaps, and a plum, cream, yellow, and mint palette.
 
 ### Food Slash
 
@@ -100,9 +100,9 @@ npm run check:release
 npm run play
 ```
 
-The 14 check suites cover typing/timing, progression, local records, rhythm, paragraph scoring, kitchen sequencing, catalog rules, and exported food geometry. Production checks verify relative links, local font licenses, and asset size budgets. Saved browser playthroughs and remaining device coverage are documented in [STATUS.md](STATUS.md).
+The 16 check suites cover typing/timing, progression, local records, rhythm, paragraph scoring, kitchen sequencing, catalog rules, and exported food geometry. Production checks verify relative links, local font licenses, and asset size budgets. Saved browser playthroughs and remaining device coverage are documented in [STATUS.md](STATUS.md).
 
-`dist/` contains the static website. The build uses relative asset links for subfolder hosting. The intended future website address is **kaziahmed.net/typeslasher**; that deployment is a separate step.
+`dist/` contains the static website. The build uses relative asset links for subfolder hosting. Play the published game at [kaziahmed.net/typeslasher](https://www.kaziahmed.net/typeslasher).
 
 ## Project structure
 

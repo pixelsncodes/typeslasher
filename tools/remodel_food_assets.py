@@ -16,8 +16,13 @@ def color(h):
 def mix(a,b,t): return tuple(x*(1-t)+y*t for x,y in zip(a,b))
 def mat(name,h,rough=.4,coat=0,painted=False):
     m=bpy.data.materials.new(name); m.diffuse_color=(*color(h),1); m.use_nodes=True
-    p=m.node_tree.nodes.get('Principled BSDF'); p.inputs['Base Color'].default_value=m.diffuse_color
-    p.inputs['Roughness'].default_value=rough; p.inputs['Coat Weight'].default_value=coat; p.inputs['Coat Roughness'].default_value=.25
+    p=next(n for n in m.node_tree.nodes if n.type=='BSDF_PRINCIPLED'); p.inputs['Base Color'].default_value=m.diffuse_color
+    # Broad, soft highlights match the illustrated recipe food. Keep enough
+    # variation for waxy peel, baked crust and juicy interiors to read differently.
+    p.inputs['Roughness'].default_value=max(.43,min(.82,rough+.07))
+    p.inputs['Coat Weight'].default_value=min(.07,coat*.45)
+    p.inputs['Coat Roughness'].default_value=.38
+    p.inputs['Specular IOR Level'].default_value=.3
     if painted:
         attr=m.node_tree.nodes.new('ShaderNodeVertexColor'); attr.layer_name='Color'; m.node_tree.links.new(attr.outputs['Color'],p.inputs['Base Color'])
     return m
@@ -31,7 +36,7 @@ CARROT_FLESH=mat('Carrot interior','e98b24',.57)
 GRAPE_SKIN=mat('Painted translucent grape skin','ffffff',.26,.22,True)
 GRAPE_FLESH=mat('Painted translucent grape flesh','ffffff',.21,.22,True)
 for material,transmission in ((GRAPE_SKIN,.18),(GRAPE_FLESH,.24)):
-    p=material.node_tree.nodes.get('Principled BSDF')
+    p=next(n for n in material.node_tree.nodes if n.type=='BSDF_PRINCIPLED')
     p.inputs['Transmission Weight'].default_value=transmission
     p.inputs['IOR'].default_value=1.38
     p.inputs['Subsurface Weight'].default_value=.08
@@ -75,19 +80,22 @@ def tube(parent,name,points,radii,material,sides=10):
             a=j*sides+i; b=j*sides+(i+1)%sides; faces.append((a,b,b+sides,a+sides))
     faces.extend([tuple(reversed(range(sides))),tuple((len(points)-1)*sides+i for i in range(sides))])
     return mesh(parent,name,verts,faces,material)
-def leaf(parent,name,start,end,width,material=LEAF,serration=0):
-    a,b=Vector(start),Vector(end); d=b-a; side=Vector((d.y,-d.x,0)).normalized(); verts=[]; faces=[]; mid=[]
+def leaf(parent,name,start,end,width,material=LEAF,serration=0,normal=None):
+    a,b=Vector(start),Vector(end); d=b-a
+    normal=Vector(normal) if normal is not None else Vector((0,0,1))
+    side=d.cross(normal).normalized(); normal=side.cross(d).normalized()
+    verts=[]; faces=[]; mid=[]
     for j in range(13):
-        t=j/12; center=a+d*t+Vector((0,0,min(.16,d.length*.16)*math.sin(math.pi*t))); mid.append(center+Vector((0,0,.012)))
+        t=j/12; center=a+d*t+normal*(min(.16,d.length*.16)*math.sin(math.pi*t)); mid.append(center+normal*.012)
         w=width*math.sin(math.pi*t)**.8*(1-serration*(j%2))
-        for k in (-1,0,1): verts.append(center+side*w*k+Vector((0,0,-min(.07,width*.3)*abs(k)*math.sin(math.pi*t))))
+        for k in (-1,0,1): verts.append(center+side*w*k-normal*(min(.07,width*.3)*abs(k)*math.sin(math.pi*t)))
     for j in range(12):
         for k in range(2): n=j*3+k; faces.append((n,n+1,n+4,n+3))
-    o=mesh(parent,name,verts,faces,material); solid=o.modifiers.new('Leaf thickness','SOLIDIFY'); solid.thickness=.008
+    o=mesh(parent,name,verts,faces,material); solid=o.modifiers.new('Leaf thickness','SOLIDIFY'); solid.thickness=.014
     tube(parent,name+' midrib',mid,[.012*(1-j/14) for j in range(13)],VEIN,5)
     for j in (3,5,7,9):
         w=width*math.sin(math.pi*j/12)**.8
-        for s in (-1,1): tube(parent,name+' vein',[mid[j-1],mid[j]+side*w*.78*s-Vector((0,0,.028))],[.006,.002],VEIN,4)
+        for s in (-1,1): tube(parent,name+' vein',[mid[j-1],mid[j]+side*w*.78*s-normal*.028],[.006,.002],VEIN,4)
     return o
 def profile(parent,name,points,material,shade,segments=64,steps=3,lobes=0):
     path=[]
@@ -139,11 +147,13 @@ def carrot():
         start=.65+(j%2)*.3; pts=[(rad*math.cos(start+i*.1),y+.01*math.sin(i*.7),rad*math.sin(start+i*.1)) for i in range(11)]
         tube(r,'Carrot growth line',pts,[.008]*len(pts),grooves,4)
     for i in range(4):
-        angle=(i-1.5)*.48; end=(math.sin(angle)*.85,1.3+.18*math.cos(angle),-.08+(i%2)*.2)
+        angle=TAU*i/4+.35; end=(math.cos(angle)*.53,1.38+.12*(i%2),math.sin(angle)*.53)
         tube(r,'Carrot green stem',[(0,.57,0),(end[0]*.45,.97,end[2]*.5),end],[.035,.025,.008],LEAF,6)
         for j in range(3):
             t=.48+j*.14; center=(end[0]*t,.64+(end[1]-.64)*t,end[2]*t)
-            for side in (-1,1): leaf(r,'Carrot leaflet',center,(center[0]+side*(.21-j*.045),center[1]+.16,center[2]),.06,serration=.25)
+            for side in (-1,1):
+                spread=side*(.21-j*.045)
+                leaf(r,'Carrot leaflet',center,(center[0]-math.sin(angle)*spread,center[1]+.16,center[2]+math.cos(angle)*spread),.065,serration=.25,normal=(math.cos(angle),.3,math.sin(angle)))
     return r
 def cookie():
     r=root('food_cookie')
@@ -169,7 +179,7 @@ def corn():
     tube(r,'Corn stalk',[(0,-.95,0),(0,-1.21,0)],[.14,.1],LEAF,10); return r
 def grape():
     r=root('food_grape'); palette=['8d1937','a72543','7f1434','b12c49']
-    for layer,(y,rad,count,size) in enumerate([(.55,.38,4,.31),(-.07,.40,4,.31),(-.74,.28,3,.28),(-1.32,0,1,.23)]):
+    for layer,(y,rad,count,size) in enumerate([(.55,.36,4,.32),(-.04,.38,4,.32),(-.60,.24,3,.29),(-1.05,0,1,.24)]):
         for i in range(count):
             phi=TAU*i/count+[math.pi/4,0,math.pi/6,0][layer]; c=color(palette[(i+layer)%len(palette)])
             def paint(p,j,k):
