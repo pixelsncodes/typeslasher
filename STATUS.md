@@ -1,4 +1,25 @@
-# Current checkpoint — Illustrated story menu and serving dishes · 2026-10-09
+# Current checkpoint — Playable storybooks and smooth kitchen preparation · 2026-10-09
+
+- All six stories now have sentence-matched artwork: 30 selected illustrated
+  pages, with a grayscale-to-watercolor reveal driven by correct typing.
+- Fruit Adventure follows one tiny rat chef with ordinary faceless fruit.
+  Character, setting and prop continuity were planned and reviewed per page.
+- Completed words unlock ingredient milestones; arrival, cutting and plating
+  animate smoothly on the paused scene clock. The final ingredient's blade
+  contact triggers the sentence slash, then the completed dish is served.
+- Short or fast sentences finish remaining prep in a bounded flourish. Pause
+  freezes motion, mistakes unlock nothing, and reduced motion settles directly.
+- The original sentence stays hidden during its cut and serving transition.
+
+Validation: all 18 automated suites, the production build, and portable release
+checks pass. Browser checks cover milestone gating, smooth completion without
+another keystroke, pause/resume, consecutive services and story-page transitions.
+Release: 39.79 MB raw / 22.43 MB gzip. Production destination:
+https://www.kaziahmed.net/typeslasher.
+
+---
+
+# Previous checkpoint — Illustrated story menu and serving dishes · 2026-10-09
 
 - Sentence Slash now opens a six-tile story menu, with a separate “+ Add your
   story” tab for writing or pasting. File upload is removed; choosing a story

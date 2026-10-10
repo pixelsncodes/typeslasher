@@ -177,3 +177,34 @@ Vite's size advisory for the shared Three.js bundle.
 The loader now accepts Blender's Object3D roots and validates mesh content. The
 previous Group-only check rejected the exported roots and silently showed the
 old primitive foods. Starting a round now waits for the validated pack to load.
+
+## Illustrated storybooks
+
+All six story choices have one reviewed 3:2 illustration per sentence: Restaurant
+Shift (10), Fruit Adventure (4), Space Mission (3), Funny Day (3), Little Kindness
+(5), and Helping Paws (5). The 30 selected WebP pages are in
+`public/assets/storybooks/`, 1200 × 800 pixels and approximately 3.53 MiB combined.
+The current picture and next picture load only during an illustrated story.
+Original PNGs, continuity edits, contact sheets and prompts remain in
+`art-review/storybook/`; superseded variants are excluded from production assets.
+
+`src/story-pages.ts` binds each image to its exact prepared sentence.
+`src/storybook.ts` reveals a colored canvas over the grayscale original using
+soft brush marks as correct characters are accepted. Pause freezes the reveal;
+serving retains the completed page until the dish finishes, and the next order
+starts with its own grayscale image. Edited/custom passages use the text-only
+layout. `tools/check-storybooks.mjs` checks text binding, assets, serving and expiry
+alignment; release checks budget the optional pages separately from the starter.
+
+Fruit Adventure features a single tiny rat chef, ordinary faceless fruit and a
+matching story tile. Its four revised sentences follow gathering, mixing and
+finishing lunch. The planned sequence, exact built-in image generation prompts
+and individual continuity checks are in `art-review/storybook/fruit-adventure/`.
+
+In the playable kitchen, completed words unlock evenly distributed ingredient
+milestones. Each milestone plays a smooth arrival, cut and transfer on the paused
+scene clock, independently of the next keystroke. The next ingredient stays in
+the basket until its milestone. Sentence completion unlocks the final ingredient;
+the text slash matches its blade contact, and serving waits for the pieces to land.
+Fast or very short sentences finish the remaining preparation in a bounded .7s
+flourish. Mistakes unlock nothing; Pause freezes preparation and serving.

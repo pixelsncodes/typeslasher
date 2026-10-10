@@ -1,6 +1,7 @@
 import './sentence-ui.css';
 import './pause-menu.css';
 import './restaurant-orders.css';
+import './storybook.css';
 import { planOrders, type KitchenOrder } from './restaurant-orders';
 import { extractClipboardHtml, preparePassage, SentenceSession, type TypingStyle, type PreparedPassage } from './sentence-core';
 import { createSentenceProgress } from './sentence-progress';
@@ -10,6 +11,8 @@ import { fingerFor } from './learning';
 import { RECIPES, type RecipeId } from './kitchen-recipes';
 import { createGameConfirm } from './game-confirm';
 import { STORY_CHOICES, type StoryChoice } from './story-choices';
+import { getStoryPages, type StoryPage } from './story-pages';
+import { createStorybook } from './storybook';
 
 export function createSentenceUI(options: { home: () => void; reduced: () => boolean; sound: () => void; progress: ReturnType<typeof createSentenceProgress>; settings:()=>void; quality?:()=>string; theme?:()=>string; muted?:()=>boolean; toggleMute?:()=>void; setReduced?:(value:boolean)=>void; letter?:(index:number)=>void; serve?:()=>void; stopSound?:()=>void }) {
   const progress = options.progress;
@@ -26,9 +29,10 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     <section class="sentence-page sentence-stage" data-page="stage" hidden>
       <div class="sentence-stage-top"><div><p class="sentence-kicker">KITCHEN SERVICE</p><span id="sentence-progress"></span></div><div class="service-stats"><div><b id="service-score">0</b><small>POINTS</small></div><div><b id="service-wpm">—</b><small>WPM</small></div><div><b id="service-accuracy">—</b><small>ACCURACY</small></div><div class="service-combo"><b id="service-combo">×1</b><small id="service-streak">0 / 5 CLEAN WORDS</small><span id="service-marks" aria-hidden="true">▱ ▱ ▱ ▱ ▱</span></div></div><div class="service-tools"><button id="sentence-mute" aria-pressed="false">Sound on</button><button id="sentence-pause">Ⅱ Pause</button></div></div>
       <div class="service-progress-row"><div id="service-progress" class="service-progress" role="progressbar" aria-label="Passage completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div><span id="service-percent">0%</span></div>
-      <div class="order-rail" aria-label="Restaurant orders"></div><p id="order-alert" role="status" aria-live="polite"></p>
+      <p id="order-alert" role="status" aria-live="polite"></p>
       <div id="sentence-kitchen" aria-hidden="true"></div>
-      <div class="sentence-reading"><div id="sentence-fx" aria-hidden="true"></div><div class="reading-heading"><p class="sentence-kicker">TYPE THIS SENTENCE</p><span id="service-mode-label">RELAXED · GENTLE</span></div><div class="sentence-text-window"><div id="active-sentence" aria-live="off"></div></div><p id="sentence-feedback" role="status">Start with the glowing character.</p><div class="up-next"><span>UP NEXT</span><p id="next-sentence"></p></div></div>
+      <div class="sentence-book"><div class="story-art" hidden><img alt="" width="1200" height="800"><canvas width="900" height="600" aria-hidden="true"></canvas><span class="story-page-number"></span><span class="story-art-status" role="status"></span></div><div class="sentence-reading"><div id="sentence-fx" aria-hidden="true"></div><div class="reading-heading"><p class="sentence-kicker">TYPE THIS SENTENCE</p><span id="service-mode-label">RELAXED · GENTLE</span></div><h2 class="story-reading-title" hidden></h2><div class="sentence-text-window"><div id="active-sentence" aria-live="off"></div></div><p id="sentence-feedback" role="status">Start with the glowing character.</p><p class="story-paint-label" hidden>Words bring this picture to life.</p><div class="up-next"><span>UP NEXT</span><p id="next-sentence"></p></div></div></div>
+      <div class="order-rail" aria-label="Restaurant orders"></div>
       <div class="sentence-stage-bottom"><span id="sentence-hint">Find your home row. Type the highlighted character.</span><label><input id="service-finger-hints" type="checkbox"> Finger hints</label><button id="sentence-finish">Finish early</button></div><input id="sentence-input" aria-label="Type the highlighted sentence here" autocomplete="off" autocapitalize="off" spellcheck="false"></section>
     <section class="sentence-page sentence-result" data-page="result" hidden><p class="sentence-kicker" id="sentence-result-kicker">PASSAGE COMPLETE</p><h1 id="sentence-result-title" tabindex="-1">Words well sliced!</h1><div class="sentence-result-grid"><div><b id="sentence-accuracy">—</b><small>ACCURACY</small></div><div><b id="sentence-count">0</b><small>SENTENCES</small></div><div><b id="sentence-wpm">—</b><small>WPM</small></div></div><p id="sentence-result-copy"></p><div class="sentence-actions"><button class="sentence-primary" id="sentence-replay">PLAY AGAIN ↻</button><button id="sentence-edit">Edit story</button><button id="sentence-new">New passage</button><button id="sentence-result-home">Home</button></div><p class="sentence-privacy">Only your typing results are saved. Your passage stays in this visit.</p></section>
     <div class="sentence-countdown" hidden aria-live="assertive">3</div>
@@ -87,6 +91,7 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   let style: TypingStyle = 'gentle';
   let timer = 0; let epoch = 0; let shownPage = 'editor'; let savedRun = false;
   let cutting = false; let cutReady = false; let cutFinal = false; let cutTimer = 0;
+  let awaitingFinalCut=false;
   let queuedKeys: string[] = [];
   let kitchen: SentenceKitchen | null = null;
   let scene: ReturnType<typeof createSentenceScene> | undefined;
@@ -97,6 +102,8 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   const errorSpan=document.createElement('span');errorSpan.className='error';
   const comparisons=new Map<string,number>();
   const isReduced=()=>localReduced||options.reduced();
+  const book=createStorybook($('.story-art'),isReduced);
+  let storyPages:readonly StoryPage[]|undefined;
   const headlineMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
   let headlineAnimations:Animation[]=[];
   function stopHeadline(){headlineAnimations.forEach(animation=>animation.cancel());headlineAnimations=[];}
@@ -115,7 +122,7 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     });
   }
   headlineMotion.addEventListener('change',()=>{if(headlineMotion.matches)stopHeadline();});
-  const show = (page: string) => { stopHeadline(); shownPage = page; root.querySelectorAll<HTMLElement>('[data-page]').forEach(el => { el.hidden = el.dataset.page !== page; }); root.querySelector('.sentence-cabinet')!.setAttribute('data-view',page); $('#sentence-step').textContent = page === 'stage' ? 'KITCHEN SERVICE' : page === 'editor' ? 'READY TO PLAY' : page.toUpperCase(); if(page==='editor'){root.scrollTop=0;dropHeadline();} if(page!=='stage'){window.clearInterval(hudTimer);scene?.setActive(false);options.stopSound?.();} };
+  const show = (page: string) => { stopHeadline(); shownPage = page; root.querySelectorAll<HTMLElement>('[data-page]').forEach(el => { el.hidden = el.dataset.page !== page; }); root.querySelector('.sentence-cabinet')!.setAttribute('data-view',page); $('#sentence-step').textContent = page === 'stage' ? 'PAY WITH A STORY' : page === 'editor' ? 'READY TO PLAY' : page.toUpperCase(); if(page==='editor'){root.scrollTop=0;dropHeadline();} if(page!=='stage'){window.clearInterval(hudTimer);scene?.setActive(false);book.setPaused(true);options.stopSound?.();} };
   const showError = (message: string) => { error.textContent = message; };
   function startPassage() {
     try { prepared = preparePassage(storyTab==='custom'?editor.value:selectedStory?.text??'', style); showError(''); }
@@ -125,6 +132,13 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   const screen = root.querySelector<HTMLElement>('.sentence-reading')!;
   function render() {
     if (!session) return;
+    if(storyPages){
+      const page=storyPages[activeOrder];
+      book.show(page,activeOrder,storyPages.length,storyPages[activeOrder+1]);
+      book.setProgress(session.cursor/page.text.length);
+      $('.story-reading-title').textContent=page.beat;
+      $('.story-paint-label').textContent=session.cursor?'Every word adds a little color.':'Words bring this picture to life.';
+    }
     $('#sentence-progress').textContent = `SENTENCE ${session.index + 1} / ${session.sentences.length}`;
     const active = $('#active-sentence');
     const text = session.current;
@@ -152,7 +166,7 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     const help=$<HTMLInputElement>('#service-finger-hints').checked && zone?` · ${zone.label}${style==='exact'&&/[A-Z]/.test(key)?' + Shift':''}`:'';
     $('#sentence-hint').textContent = session.error ? 'Backspace to correct the marked character.' : key === ' ' ? 'SPACE · either thumb' : `NEXT KEY · ${key.toUpperCase() || '—'}${help}`;
     const token=kitchen?.tokenAt(session.index,session.cursor);
-    if(token)scene?.update({ordinal:token.ordinal,progress:Math.max(0,Math.min(1,(session.cursor-token.start)/(token.end-token.start))),served:kitchen!.served,total:session.sentences.length,multiplier:kitchen!.multiplier,error:!!session.error});
+    if(token)scene?.update({ordinal:token.ordinal,progress:Math.max(0,Math.min(1,(session.cursor-token.start)/(token.end-token.start))),sentenceProgress:session.cursor/text.length,served:kitchen!.served,total:session.sentences.length,multiplier:kitchen!.multiplier,error:!!session.error});
     updateHud();
   }
   function updateHud(){
@@ -191,6 +205,7 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     if(!session||!kitchen||cutting||!$('.sentence-countdown').hidden||!pauseCover.hidden||session.completed)return false;
     if(!kitchen.expire(activeOrder,session.active))return false;
     orderLost=true;queuedKeys=[];scene?.abort();
+    book.setPaused(true);
     const result=session.skip();session.pause();cutting=true;cutReady=false;cutFinal=result==='finished';
     $('#order-alert').textContent=`Order lost · ${orders[activeOrder].title} expired. Clearing the kitchen.`;
     $('.order-card.current').classList.add('expired');
@@ -255,7 +270,12 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     if (!prepared) return;
     epoch++; resetCut(); savedRun = false; renderedIndex=-1; session = new SentenceSession(prepared.sentences,style);kitchen=new SentenceKitchen(prepared.sentences,mode,pace);
     orders=planOrders(prepared.sentences,recipe);activeOrder=0;orderLost=false;$('#order-alert').textContent='';
-    scene??=createSentenceScene($('#sentence-kitchen'),{reduced:isReduced,quality:options.quality??(()=> 'auto')});scene.reset();
+    storyPages=getStoryPages(storyTab==='stories'?selectedStory?.id:undefined,prepared.sentences);
+    root.classList.toggle('storybook-mode',!!storyPages);
+    $('.story-art').hidden=!storyPages;$('.story-reading-title').hidden=!storyPages;$('.story-paint-label').hidden=!storyPages;
+    book.clear();book.setPaused(false);
+    $('.sentence-stage-top .sentence-kicker').textContent=storyPages?'TYPE A STORY. DINNER’S ON US.':'KITCHEN SERVICE';
+    scene??=createSentenceScene($('#sentence-kitchen'),{reduced:isReduced,quality:options.quality??(()=> 'auto'),frameKitchen:()=>!!storyPages});scene.reset();
     pauseCover.hidden=true;setPausedInert(false);
     root.dataset.theme=options.theme?.()??'midnight';root.classList.toggle('service-reduced',isReduced());
     $('#service-mode-label').textContent=`${mode.toUpperCase()} · ${style.toUpperCase()}`;
@@ -268,12 +288,17 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     timer = window.setTimeout(() => { if (epoch === myEpoch && !savedRun) { countdown.hidden = true; $<HTMLButtonElement>('#sentence-finish').disabled=false;session!.resume();session!.start();kitchen!.startOrder(0,session!.active);if(!pauseCover.hidden)session!.pause();else input.focus({preventScroll:true}); } }, 700);
   }
   const pauseCover = $('.sentence-pause-cover');
-  function pause() { if (!session || shownPage !== 'stage' || !pauseCover.hidden) return; session.pause();if(cutting&&!cutReady){cutRemaining=Math.max(0,cutDue-performance.now());window.clearTimeout(cutTimer);} pauseCover.hidden = false; setPausedInert(true);scene?.setActive(false);root.classList.add('service-paused');options.stopSound?.(); input.blur(); $('#sentence-resume').focus(); }
-  function resume() { if (!session) return; pauseCover.hidden = true; if (!cutting) session.resume(); setPausedInert(false);root.classList.remove('service-paused');scene?.setActive(true); input.focus({preventScroll:true}); if(cutReady) completeCut();else if(cutting)scheduleCut(cutRemaining); }
+  function pause() { if (!session || shownPage !== 'stage' || !pauseCover.hidden) return; session.pause();book.setPaused(true);if(cutting&&!cutReady){cutRemaining=Math.max(0,cutDue-performance.now());window.clearTimeout(cutTimer);} pauseCover.hidden = false; setPausedInert(true);scene?.setActive(false);root.classList.add('service-paused');options.stopSound?.(); input.blur(); $('#sentence-resume').focus(); }
+  function resume() { if (!session) return; pauseCover.hidden = true; if (!cutting) session.resume();book.setPaused(false);setPausedInert(false);root.classList.remove('service-paused');scene?.setActive(true); input.focus({preventScroll:true}); if(cutReady) completeCut();else if(cutting)scheduleCut(cutRemaining); }
   function setPausedInert(paused:boolean){for(const selector of ['.sentence-nav','.sentence-stage']) $<HTMLElement>(selector).inert=paused;}
-  function home() { epoch++; resetCut(); stopHeadline(); window.clearTimeout(timer);window.clearInterval(hudTimer);scene?.setActive(false);options.stopSound?.(); $('#sentence-fx').replaceChildren(); pauseCover.hidden = true; setPausedInert(false); root.hidden = true; document.querySelector<HTMLElement>('#app')!.inert = true; options.home(); }
-  function scheduleCut(duration:number){cutRemaining=duration;cutDue=performance.now()+duration;const cutEpoch=epoch;cutTimer=window.setTimeout(()=>{if(epoch!==cutEpoch)return;cutReady=true;completeCut();},duration);}
-  function resetCut() { window.clearTimeout(cutTimer); cutting=false; cutReady=false; queuedKeys=[]; screen.classList.remove('cutting');root.classList.remove('service-paused','order-shake'); }
+  function home() { epoch++; resetCut(); stopHeadline(); window.clearTimeout(timer);window.clearInterval(hudTimer);scene?.setActive(false);book.setPaused(true);book.clear();options.stopSound?.(); $('#sentence-fx').replaceChildren(); pauseCover.hidden = true; setPausedInert(false); root.hidden = true; document.querySelector<HTMLElement>('#app')!.inert = true; options.home(); }
+  function scheduleCut(duration:number){cutRemaining=duration;cutDue=performance.now()+duration;const cutEpoch=epoch;cutTimer=window.setTimeout(()=>{if(epoch!==cutEpoch)return;if(awaitingFinalCut){startCompletedCut();return;}cutReady=true;completeCut();},duration);}
+  function startCompletedCut(){
+    if(!pauseCover.hidden)return;
+    if(scene&&!scene.finalCutReached){scheduleCut(16);return;}
+    awaitingFinalCut=false;slash(cutFinal);scheduleCut(isReduced()?220:620);
+  }
+  function resetCut() { window.clearTimeout(cutTimer); cutting=false; cutReady=false; awaitingFinalCut=false; queuedKeys=[]; screen.classList.remove('cutting');root.classList.remove('service-paused','order-shake'); }
   function completeCut() {
     if(!cutting || !cutReady || !pauseCover.hidden) return;
     // Keep the kitchen visible until the last pieces land and the bowl is served.
@@ -282,7 +307,7 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     $('#sentence-fx').replaceChildren(); screen.classList.remove('cutting');
     if(final) { queuedKeys=[]; finish(false); return; }
     const wasLost=orderLost;orderLost=false;root.classList.remove('order-shake');
-    activeOrder=session!.index;scene?.beginOrder(orders[activeOrder]);session!.resume();kitchen!.startOrder(activeOrder,session!.active);renderOrders();render(); $<HTMLButtonElement>('#sentence-finish').disabled=false; $('#sentence-feedback').textContent=wasLost?'New order · fresh start.':'Order served! Next recipe — keep going.';
+    activeOrder=session!.index;scene?.beginOrder(orders[activeOrder]);session!.resume();book.setPaused(false);kitchen!.startOrder(activeOrder,session!.active);renderOrders();render(); $<HTMLButtonElement>('#sentence-finish').disabled=false; $('#sentence-feedback').textContent=wasLost?'New order · fresh start.':'Order served! Next recipe — keep going.';
     const pending=queuedKeys; queuedKeys=[];
     for(const key of pending) { if(cutting) queuedKeys.push(key); else acceptKey(key); }
   }
@@ -299,15 +324,17 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     else if(effects.length&&now-lastSound>65){options.sound();lastSound=now;}
     else if(result==='correct'&&now-lastSound>45){options.letter?.(session.correct);lastSound=now;}
     if(result==='slash' || result==='finished') {
-      if(previousToken)scene?.update({ordinal:previousToken.ordinal,progress:1,served:kitchen.served,total:session.sentences.length,multiplier:kitchen.multiplier,error:false});
-      // Keep the finished text on screen until the cut has fully left the stage.
+      book.setProgress(1);
+      if(storyPages)$('.story-paint-label').textContent='Picture complete. Supper is served!';
+      if(previousToken)scene?.update({ordinal:previousToken.ordinal,progress:1,sentenceProgress:1,served:kitchen.served,total:session.sentences.length,multiplier:kitchen.multiplier,error:false});
+      // The animated cut faces replace the original text until service settles.
       characterSpans.forEach(span=>span.className='done');
       cutting=true; cutReady=false; cutFinal=result==='finished'; session.pause();
-      slash(cutFinal); screen.classList.add('cutting');
+      screen.classList.add('cutting');awaitingFinalCut=true;
       $('#sentence-feedback').textContent=cutFinal?'Passage complete!':'Clean cut!';
       $('#sentence-hint').textContent='✦ SLICE!';
       $<HTMLButtonElement>('#sentence-finish').disabled=true;
-      updateHud();scheduleCut(isReduced()?220:620);
+      updateHud();startCompletedCut();
     } else { $('#sentence-feedback').textContent=result==='wrong'?'Not quite. Backspace to fix it.':''; render(); }
   }
   $('#sentence-home').addEventListener('click',home); $('#sentence-result-home').addEventListener('click',home); $('#sentence-pause-home').addEventListener('click',home);

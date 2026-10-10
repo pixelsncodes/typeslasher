@@ -56,7 +56,7 @@ Choose one of six illustrated stories, or use **+ Add your story** to write or p
 <table>
 <tr>
 <td align="center" width="33%"><img src="public/assets/stories/restaurant-shift.webp" width="240" alt="A cozy restaurant pass with dishes and a service bell"><br><strong>Restaurant shift</strong><br>10 orders · A full kitchen service</td>
-<td align="center" width="33%"><img src="public/assets/stories/fruit-adventure.webp" width="240" alt="An apple chef, kiwi, and pear preparing fruit salad"><br><strong>Fruit adventure</strong><br>4 orders · A tiny kitchen crew</td>
+<td align="center" width="33%"><img src="public/assets/stories/fruit-adventure.webp" width="240" alt="A tiny rat chef carrying a basket of ordinary fruit"><br><strong>Fruit adventure</strong><br>4 orders · A tiny chef’s sunny lunch</td>
 <td align="center" width="33%"><img src="public/assets/stories/space-mission.webp" width="240" alt="A friendly robot with a spaceship under glowing stars"><br><strong>Space mission</strong><br>3 orders · Follow the stars home</td>
 </tr>
 <tr>
@@ -68,9 +68,11 @@ Choose one of six illustrated stories, or use **+ Add your story** to write or p
 
 *The story tiles use generated illustrations created for the game. The kitchen and food in gameplay are rendered 3D models.*
 
-![Sentence Slash showing recipe cards, a fixed ingredient basket, the cutting board, and a handled soup bowl](docs/screenshots/sentence-kitchen-current.png)
+![Sentence Slash with a rat-chef story picture, typing text, 3D kitchen, and recipe orders](docs/screenshots/sentence-kitchen-current.png)
 
-Every sentence becomes an order with a **fixed batch of ingredients**. One ingredient moves onto the board at a time. Word progress guides the cuts, pieces collect in the serving dish, and the completed sentence serves the order. All cuts finish before the next batch arrives.
+The six stories include **30 illustrated pages**, one for each sentence. Pictures start in black and white and gain color through soft watercolor brush marks as you type correctly. Each new sentence brings the next picture; the characters and settings stay consistent.
+
+Every sentence becomes an order with a **fixed batch of ingredients**. Completed words unlock evenly spaced milestones: one ingredient smoothly arrives, gets cut, and moves into the dish. The final milestone triggers the last cut alongside the sentence slash, then the completed dish is served. All cuts finish before the next batch arrives.
 
 ```mermaid
 flowchart LR
@@ -158,7 +160,7 @@ npm run dev
 Open the address printed by Vite, normally `http://localhost:5173/`. Open `/assets.html` for the food studio. Progress belongs to the browser and site address, so local and published games keep separate records.
 
 ```sh
-npm run check          # 17 suites: gameplay, timing, scoring, records and 3D assets
+npm run check          # 18 suites: gameplay, storybooks, timing, scoring and 3D assets
 npm run build          # Type-check and build the static site
 npm run check:release  # Portable links, local fonts/licenses and asset budgets
 npm run play           # Serve the production build on 127.0.0.1:5173
@@ -172,7 +174,7 @@ On Windows, **Play Typeslasher.cmd** also serves an existing build. The `dist/` 
 src/              Gameplay, menus, rendering, audio, and local progress
 public/assets/    Food/kitchen GLBs, recipe cards, and story artwork
 public/fonts/     Locally served fonts and their licenses
-tools/            Modeling/export scripts and 17 automated check suites
+tools/            Modeling/export scripts and 18 automated check suites
 design/           Concepts, reference prompts, textures, and interface studies
 art-review/       Turnarounds, original generated artwork, and browser reviews
 docs/             Player guide, development story, and current screenshots

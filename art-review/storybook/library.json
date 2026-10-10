@@ -1,0 +1,236 @@
+[
+  {
+    "id": "restaurant",
+    "title": "Restaurant shift",
+    "recipe": "fruit",
+    "cover": "../stories/restaurant-shift.png",
+    "continuity": "Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes.",
+    "pages": [
+      {
+        "text": "Slice the apple, kiwi, pear, orange, mango and grapes, then serve a colorful fruit salad.",
+        "beat": "Order 1 · Fruit salad",
+        "alt": "Slice the apple, kiwi, pear, orange, mango and grapes, then serve a colorful fruit salad.",
+        "image": "restaurant/page-01.webp"
+      },
+      {
+        "text": "Chop tomato, cucumber, yellow pepper, radish, avocado and carrot, then add lemon to our garden salad.",
+        "beat": "Order 2 · Garden salad",
+        "alt": "Chop tomato, cucumber, yellow pepper, radish, avocado and carrot, then add lemon to our garden salad.",
+        "image": "restaurant/page-02.webp"
+      },
+      {
+        "text": "Chop pumpkin, onion, potato, carrot and celery, then serve a warm bowl of pumpkin soup.",
+        "beat": "Order 3 · Pumpkin soup",
+        "alt": "Chop pumpkin, onion, potato, carrot and celery, then serve a warm bowl of pumpkin soup.",
+        "image": "restaurant/page-03.webp"
+      },
+      {
+        "text": "Mix orange, lemon, mango, pineapple, lime, dragon fruit and kiwi for a bright tropical bowl.",
+        "beat": "Order 4 · Tropical bowl",
+        "alt": "Mix orange, lemon, mango, pineapple, lime, dragon fruit and kiwi for a bright tropical bowl.",
+        "image": "restaurant/page-04.webp"
+      },
+      {
+        "text": "Cut potato, beet, onion, zucchini, mushroom and broccoli, then plate the roasted vegetables.",
+        "beat": "Order 5 · Roasted veggies",
+        "alt": "Cut potato, beet, onion, zucchini, mushroom and broccoli, then plate the roasted vegetables.",
+        "image": "restaurant/page-05.webp"
+      },
+      {
+        "text": "Slice strawberry, raspberry, blueberry and cherry, then add pomegranate to our berry bowl.",
+        "beat": "Order 6 · Berry bowl",
+        "alt": "Slice strawberry, raspberry, blueberry and cherry, then add pomegranate to our berry bowl.",
+        "image": "restaurant/page-06.webp"
+      },
+      {
+        "text": "Cut tofu, cucumber, pepper, carrot and radish, then squeeze lime over our crunchy tofu salad.",
+        "beat": "Order 7 · Tofu salad",
+        "alt": "Cut tofu, cucumber, pepper, carrot and radish, then squeeze lime over our crunchy tofu salad.",
+        "image": "restaurant/page-07-v2.webp"
+      },
+      {
+        "text": "Slice apple, pear, peach, plum, apricot, cherry and fig, then serve a sweet orchard bowl.",
+        "beat": "Order 8 · Orchard bowl",
+        "alt": "Slice apple, pear, peach, plum, apricot, cherry and fig, then serve a sweet orchard bowl.",
+        "image": "restaurant/page-08.webp"
+      },
+      {
+        "text": "Slice bread, cheese, tomato, cucumber and apple, then arrange a fresh picnic plate.",
+        "beat": "Order 9 · Picnic plate",
+        "alt": "Slice bread, cheese, tomato, cucumber and apple, then arrange a fresh picnic plate.",
+        "image": "restaurant/page-09.webp"
+      },
+      {
+        "text": "Plate bagel, croissant, cheese, fig, apricot and blueberry for a cheerful bakery breakfast.",
+        "beat": "Order 10 · Bakery breakfast",
+        "alt": "Plate bagel, croissant, cheese, fig, apricot and blueberry for a cheerful bakery breakfast.",
+        "image": "restaurant/page-10.webp"
+      }
+    ]
+  },
+  {
+    "id": "fruit-adventure",
+    "title": "Fruit adventure",
+    "recipe": "fruit",
+    "cover": "fruit-adventure/page-01-mouse.webp",
+    "continuity": "One tiny taupe-gray rat chef with round pink-centered ears, dark oval eyes, pink nose, fine whiskers, rosy cheeks, cream pocket apron and oversized mint puffy hat. Rat is the only character. All fruit is ordinary faceless food. Same peach kitchen, left arched window, mint cabinets, right wooden herb shelf, cream counter, mint scalloped bowl and mint gingham towel.",
+    "pages": [
+      {
+        "text": "A tiny rat wore an oversized chef hat.",
+        "beat": "Meet the tiny chef",
+        "alt": "A tiny taupe rat in a cream apron adjusts his oversized mint chef hat beside an empty mint bowl.",
+        "image": "fruit-adventure/page-01-mouse.webp"
+      },
+      {
+        "text": "He carried a basket of fruit into his kitchen.",
+        "beat": "A basket full of sunshine",
+        "alt": "The tiny rat chef carries a wicker basket of ordinary apples, kiwi, pears, oranges and mango to his kitchen counter.",
+        "image": "fruit-adventure/page-02-rat.webp"
+      },
+      {
+        "text": "He mixed pears and oranges in a mint bowl.",
+        "beat": "A little stir of sunshine",
+        "alt": "The tiny rat chef stirs ordinary pear cubes and orange segments in the mint scalloped bowl.",
+        "image": "fruit-adventure/page-03-rat.webp"
+      },
+      {
+        "text": "With a sprinkle of mango, lunch was ready to share.",
+        "beat": "Lunch is ready",
+        "alt": "The tiny rat chef adds golden mango cubes to the completed pear and orange salad in the mint bowl.",
+        "image": "fruit-adventure/page-04-rat-v2.webp"
+      }
+    ]
+  },
+  {
+    "id": "space-mission",
+    "title": "Space mission",
+    "recipe": "fruit",
+    "cover": "../stories/space-mission.png",
+    "continuity": "Same rounded mint-green robot, black face screen, golden crescent smiling eyes, tiny black smile, cream side ear discs and wrist collars, golden ball antenna, tan backpack with rolled bedroll. Same cream-and-golden compact spaceship with purple bubble cockpit, round gray porthole, side door and small ramp, stubby landing feet. Lavender rocky moon surface, purple ringed moon in plum star sky, warm golden stars and violet crystals. Exact same robot proportions and ship design throughout.",
+    "pages": [
+      {
+        "text": "Our spaceship landed beside a purple moon.",
+        "beat": "A very purple landing",
+        "alt": "Our spaceship landed beside a purple moon.",
+        "image": "space-mission/page-01.webp"
+      },
+      {
+        "text": "A friendly robot offered us a map.",
+        "beat": "A friendly guide",
+        "alt": "A friendly robot offered us a map.",
+        "image": "space-mission/page-02.webp"
+      },
+      {
+        "text": "We followed the glowing stars home.",
+        "beat": "Follow the stars",
+        "alt": "We followed the glowing stars home.",
+        "image": "space-mission/page-03.webp"
+      }
+    ]
+  },
+  {
+    "id": "funny-day",
+    "title": "Funny day",
+    "recipe": "fruit",
+    "cover": "../stories/funny-day.png",
+    "continuity": "Same cute round yellow rubber duck, orange beak, glossy dark oval eyes, rosy cheeks, small crest and stubby wings. Same mint fabric school backpack with yellow zipper, round daisy patch on front pocket, little yellow duck charm on zipper, purple bottle in side pocket and purple spiral notebook. Warm peach-and-lilac classroom, wooden desktop, tall window left with little schoolhouse outside, rainbow drawing on wall, colorful books on right. Introduce only on final page a kind adult woman teacher with warm medium-brown skin, dark curly bob, round plum glasses and lavender cardigan; consistent rubber duck and backpack must remain.",
+    "pages": [
+      {
+        "text": "I opened my backpack and found a squeaky rubber duck.",
+        "beat": "An unexpected school guest",
+        "alt": "I opened my backpack and found a squeaky rubber duck.",
+        "image": "funny-day/page-01.webp"
+      },
+      {
+        "text": "It had eaten my homework.",
+        "beat": "The homework mystery",
+        "alt": "It had eaten my homework.",
+        "image": "funny-day/page-02-v2.webp"
+      },
+      {
+        "text": "The teacher laughed so hard she gave the duck a gold star.",
+        "beat": "A star for the surprise guest",
+        "alt": "The teacher laughed so hard she gave the duck a gold star.",
+        "image": "funny-day/page-03.webp"
+      }
+    ]
+  },
+  {
+    "id": "little-kindness",
+    "title": "Little kindness",
+    "recipe": "soup",
+    "cover": "../stories/little-kindness.png",
+    "continuity": "Cream bunny, mint scarf, lavender mouse, yellow umbrella. Same rainy cobblestone garden throughout.",
+    "pages": [
+      {
+        "text": "Rain tapped on a tiny yellow umbrella.",
+        "beat": "A rainy beginning",
+        "alt": "Cream bunny in a mint scarf watches raindrops tap on her yellow umbrella.",
+        "image": "little-kindness/page-01.webp"
+      },
+      {
+        "text": "Bunny spotted a mouse with very soggy whiskers.",
+        "beat": "Someone needs a little shelter",
+        "alt": "Bunny notices a tiny lavender mouse standing in the rain with wet whiskers.",
+        "image": "little-kindness/page-02.webp"
+      },
+      {
+        "text": "She lifted her umbrella and made room for her new friend.",
+        "beat": "There’s always room for a friend",
+        "alt": "Bunny lifts her yellow umbrella to welcome the lavender mouse beneath it.",
+        "image": "little-kindness/page-03.webp"
+      },
+      {
+        "text": "They splashed through the puddles together.",
+        "beat": "Better together",
+        "alt": "Bunny and mouse splash happily through a garden puddle beneath one umbrella.",
+        "image": "little-kindness/page-04.webp"
+      },
+      {
+        "text": "A little kindness made the rainy day feel warm.",
+        "beat": "A little kindness goes a long way",
+        "alt": "Bunny and mouse stand together on the wet garden path under the yellow umbrella as the rain eases.",
+        "image": "little-kindness/page-05-v2.webp"
+      }
+    ]
+  },
+  {
+    "id": "helping-paws",
+    "title": "Helping paws",
+    "recipe": "orchard",
+    "cover": "../stories/helping-paws.png",
+    "continuity": "Exact same honey-brown plush bear, cream muzzle, round ears, glossy brown eyes, rosy cheeks, dark nose; mint apron with cream front pocket embroidered green sprout and back bow, no other clothes. Same much smaller round hedgehog with cream face and belly, layered soft brown spines, small pink ears, rosy cheeks, dark nose and brown paws, no clothes. Same wooden slat basket with curved handle, red apples with stems/leaves. Same flat warm cobblestone orchard path, apple tree and rustic fence left, cream stone cottage with wooden arched window right, roses/daisies, distant lavender hills. Bear roughly twice hedgehog height. No raised platforms, no sudden scenery changes. A cream-and-mint checkered picnic blanket beside path is introduced in page1 and stays in same garden.",
+    "pages": [
+      {
+        "text": "A little hedgehog spilled his basket of apples.",
+        "beat": "A little tumble",
+        "alt": "A little hedgehog spilled his basket of apples.",
+        "image": "helping-paws/page-01.webp"
+      },
+      {
+        "text": "Bear put down her picnic and hurried over to help.",
+        "beat": "Help is on the way",
+        "alt": "Bear put down her picnic and hurried over to help.",
+        "image": "helping-paws/page-02.webp"
+      },
+      {
+        "text": "They gathered every apple with their tiny paws.",
+        "beat": "Many paws make light work",
+        "alt": "They gathered every apple with their tiny paws.",
+        "image": "helping-paws/page-03.webp"
+      },
+      {
+        "text": "Hedgehog saved the sweetest one for his new friend.",
+        "beat": "A sweet thank-you",
+        "alt": "Hedgehog saved the sweetest one for his new friend.",
+        "image": "helping-paws/page-04.webp"
+      },
+      {
+        "text": "Together they turned a small tumble into a happy picnic.",
+        "beat": "A happy picnic together",
+        "alt": "Together they turned a small tumble into a happy picnic.",
+        "image": "helping-paws/page-05.webp"
+      }
+    ]
+  }
+]

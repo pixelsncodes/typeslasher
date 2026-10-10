@@ -1,0 +1,326 @@
+{
+  "mode": "Built-in image generation",
+  "sharedPrompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. ",
+  "stories": [
+    {
+      "id": "fruit-adventure",
+      "title": "Fruit adventure",
+      "recipe": "fruit",
+      "reference": "fruit-adventure",
+      "continuity": "Same red apple chef with cream puffy chef hat, brown stem and green leaf, rosy cheeks, small red hands; small fuzzy brown kiwi with bright green cut face and brown paws; yellow-green pear with brown stem and green leaf. Same peach kitchen, arched window left, mint cabinets right, wooden herb shelf and utensils, warm cream countertop and mint scalloped bowl. Cute anthropomorphic fruit, handmade stylized 3D, not plush animals.",
+      "pages": [
+        {
+          "id": "fruit-adventure",
+          "index": 1,
+          "title": "Fruit adventure",
+          "text": "An apple wore a tiny chef hat.",
+          "beat": "Meet the apple chef",
+          "alt": "An apple wore a tiny chef hat.",
+          "recipe": "fruit",
+          "reference": "fruit-adventure",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Fruit adventure. CONTINUITY LOCK: Same red apple chef with cream puffy chef hat, brown stem and green leaf, rosy cheeks, small red hands; small fuzzy brown kiwi with bright green cut face and brown paws; yellow-green pear with brown stem and green leaf. Same peach kitchen, arched window left, mint cabinets right, wooden herb shelf and utensils, warm cream countertop and mint scalloped bowl. Cute anthropomorphic fruit, handmade stylized 3D, not plush animals. PAGE 1/4. Exact sentence to illustrate (do not render as text): \"An apple wore a tiny chef hat.\" SCENE: ONLY the apple proudly adjusts the little cream chef hat with both little hands, smiling at his reflection in a wooden spoon. Empty mint bowl on counter. Kiwi and pear not visible yet."
+        },
+        {
+          "id": "fruit-adventure",
+          "index": 2,
+          "title": "Fruit adventure",
+          "text": "A kiwi joined the kitchen crew.",
+          "beat": "A new kitchen friend",
+          "alt": "A kiwi joined the kitchen crew.",
+          "recipe": "fruit",
+          "reference": "fruit-adventure",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Fruit adventure. CONTINUITY LOCK: Same red apple chef with cream puffy chef hat, brown stem and green leaf, rosy cheeks, small red hands; small fuzzy brown kiwi with bright green cut face and brown paws; yellow-green pear with brown stem and green leaf. Same peach kitchen, arched window left, mint cabinets right, wooden herb shelf and utensils, warm cream countertop and mint scalloped bowl. Cute anthropomorphic fruit, handmade stylized 3D, not plush animals. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 2/4. Exact sentence to illustrate (do not render as text): \"A kiwi joined the kitchen crew.\" SCENE: Apple in identical hat welcomes the small kiwi who has just arrived beside the empty mint bowl. Kiwi waves one brown paw. Pear not visible yet."
+        },
+        {
+          "id": "fruit-adventure",
+          "index": 3,
+          "title": "Fruit adventure",
+          "text": "They mixed pears and oranges in a bowl.",
+          "beat": "A delicious team effort",
+          "alt": "They mixed pears and oranges in a bowl.",
+          "recipe": "fruit",
+          "reference": "fruit-adventure",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Fruit adventure. CONTINUITY LOCK: Same red apple chef with cream puffy chef hat, brown stem and green leaf, rosy cheeks, small red hands; small fuzzy brown kiwi with bright green cut face and brown paws; yellow-green pear with brown stem and green leaf. Same peach kitchen, arched window left, mint cabinets right, wooden herb shelf and utensils, warm cream countertop and mint scalloped bowl. Cute anthropomorphic fruit, handmade stylized 3D, not plush animals. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 3/4. Exact sentence to illustrate (do not render as text): \"They mixed pears and oranges in a bowl.\" SCENE: Apple and kiwi gently stir a mint bowl containing pear cubes and orange segments with a wooden spoon. Same friendly yellow-green pear character stands beside them holding an orange segment, intact character is not being cut. Readable joyful teamwork."
+        },
+        {
+          "id": "fruit-adventure",
+          "index": 4,
+          "title": "Fruit adventure",
+          "text": "Sweet mango made the fruit salad complete.",
+          "beat": "The finishing touch",
+          "alt": "Sweet mango made the fruit salad complete.",
+          "recipe": "fruit",
+          "reference": "fruit-adventure",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Fruit adventure. CONTINUITY LOCK: Same red apple chef with cream puffy chef hat, brown stem and green leaf, rosy cheeks, small red hands; small fuzzy brown kiwi with bright green cut face and brown paws; yellow-green pear with brown stem and green leaf. Same peach kitchen, arched window left, mint cabinets right, wooden herb shelf and utensils, warm cream countertop and mint scalloped bowl. Cute anthropomorphic fruit, handmade stylized 3D, not plush animals. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 4/4. Exact sentence to illustrate (do not render as text): \"Sweet mango made the fruit salad complete.\" SCENE: Apple, kiwi and pear admire completed fruit salad in same mint bowl, bright golden mango cubes being added with wooden spoon by apple. Pear and orange pieces visible. No new character."
+        }
+      ]
+    },
+    {
+      "id": "space-mission",
+      "title": "Space mission",
+      "recipe": "fruit",
+      "reference": "space-mission",
+      "continuity": "Same rounded mint-green robot, black face screen, golden crescent smiling eyes, tiny black smile, cream side ear discs and wrist collars, golden ball antenna, tan backpack with rolled bedroll. Same cream-and-golden compact spaceship with purple bubble cockpit, round gray porthole, side door and small ramp, stubby landing feet. Lavender rocky moon surface, purple ringed moon in plum star sky, warm golden stars and violet crystals. Exact same robot proportions and ship design throughout.",
+      "pages": [
+        {
+          "id": "space-mission",
+          "index": 1,
+          "title": "Space mission",
+          "text": "Our spaceship landed beside a purple moon.",
+          "beat": "A very purple landing",
+          "alt": "Our spaceship landed beside a purple moon.",
+          "recipe": "fruit",
+          "reference": "space-mission",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Space mission. CONTINUITY LOCK: Same rounded mint-green robot, black face screen, golden crescent smiling eyes, tiny black smile, cream side ear discs and wrist collars, golden ball antenna, tan backpack with rolled bedroll. Same cream-and-golden compact spaceship with purple bubble cockpit, round gray porthole, side door and small ramp, stubby landing feet. Lavender rocky moon surface, purple ringed moon in plum star sky, warm golden stars and violet crystals. Exact same robot proportions and ship design throughout. PAGE 1/3. Exact sentence to illustrate (do not render as text): \"Our spaceship landed beside a purple moon.\" SCENE: Wide scene of the canonical spaceship just settled on lavender ground beside the purple ringed moon in sky, soft dust cloud around landing feet, side door still closed. No robot or other character visible yet."
+        },
+        {
+          "id": "space-mission",
+          "index": 2,
+          "title": "Space mission",
+          "text": "A friendly robot offered us a map.",
+          "beat": "A friendly guide",
+          "alt": "A friendly robot offered us a map.",
+          "recipe": "fruit",
+          "reference": "space-mission",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Space mission. CONTINUITY LOCK: Same rounded mint-green robot, black face screen, golden crescent smiling eyes, tiny black smile, cream side ear discs and wrist collars, golden ball antenna, tan backpack with rolled bedroll. Same cream-and-golden compact spaceship with purple bubble cockpit, round gray porthole, side door and small ramp, stubby landing feet. Lavender rocky moon surface, purple ringed moon in plum star sky, warm golden stars and violet crystals. Exact same robot proportions and ship design throughout. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 2/3. Exact sentence to illustrate (do not render as text): \"A friendly robot offered us a map.\" SCENE: Same robot stands beside the same landed spaceship with door open and ramp down, kindly extending a folded plum star map toward viewer with both hands. Map shows only golden star symbols and dotted routes, no letters."
+        },
+        {
+          "id": "space-mission",
+          "index": 3,
+          "title": "Space mission",
+          "text": "We followed the glowing stars home.",
+          "beat": "Follow the stars",
+          "alt": "We followed the glowing stars home.",
+          "recipe": "fruit",
+          "reference": "space-mission",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Space mission. CONTINUITY LOCK: Same rounded mint-green robot, black face screen, golden crescent smiling eyes, tiny black smile, cream side ear discs and wrist collars, golden ball antenna, tan backpack with rolled bedroll. Same cream-and-golden compact spaceship with purple bubble cockpit, round gray porthole, side door and small ramp, stubby landing feet. Lavender rocky moon surface, purple ringed moon in plum star sky, warm golden stars and violet crystals. Exact same robot proportions and ship design throughout. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 3/3. Exact sentence to illustrate (do not render as text): \"We followed the glowing stars home.\" SCENE: Same ship now flying above the lavender lunar landscape toward a small welcoming blue-green home planet in distance, following a clear curving trail of warm golden stars. Same robot visible smiling through purple cockpit glass. No extra ships."
+        }
+      ]
+    },
+    {
+      "id": "funny-day",
+      "title": "Funny day",
+      "recipe": "fruit",
+      "reference": "funny-day",
+      "continuity": "Same cute round yellow rubber duck, orange beak, glossy dark oval eyes, rosy cheeks, small crest and stubby wings. Same mint fabric school backpack with yellow zipper, round daisy patch on front pocket, little yellow duck charm on zipper, purple bottle in side pocket and purple spiral notebook. Warm peach-and-lilac classroom, wooden desktop, tall window left with little schoolhouse outside, rainbow drawing on wall, colorful books on right. Introduce only on final page a kind adult woman teacher with warm medium-brown skin, dark curly bob, round plum glasses and lavender cardigan; consistent rubber duck and backpack must remain.",
+      "pages": [
+        {
+          "id": "funny-day",
+          "index": 1,
+          "title": "Funny day",
+          "text": "I opened my backpack and found a squeaky rubber duck.",
+          "beat": "An unexpected school guest",
+          "alt": "I opened my backpack and found a squeaky rubber duck.",
+          "recipe": "fruit",
+          "reference": "funny-day",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Funny day. CONTINUITY LOCK: Same cute round yellow rubber duck, orange beak, glossy dark oval eyes, rosy cheeks, small crest and stubby wings. Same mint fabric school backpack with yellow zipper, round daisy patch on front pocket, little yellow duck charm on zipper, purple bottle in side pocket and purple spiral notebook. Warm peach-and-lilac classroom, wooden desktop, tall window left with little schoolhouse outside, rainbow drawing on wall, colorful books on right. Introduce only on final page a kind adult woman teacher with warm medium-brown skin, dark curly bob, round plum glasses and lavender cardigan; consistent rubber duck and backpack must remain. PAGE 1/3. Exact sentence to illustrate (do not render as text): \"I opened my backpack and found a squeaky rubber duck.\" SCENE: Close-medium scene of same open mint backpack on classroom desk with identical yellow duck peeking out, smiling. Backpack unzip clearly visible. Homework sheet intact next to bag, only simple childish drawings and faint lines, no writing. Viewer perspective, no child needed."
+        },
+        {
+          "id": "funny-day",
+          "index": 2,
+          "title": "Funny day",
+          "text": "It had eaten my homework.",
+          "beat": "The homework mystery",
+          "alt": "It had eaten my homework.",
+          "recipe": "fruit",
+          "reference": "funny-day",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Funny day. CONTINUITY LOCK: Same cute round yellow rubber duck, orange beak, glossy dark oval eyes, rosy cheeks, small crest and stubby wings. Same mint fabric school backpack with yellow zipper, round daisy patch on front pocket, little yellow duck charm on zipper, purple bottle in side pocket and purple spiral notebook. Warm peach-and-lilac classroom, wooden desktop, tall window left with little schoolhouse outside, rainbow drawing on wall, colorful books on right. Introduce only on final page a kind adult woman teacher with warm medium-brown skin, dark curly bob, round plum glasses and lavender cardigan; consistent rubber duck and backpack must remain. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 2/3. Exact sentence to illustrate (do not render as text): \"It had eaten my homework.\" SCENE: Same duck now out on desk beside same open mint backpack, a ragged tiny corner of homework paper sticking from orange beak and nibbled curled sheet below. Duck looks adorably sheepish. Paper has recognizable same sunshine/tree/house drawings, no writing. Not threatening, silly slapstick."
+        },
+        {
+          "id": "funny-day",
+          "index": 3,
+          "title": "Funny day",
+          "text": "The teacher laughed so hard she gave the duck a gold star.",
+          "beat": "A star for the surprise guest",
+          "alt": "The teacher laughed so hard she gave the duck a gold star.",
+          "recipe": "fruit",
+          "reference": "funny-day",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Funny day. CONTINUITY LOCK: Same cute round yellow rubber duck, orange beak, glossy dark oval eyes, rosy cheeks, small crest and stubby wings. Same mint fabric school backpack with yellow zipper, round daisy patch on front pocket, little yellow duck charm on zipper, purple bottle in side pocket and purple spiral notebook. Warm peach-and-lilac classroom, wooden desktop, tall window left with little schoolhouse outside, rainbow drawing on wall, colorful books on right. Introduce only on final page a kind adult woman teacher with warm medium-brown skin, dark curly bob, round plum glasses and lavender cardigan; consistent rubber duck and backpack must remain. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 3/3. Exact sentence to illustrate (do not render as text): \"The teacher laughed so hard she gave the duck a gold star.\" SCENE: Friendly teacher with medium-brown skin, curly dark bob, round plum glasses and lavender cardigan smiles with laughing closed eyes while placing one golden star sticker on the SAME duck chest. Same desk, bag with daisy patch and paper nearby. No new children."
+        }
+      ]
+    },
+    {
+      "id": "helping-paws",
+      "title": "Helping paws",
+      "recipe": "orchard",
+      "reference": "helping-paws",
+      "continuity": "Exact same honey-brown plush bear, cream muzzle, round ears, glossy brown eyes, rosy cheeks, dark nose; mint apron with cream front pocket embroidered green sprout and back bow, no other clothes. Same much smaller round hedgehog with cream face and belly, layered soft brown spines, small pink ears, rosy cheeks, dark nose and brown paws, no clothes. Same wooden slat basket with curved handle, red apples with stems/leaves. Same flat warm cobblestone orchard path, apple tree and rustic fence left, cream stone cottage with wooden arched window right, roses/daisies, distant lavender hills. Bear roughly twice hedgehog height. No raised platforms, no sudden scenery changes. A cream-and-mint checkered picnic blanket beside path is introduced in page1 and stays in same garden.",
+      "pages": [
+        {
+          "id": "helping-paws",
+          "index": 1,
+          "title": "Helping paws",
+          "text": "A little hedgehog spilled his basket of apples.",
+          "beat": "A little tumble",
+          "alt": "A little hedgehog spilled his basket of apples.",
+          "recipe": "orchard",
+          "reference": "helping-paws",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Helping paws. CONTINUITY LOCK: Exact same honey-brown plush bear, cream muzzle, round ears, glossy brown eyes, rosy cheeks, dark nose; mint apron with cream front pocket embroidered green sprout and back bow, no other clothes. Same much smaller round hedgehog with cream face and belly, layered soft brown spines, small pink ears, rosy cheeks, dark nose and brown paws, no clothes. Same wooden slat basket with curved handle, red apples with stems/leaves. Same flat warm cobblestone orchard path, apple tree and rustic fence left, cream stone cottage with wooden arched window right, roses/daisies, distant lavender hills. Bear roughly twice hedgehog height. No raised platforms, no sudden scenery changes. A cream-and-mint checkered picnic blanket beside path is introduced in page1 and stays in same garden. PAGE 1/5. Exact sentence to illustrate (do not render as text): \"A little hedgehog spilled his basket of apples.\" SCENE: Small hedgehog reacts with surprised but gentle expression as his wooden basket tips sideways on flat cobblestone path, four red apples rolling nearby. Bear farther back beside a neatly laid picnic blanket notices the tumble; bear not yet helping."
+        },
+        {
+          "id": "helping-paws",
+          "index": 2,
+          "title": "Helping paws",
+          "text": "Bear put down her picnic and hurried over to help.",
+          "beat": "Help is on the way",
+          "alt": "Bear put down her picnic and hurried over to help.",
+          "recipe": "orchard",
+          "reference": "helping-paws",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Helping paws. CONTINUITY LOCK: Exact same honey-brown plush bear, cream muzzle, round ears, glossy brown eyes, rosy cheeks, dark nose; mint apron with cream front pocket embroidered green sprout and back bow, no other clothes. Same much smaller round hedgehog with cream face and belly, layered soft brown spines, small pink ears, rosy cheeks, dark nose and brown paws, no clothes. Same wooden slat basket with curved handle, red apples with stems/leaves. Same flat warm cobblestone orchard path, apple tree and rustic fence left, cream stone cottage with wooden arched window right, roses/daisies, distant lavender hills. Bear roughly twice hedgehog height. No raised platforms, no sudden scenery changes. A cream-and-mint checkered picnic blanket beside path is introduced in page1 and stays in same garden. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 2/5. Exact sentence to illustrate (do not render as text): \"Bear put down her picnic and hurried over to help.\" SCENE: Same bear leaves her cream-and-mint checkered picnic blanket beside path, where a small plate and sandwich remain, and hurries toward hedgehog and tipped basket with caring expression and outstretched paws. Apples still scattered."
+        },
+        {
+          "id": "helping-paws",
+          "index": 3,
+          "title": "Helping paws",
+          "text": "They gathered every apple with their tiny paws.",
+          "beat": "Many paws make light work",
+          "alt": "They gathered every apple with their tiny paws.",
+          "recipe": "orchard",
+          "reference": "helping-paws",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Helping paws. CONTINUITY LOCK: Exact same honey-brown plush bear, cream muzzle, round ears, glossy brown eyes, rosy cheeks, dark nose; mint apron with cream front pocket embroidered green sprout and back bow, no other clothes. Same much smaller round hedgehog with cream face and belly, layered soft brown spines, small pink ears, rosy cheeks, dark nose and brown paws, no clothes. Same wooden slat basket with curved handle, red apples with stems/leaves. Same flat warm cobblestone orchard path, apple tree and rustic fence left, cream stone cottage with wooden arched window right, roses/daisies, distant lavender hills. Bear roughly twice hedgehog height. No raised platforms, no sudden scenery changes. A cream-and-mint checkered picnic blanket beside path is introduced in page1 and stays in same garden. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 3/5. Exact sentence to illustrate (do not render as text): \"They gathered every apple with their tiny paws.\" SCENE: Bear and hedgehog kneel side by side picking up red apples into now upright wooden basket, each holds an apple, last apple on ground between them. Same flat path and picnic blanket behind."
+        },
+        {
+          "id": "helping-paws",
+          "index": 4,
+          "title": "Helping paws",
+          "text": "Hedgehog saved the sweetest one for his new friend.",
+          "beat": "A sweet thank-you",
+          "alt": "Hedgehog saved the sweetest one for his new friend.",
+          "recipe": "orchard",
+          "reference": "helping-paws",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Helping paws. CONTINUITY LOCK: Exact same honey-brown plush bear, cream muzzle, round ears, glossy brown eyes, rosy cheeks, dark nose; mint apron with cream front pocket embroidered green sprout and back bow, no other clothes. Same much smaller round hedgehog with cream face and belly, layered soft brown spines, small pink ears, rosy cheeks, dark nose and brown paws, no clothes. Same wooden slat basket with curved handle, red apples with stems/leaves. Same flat warm cobblestone orchard path, apple tree and rustic fence left, cream stone cottage with wooden arched window right, roses/daisies, distant lavender hills. Bear roughly twice hedgehog height. No raised platforms, no sudden scenery changes. A cream-and-mint checkered picnic blanket beside path is introduced in page1 and stays in same garden. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 4/5. Exact sentence to illustrate (do not render as text): \"Hedgehog saved the sweetest one for his new friend.\" SCENE: Same hedgehog offers a shiny red apple in both paws to same smiling bear, bear reaches to receive it. Basket upright and full nearby. Same path, no platform, picnic blanket visible beside path."
+        },
+        {
+          "id": "helping-paws",
+          "index": 5,
+          "title": "Helping paws",
+          "text": "Together they turned a small tumble into a happy picnic.",
+          "beat": "A happy picnic together",
+          "alt": "Together they turned a small tumble into a happy picnic.",
+          "recipe": "orchard",
+          "reference": "helping-paws",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Helping paws. CONTINUITY LOCK: Exact same honey-brown plush bear, cream muzzle, round ears, glossy brown eyes, rosy cheeks, dark nose; mint apron with cream front pocket embroidered green sprout and back bow, no other clothes. Same much smaller round hedgehog with cream face and belly, layered soft brown spines, small pink ears, rosy cheeks, dark nose and brown paws, no clothes. Same wooden slat basket with curved handle, red apples with stems/leaves. Same flat warm cobblestone orchard path, apple tree and rustic fence left, cream stone cottage with wooden arched window right, roses/daisies, distant lavender hills. Bear roughly twice hedgehog height. No raised platforms, no sudden scenery changes. A cream-and-mint checkered picnic blanket beside path is introduced in page1 and stays in same garden. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 5/5. Exact sentence to illustrate (do not render as text): \"Together they turned a small tumble into a happy picnic.\" SCENE: Bear and hedgehog sit together on the established cream-and-mint checkered picnic blanket on flat grass beside same path, happily sharing apple slices on a small cream plate and sandwiches. Full wooden basket rests beside blanket, same orchard/cottage/fence and proportions."
+        }
+      ]
+    },
+    {
+      "id": "restaurant",
+      "title": "Restaurant shift",
+      "recipe": "fruit",
+      "reference": "restaurant-shift",
+      "continuity": "Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes.",
+      "pages": [
+        {
+          "id": "restaurant",
+          "index": 1,
+          "title": "Restaurant shift",
+          "text": "Slice the apple, kiwi, pear, orange, mango and grapes, then serve a colorful fruit salad.",
+          "beat": "Order 1 · Fruit salad",
+          "alt": "Slice the apple, kiwi, pear, orange, mango and grapes, then serve a colorful fruit salad.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. PAGE 1/10. Exact sentence to illustrate (do not render as text): \"Slice the apple, kiwi, pear, orange, mango and grapes, then serve a colorful fruit salad.\" SCENE: Main chef gently adds golden mango cubes to a finished colorful fruit salad of apple, kiwi, pear, orange, mango and grapes in mint scalloped bowl. Whole ingredients on small wooden tray."
+        },
+        {
+          "id": "restaurant",
+          "index": 2,
+          "title": "Restaurant shift",
+          "text": "Chop tomato, cucumber, yellow pepper, radish, avocado and carrot, then add lemon to our garden salad.",
+          "beat": "Order 2 · Garden salad",
+          "alt": "Chop tomato, cucumber, yellow pepper, radish, avocado and carrot, then add lemon to our garden salad.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 2/10. Exact sentence to illustrate (do not render as text): \"Chop tomato, cucumber, yellow pepper, radish, avocado and carrot, then add lemon to our garden salad.\" SCENE: Main chef squeezes a small lemon wedge over garden salad of tomato, cucumber, yellow pepper, radish, avocado and carrot in wide cream bowl with green rim."
+        },
+        {
+          "id": "restaurant",
+          "index": 3,
+          "title": "Restaurant shift",
+          "text": "Chop pumpkin, onion, potato, carrot and celery, then serve a warm bowl of pumpkin soup.",
+          "beat": "Order 3 · Pumpkin soup",
+          "alt": "Chop pumpkin, onion, potato, carrot and celery, then serve a warm bowl of pumpkin soup.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 3/10. Exact sentence to illustrate (do not render as text): \"Chop pumpkin, onion, potato, carrot and celery, then serve a warm bowl of pumpkin soup.\" SCENE: Main chef ladles smooth orange pumpkin soup into golden yellow handled ceramic soup bowl, gentle curl of steam, pumpkin wedges, onion, potato, carrot and celery on small ingredient tray."
+        },
+        {
+          "id": "restaurant",
+          "index": 4,
+          "title": "Restaurant shift",
+          "text": "Mix orange, lemon, mango, pineapple, lime, dragon fruit and kiwi for a bright tropical bowl.",
+          "beat": "Order 4 · Tropical bowl",
+          "alt": "Mix orange, lemon, mango, pineapple, lime, dragon fruit and kiwi for a bright tropical bowl.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 4/10. Exact sentence to illustrate (do not render as text): \"Mix orange, lemon, mango, pineapple, lime, dragon fruit and kiwi for a bright tropical bowl.\" SCENE: Main chef mixes a vivid tropical salad with orange, lemon, mango, pineapple, lime, pink-rim white dragon fruit and kiwi in coral scalloped bowl."
+        },
+        {
+          "id": "restaurant",
+          "index": 5,
+          "title": "Restaurant shift",
+          "text": "Cut potato, beet, onion, zucchini, mushroom and broccoli, then plate the roasted vegetables.",
+          "beat": "Order 5 · Roasted veggies",
+          "alt": "Cut potato, beet, onion, zucchini, mushroom and broccoli, then plate the roasted vegetables.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 5/10. Exact sentence to illustrate (do not render as text): \"Cut potato, beet, onion, zucchini, mushroom and broccoli, then plate the roasted vegetables.\" SCENE: Main chef arranges roasted potato, beet, onion, zucchini, mushroom and broccoli on low oval terracotta platter using wooden spoon."
+        },
+        {
+          "id": "restaurant",
+          "index": 6,
+          "title": "Restaurant shift",
+          "text": "Slice strawberry, raspberry, blueberry and cherry, then add pomegranate to our berry bowl.",
+          "beat": "Order 6 · Berry bowl",
+          "alt": "Slice strawberry, raspberry, blueberry and cherry, then add pomegranate to our berry bowl.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 6/10. Exact sentence to illustrate (do not render as text): \"Slice strawberry, raspberry, blueberry and cherry, then add pomegranate to our berry bowl.\" SCENE: Main chef sprinkles ruby pomegranate seeds over strawberries, raspberries, blueberries and cherries in a lilac scalloped bowl. Berries proportionate, raspberries small."
+        },
+        {
+          "id": "restaurant",
+          "index": 7,
+          "title": "Restaurant shift",
+          "text": "Cut tofu, cucumber, pepper, carrot and radish, then squeeze lime over our crunchy tofu salad.",
+          "beat": "Order 7 · Tofu salad",
+          "alt": "Cut tofu, cucumber, pepper, carrot and radish, then squeeze lime over our crunchy tofu salad.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 7/10. Exact sentence to illustrate (do not render as text): \"Cut tofu, cucumber, pepper, carrot and radish, then squeeze lime over our crunchy tofu salad.\" SCENE: Main chef squeezes lime over white tofu cubes, cucumber, pepper, carrot and radish in a blue ceramic bowl."
+        },
+        {
+          "id": "restaurant",
+          "index": 8,
+          "title": "Restaurant shift",
+          "text": "Slice apple, pear, peach, plum, apricot, cherry and fig, then serve a sweet orchard bowl.",
+          "beat": "Order 8 · Orchard bowl",
+          "alt": "Slice apple, pear, peach, plum, apricot, cherry and fig, then serve a sweet orchard bowl.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 8/10. Exact sentence to illustrate (do not render as text): \"Slice apple, pear, peach, plum, apricot, cherry and fig, then serve a sweet orchard bowl.\" SCENE: Main chef presents apple, pear, peach, plum, apricot, cherry and fig slices in honey wooden grain serving bowl."
+        },
+        {
+          "id": "restaurant",
+          "index": 9,
+          "title": "Restaurant shift",
+          "text": "Slice bread, cheese, tomato, cucumber and apple, then arrange a fresh picnic plate.",
+          "beat": "Order 9 · Picnic plate",
+          "alt": "Slice bread, cheese, tomato, cucumber and apple, then arrange a fresh picnic plate.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 9/10. Exact sentence to illustrate (do not render as text): \"Slice bread, cheese, tomato, cucumber and apple, then arrange a fresh picnic plate.\" SCENE: Main chef arranges bread, cheese, tomato, cucumber and apple on an ivory oval plate with mint rim, picnic snacks readable and attractive."
+        },
+        {
+          "id": "restaurant",
+          "index": 10,
+          "title": "Restaurant shift",
+          "text": "Plate bagel, croissant, cheese, fig, apricot and blueberry for a cheerful bakery breakfast.",
+          "beat": "Order 10 · Bakery breakfast",
+          "alt": "Plate bagel, croissant, cheese, fig, apricot and blueberry for a cheerful bakery breakfast.",
+          "recipe": "fruit",
+          "reference": "restaurant-shift",
+          "prompt": "Use case: illustration-story. Asset type: one finished children's book gameplay illustration for Typeslasher. Input image 1 is the canonical existing story thumbnail: match the characters, materials, setting, props and art style very closely, but create a new composition for this exact story beat. Polished rounded stylized 3D children's book art, softly matte handmade materials, delicate plush/painted texture, warm cream highlights, plum shadows, mint and golden accents, cute expressive faces, never realistic. Landscape 3:2, 1536x1024. Full-bleed scene, important subjects entirely visible with safe margins. No lettering, text, typography, captions, UI, panels, borders, watermark or logo. Do not show future story events prematurely. STORY: Restaurant shift. CONTINUITY LOCK: Same cute stylized woman chef with warm peach skin, rosy cheeks, dark brown hair in two low side buns and front curl, cream puffy chef toque, white double-breasted coat and plum apron. Same cozy restaurant kitchen pass: warm wooden counter, plum tiled backsplash, hanging copper pans, two green pendant lamps, shelf with stacked ivory plates and herbs, three blank hanging paper tickets, friendly yellow service bell left. Same bearded warm brown-skinned male sous chef wearing white toque/coat and plum apron softly blurred in background right. Main chef prepares or finishes exactly ONE featured dish per page. Match food shapes and soft painted textures of game recipe cards, no photorealism, no extra featured dishes. Input image 2 is this story opening page; retain its exact identities and environment as well. PAGE 10/10. Exact sentence to illustrate (do not render as text): \"Plate bagel, croissant, cheese, fig, apricot and blueberry for a cheerful bakery breakfast.\" SCENE: Main chef serves a cream scalloped breakfast plate with golden bagel, croissant, cheese, cut fig, apricot and blueberries, satisfied end-of-shift smile."
+        }
+      ]
+    }
+  ]
+}

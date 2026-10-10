@@ -1,0 +1,42 @@
+/* The illustration and typing surface form one compact book below the kitchen. */
+.sentence-book{min-width:0}
+.story-art{position:relative;isolation:isolate;overflow:hidden;background:#e9e0c9}
+.story-art img,.story-art canvas{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:fill}
+.story-art img{filter:grayscale(1)}
+.story-art canvas{pointer-events:none}
+.story-page-number{position:absolute;z-index:2;bottom:12px;left:12px;padding:7px 9px;border-radius:6px;background:#fff1d8e8;color:#78543b;font:9px 'DM Mono',monospace}
+.story-art-status{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:#6b514e;font-size:12px;pointer-events:none}
+.story-art-status:empty{display:none}
+.story-reading-title{margin:0 0 10px;font-size:16px;color:#654b61;line-height:1.3}
+.story-paint-label{font-size:11px;color:#507660;margin:5px 0 0}
+#sentence-game.storybook-mode .sentence-stage{min-height:0;justify-content:flex-start;gap:10px;padding-top:10px}
+#sentence-game.storybook-mode .sentence-nav{height:50px}
+#sentence-game.storybook-mode .sentence-stage-top .sentence-kicker{color:#ffd453;margin:0 0 5px}
+#sentence-game.storybook-mode .service-progress-row{margin-top:0;margin-bottom:0}
+#sentence-game.storybook-mode #sentence-kitchen{width:calc(100% - 2*var(--stage-gutter));margin-left:var(--stage-gutter);margin-right:var(--stage-gutter);align-self:auto;height:auto;min-height:260px;aspect-ratio:2.9/1;border-radius:12px}
+#sentence-game.storybook-mode .sentence-book{--book-height:clamp(220px,26dvh,250px);height:var(--book-height);display:grid;grid-template-columns:calc((var(--book-height) - 4px)*1.5) minmax(0,1fr);grid-template-rows:minmax(0,1fr);border:2px solid #ffd453;border-radius:15px;overflow:hidden;background:#fff1d8;color:#392b3d;box-shadow:0 5px #a77432,0 8px #17121f;margin-bottom:5px}
+#sentence-game.storybook-mode .sentence-reading{padding:14px 22px;min-width:0;min-height:0;max-height:none;overflow:hidden;display:flex;flex-direction:column;background:transparent;border:0;border-radius:0;box-shadow:none}
+#sentence-game.storybook-mode .reading-heading{gap:12px;align-items:center;margin-bottom:7px}
+#sentence-game.storybook-mode .reading-heading .sentence-kicker{color:#987044;font-size:8px;margin:0;letter-spacing:.1em}
+#sentence-game.storybook-mode #service-mode-label{color:#987044;font-size:8px;white-space:nowrap}
+#sentence-game.storybook-mode .sentence-text-window{min-height:0;flex:1;max-height:none;overflow:auto;scrollbar-width:thin;scrollbar-color:#b39e81 #fff1d8}
+#sentence-game.storybook-mode #active-sentence{font-size:clamp(22px,2.1vw,28px);line-height:1.38;min-height:0;color:#392b3d;max-width:none}
+#sentence-game.storybook-mode #active-sentence span.done{color:#507e62}
+#sentence-game.storybook-mode #active-sentence span.error{color:#b3405c}
+#sentence-game.storybook-mode #active-sentence span.current{background:#ecd48675;border-bottom-color:#bd8f30;color:#392b3d}
+#sentence-game.storybook-mode #sentence-feedback{font-size:11px;color:#8b5265;min-height:14px;margin:7px 0 0}
+#sentence-game.storybook-mode .up-next{display:none}
+#sentence-game.storybook-mode .sentence-reading.cutting #active-sentence{visibility:hidden}
+#sentence-game.storybook-mode .sentence-fragment{left:22px;right:22px;font-size:clamp(22px,2.1vw,28px);line-height:1.38;color:#507e62}
+#sentence-game.storybook-mode .sentence-stage-bottom{font-size:9px}
+#sentence-game.storybook-mode .order-card{grid-template-columns:50px minmax(0,1fr);padding:8px 10px;gap:6px 9px}
+#sentence-game.storybook-mode .order-card>img{width:50px;height:50px}
+#sentence-game.storybook-mode .order-card h2{font-size:16px}
+#sentence-game.storybook-mode .order-ingredients{display:none}
+#sentence-game.storybook-mode .order-card-footer{margin-top:3px}
+#sentence-game.storybook-mode .order-label{font-size:8px}
+#sentence-game.storybook-mode #order-alert:empty{display:none}
+@media(min-width:761px){#sentence-game.storybook-mode #sentence-kitchen{height:clamp(250px,calc(100dvh - 438px),490px);min-height:250px;aspect-ratio:auto}#sentence-game.storybook-mode .sentence-stage-top{min-height:40px}#sentence-game.storybook-mode .service-stats b{font-size:24px}#sentence-game.storybook-mode .service-stats small{font-size:7px}#sentence-game.storybook-mode .service-combo{min-width:90px}#sentence-game.storybook-mode .order-rail{margin-top:0;margin-bottom:0}#sentence-game.storybook-mode .order-card{padding:6px 9px}#sentence-game.storybook-mode .order-card>img{width:42px;height:42px}#sentence-game.storybook-mode .order-card{grid-template-columns:42px minmax(0,1fr)}#sentence-game.storybook-mode .order-card h2{font-size:14px;margin:3px 0}#sentence-game.storybook-mode .order-timer{height:4px}#sentence-game.storybook-mode .order-time{font-size:8px;margin-top:3px}}
+@media(max-width:1000px){#sentence-game.storybook-mode .service-stats{gap:12px}#sentence-game.storybook-mode .service-combo{display:none}#sentence-game.storybook-mode .story-reading-title{font-size:14px}}
+@media(min-width:761px) and (max-height:800px){#sentence-game.storybook-mode .sentence-stage{gap:6px;padding-top:8px;padding-bottom:8px}#sentence-game.storybook-mode .sentence-book{--book-height:190px}#sentence-game.storybook-mode #sentence-kitchen{height:clamp(250px,calc(100dvh - 470px),330px)}#sentence-game.storybook-mode .service-progress-row{display:none}#sentence-game.storybook-mode .sentence-nav{height:48px}#sentence-game.storybook-mode .sentence-reading{padding:12px 18px}#sentence-game.storybook-mode .story-reading-title{margin-bottom:7px}}
+@media(max-width:760px){#sentence-game.storybook-mode .sentence-book{height:auto;grid-template-columns:1fr;grid-template-rows:auto auto}#sentence-game.storybook-mode .story-art{aspect-ratio:3/2;width:min(100%,420px);justify-self:center}#sentence-game.storybook-mode .sentence-reading{padding:17px 20px;min-height:200px}#sentence-game.storybook-mode .sentence-text-window{max-height:200px}#sentence-game.storybook-mode #active-sentence{font-size:23px}#sentence-game.storybook-mode #sentence-kitchen{min-height:230px}#sentence-game.storybook-mode .sentence-stage-top{flex-wrap:wrap}#sentence-game.storybook-mode .service-tools{margin-left:auto}#sentence-game.storybook-mode .sentence-stage-bottom{flex-wrap:wrap}}

@@ -41,5 +41,17 @@ for(const name of ['fruit-adventure','space-mission','funny-day','restaurant-shi
   assert.ok(size<80_000,'Keep each illustrated story tile under 80 KB');storyBytes+=size;
 }
 assert.ok(storyBytes<300_000,'Keep story artwork under 300 KB');optionalBytes+=storyBytes;
+// Storybook pages are lazy-loaded when entering an illustrated story. Only the
+// current and next picture are requested, leaving the starter download intact.
+let storybookBytes=0,storybookPages=0;
+for(const story of await readdir(resolve(root,'assets/storybooks'))){
+  for(const name of await readdir(resolve(root,'assets/storybooks',story))){
+    assert.match(name,/\.webp$/);
+    const size=(await stat(resolve(root,'assets/storybooks',story,name))).size;
+    assert.ok(size<240_000,'Keep each storybook page under 240 KB');storybookBytes+=size;storybookPages++;
+  }
+}
+assert.equal(storybookPages,30,'All six complete storybooks ship their selected pages');
+assert.ok(storybookBytes<4_500_000,'Keep all optional storybook pages under 4.5 MB');optionalBytes+=storybookBytes;
 assert.ok(bytes-optionalBytes<8_000_000,'Keep the starter game under an 8 MB raw asset budget');
 console.log(`Passed: portable release links, local fonts/licenses, ${(bytes/1e6).toFixed(2)} MB raw / ${(gzipBytes/1e6).toFixed(2)} MB with gzip.`);

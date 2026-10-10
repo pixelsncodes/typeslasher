@@ -26,3 +26,9 @@
   Upstream source: https://github.com/google/fonts
 - Vite and TypeScript are development tools; their dependency licenses are
   retained in the installed packages. No external service is required during play.
+- The 30 sentence illustrations in `public/assets/storybooks/` were created with
+  OpenAI's built-in image generation, using the project's existing story art as
+  references. The selected pages include continuity edits for Little Kindness,
+  Funny Day and Restaurant Shift. Exact prompts and original assets are retained
+  in `art-review/storybook/`. The watercolor reveal uses original project code;
+  images are served locally and no generation service is called during gameplay.

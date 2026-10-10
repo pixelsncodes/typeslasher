@@ -206,3 +206,20 @@ does not install an offline service worker.
 
 See **STATUS.md** for completed checks and remaining device playtest coverage,
 **PLAN.md** for the roadmap, and **THIRD_PARTY_NOTICES.md** for asset/library credits.
+
+## Pay with a story
+
+Choose **Sentence Slash**, press **Play**, pick one of the six illustrated stories,
+and press **Start**. Every sentence has its own picture beside the typing text.
+It begins in black and white; correct letters gently paint in the color while
+completed words trigger smooth kitchen preparation. Each ingredient arrives,
+gets cut and moves into the dish, then the next waits for its turn. Finishing
+the sentence triggers the last ingredient's cut, serves the dish
+and opens the next picture. Mistakes do not add color. Use Backspace to correct
+the marked character, and Escape or Pause to take a break.
+
+For an easy first visit, open **Game options** and choose **Relaxed service**.
+Rush service keeps the order timers: an expired order clears the ingredients and
+moves to the next sentence and picture. Your custom passages still work with
+the standard typing layout. Pictures are stored in the game, with no AI requests
+during play.
