@@ -206,5 +206,7 @@ milestones. Each milestone plays a smooth arrival, cut and transfer on the pause
 scene clock, independently of the next keystroke. The next ingredient stays in
 the basket until its milestone. Sentence completion unlocks the final ingredient;
 the text slash matches its blade contact, and serving waits for the pieces to land.
-Fast or very short sentences finish the remaining preparation in a bounded .7s
-flourish. Mistakes unlock nothing; Pause freezes preparation and serving.
+Fast or very short sentences catch up earlier ingredients in at most 1.4 seconds;
+the last ingredient then gets its own 2.1-second ease-out through arrival, cutting
+and landing. Serving starts once it lands, rather than enforcing a sentence-end
+deadline. Mistakes unlock nothing; Pause freezes preparation and serving.

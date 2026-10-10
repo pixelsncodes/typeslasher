@@ -5,6 +5,7 @@ export const CUT_RELEASE = .43;
 export const CUT_END = .86;
 export const NEXT_FRUIT_DELAY = .25;
 export const INGREDIENT_INTAKE = .32;
+export const FINAL_PREP_DURATION = 2.1;
 
 // Use the scene's paused clock. Input updates cannot bypass this gap.
 export class FruitCadence {
@@ -31,8 +32,7 @@ export class IngredientPrepTimeline {
   private target=0;
   private value=0;
   private previous=0;
-  private finishFrom=0;
-  private finishAt:number|undefined;
+  private finish:{born:number;from:number;leadTo:number;leadDuration:number;tailDuration:number}|undefined;
   readonly count:number;
   constructor(count:number){this.count=count;}
   get progress(){return this.value/this.count;}
@@ -40,18 +40,28 @@ export class IngredientPrepTimeline {
   advance(now:number,reduced=false){
     const elapsed=Math.max(0,now-this.previous);this.previous=now;
     if(reduced)this.value=this.target;
-    else if(this.finishAt!==undefined){
-      // Even pasted/very short passages finish in one brief flourish, rather
-      // than leaving an entire basket queued behind the completed sentence.
-      const t=Math.min(1,Math.max(0,(now-this.finishAt)/.7));
-      this.value=Math.max(this.value,this.finishFrom+(this.count-this.finishFrom)*t);
+    else if(this.finish){
+      const {born,from,leadTo,leadDuration,tailDuration}=this.finish;
+      const age=Math.max(0,now-born);
+      // Catch up earlier ingredients separately, so fast typing never squeezes
+      // the final arrival, chop and landing into the same short deadline.
+      if(age<leadDuration)this.value=Math.max(this.value,from+(leadTo-from)*age/leadDuration);
+      else {
+        const t=tailDuration?Math.min(1,(age-leadDuration)/tailDuration):1;
+        const eased=1-Math.pow(1-t,1.5);
+        this.value=Math.max(this.value,leadTo+(this.count-leadTo)*eased);
+      }
     }else this.value=Math.min(this.target,this.value+elapsed*Math.max(1,(this.target-this.value)/1.5)/(INGREDIENT_INTAKE+CUT_END+NEXT_FRUIT_DELAY));
     return this.progress;
   }
   unlock(completed:number,now:number,final=false){
     this.advance(now);
     this.target=Math.max(this.target,Math.min(this.count,completed));
-    if(final&&this.finishAt===undefined){this.target=this.count;this.finishFrom=this.value;this.finishAt=now;}
+    if(final&&!this.finish){
+      this.target=this.count;
+      const leadTo=Math.max(this.value,this.count-1);
+      this.finish={born:now,from:this.value,leadTo,leadDuration:Math.min(1.4,(leadTo-this.value)*.32),tailDuration:(this.count-leadTo)*FINAL_PREP_DURATION};
+    }
   }
 }
 
@@ -60,7 +70,8 @@ export function ingredientPrepPose(progress:number,index:number,count:number) {
   const interval=sentence*count-index;
   const local=Math.max(0,Math.min(1,interval));
   const intakeTime=INGREDIENT_INTAKE;
-  const age=local*(intakeTime+CUT_END+NEXT_FRUIT_DELAY);
-  const cut=cutPose(Math.max(0,age-intakeTime));
+  // The final landing ends preparation directly; no extra inter-item rest.
+  const age=local*(intakeTime+CUT_END+(index===count-1?0:NEXT_FRUIT_DELAY));
+  const cut=cutPose(local===1?CUT_END:Math.max(0,age-intakeTime));
   return {started:interval>0,intake:smooth(age/intakeTime),cut};
 }

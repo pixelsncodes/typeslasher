@@ -214,8 +214,8 @@ and press **Start**. Every sentence has its own picture beside the typing text.
 It begins in black and white; correct letters gently paint in the color while
 completed words trigger smooth kitchen preparation. Each ingredient arrives,
 gets cut and moves into the dish, then the next waits for its turn. Finishing
-the sentence triggers the last ingredient's cut, serves the dish
-and opens the next picture. Mistakes do not add color. Use Backspace to correct
+the sentence triggers the last ingredient's gentle finish. Once it lands, the
+dish is served and the next picture opens. Mistakes do not add color. Use Backspace to correct
 the marked character, and Escape or Pause to take a break.
 
 For an easy first visit, open **Game options** and choose **Relaxed service**.

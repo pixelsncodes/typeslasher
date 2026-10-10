@@ -7,8 +7,10 @@
 - Completed words unlock ingredient milestones; arrival, cutting and plating
   animate smoothly on the paused scene clock. The final ingredient's blade
   contact triggers the sentence slash, then the completed dish is served.
-- Short or fast sentences finish remaining prep in a bounded flourish. Pause
-  freezes motion, mistakes unlock nothing, and reduced motion settles directly.
+- Short or fast sentences catch up earlier ingredients separately. The final
+  item gets its own 2.1-second ease-out and lands before serving begins.
+  “Finishing touches…” marks this pause after typing; motion remains pausable,
+  mistakes unlock nothing, and reduced motion settles directly.
 - The original sentence stays hidden during its cut and serving transition.
 
 Validation: all 18 automated suites, the production build, and portable release

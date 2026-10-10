@@ -296,7 +296,9 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
   function startCompletedCut(){
     if(!pauseCover.hidden)return;
     if(scene&&!scene.finalCutReached){scheduleCut(16);return;}
-    awaitingFinalCut=false;slash(cutFinal);scheduleCut(isReduced()?220:620);
+    awaitingFinalCut=false;screen.classList.add('cutting');slash(cutFinal);
+    $('#sentence-feedback').textContent=cutFinal?'Passage complete!':'Clean cut!';
+    $('#sentence-hint').textContent='✦ SLICE!';scheduleCut(isReduced()?220:620);
   }
   function resetCut() { window.clearTimeout(cutTimer); cutting=false; cutReady=false; awaitingFinalCut=false; queuedKeys=[]; screen.classList.remove('cutting');root.classList.remove('service-paused','order-shake'); }
   function completeCut() {
@@ -325,14 +327,14 @@ export function createSentenceUI(options: { home: () => void; reduced: () => boo
     else if(result==='correct'&&now-lastSound>45){options.letter?.(session.correct);lastSound=now;}
     if(result==='slash' || result==='finished') {
       book.setProgress(1);
-      if(storyPages)$('.story-paint-label').textContent='Picture complete. Supper is served!';
+      if(storyPages)$('.story-paint-label').textContent='Picture complete. Your dish is almost ready.';
       if(previousToken)scene?.update({ordinal:previousToken.ordinal,progress:1,sentenceProgress:1,served:kitchen.served,total:session.sentences.length,multiplier:kitchen.multiplier,error:false});
       // The animated cut faces replace the original text until service settles.
       characterSpans.forEach(span=>span.className='done');
       cutting=true; cutReady=false; cutFinal=result==='finished'; session.pause();
-      screen.classList.add('cutting');awaitingFinalCut=true;
-      $('#sentence-feedback').textContent=cutFinal?'Passage complete!':'Clean cut!';
-      $('#sentence-hint').textContent='✦ SLICE!';
+      awaitingFinalCut=true;
+      $('#sentence-feedback').textContent='Finishing touches…';
+      $('#sentence-hint').textContent='Finishing the dish';
       $<HTMLButtonElement>('#sentence-finish').disabled=true;
       updateHud();startCompletedCut();
     } else { $('#sentence-feedback').textContent=result==='wrong'?'Not quite. Backspace to fix it.':''; render(); }

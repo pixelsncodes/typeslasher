@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {FRUIT_MIX,cutPose,CUT_CONTACT,CUT_RELEASE,CUT_END,FruitCadence,NEXT_FRUIT_DELAY,ingredientPrepPose,IngredientPrepTimeline} from '../src/sentence-motion.ts';
+import {FRUIT_MIX,cutPose,CUT_CONTACT,CUT_RELEASE,CUT_END,FruitCadence,NEXT_FRUIT_DELAY,ingredientPrepPose,IngredientPrepTimeline,FINAL_PREP_DURATION} from '../src/sentence-motion.ts';
 assert.deepEqual([...FRUIT_MIX],['apple','kiwi','pear','orange','mango']);
 assert.equal(cutPose(CUT_CONTACT-.001).split,false);
 assert.equal(cutPose(CUT_CONTACT).split,true);
@@ -40,11 +40,21 @@ assert.equal(prep.advance(18),1/6,'The next ingredient waits for its sentence mi
 prep.unlock(1,18);assert.equal(prep.busy,false,'Repeating a word effect never duplicates a cut');
 prep.unlock(2,18);const moving=prep.advance(18.2);
 assert.equal(prep.advance(18.2),moving,'Paused scene time freezes the animation');
+const finale=new IngredientPrepTimeline(6);
+finale.unlock(5,0);finale.advance(20);finale.unlock(6,20,true);
+assert.equal(finale.progress,5/6,'Sentence completion does not jump the last ingredient');
+assert.equal(ingredientPrepPose(finale.advance(20.7),5,6).cut.settled,false,'The final landing is no longer squeezed into .7 seconds');
+const before=finale.advance(21.4),after=finale.advance(21.5),nearEnd=finale.advance(21.9),end=finale.advance(22);
+assert.ok(after-before> end-nearEnd,'The final motion slows down as it approaches the dish');
+assert.equal(finale.advance(22),end,'Pause freezes the ease-out, too');
+finale.unlock(6,22,true);
+assert.equal(finale.advance(20+FINAL_PREP_DURATION),1,'Duplicate completion cannot restart the final easing');
+assert.equal(finale.busy,false,'Serving can begin once the last ingredient lands');
 for(const count of [1,4,6,8]){
   const fast=new IngredientPrepTimeline(count);fast.unlock(count,0,true);
   let previous=0;
-  for(let now=0;now<.7;now+=1/60){const value=fast.advance(now);assert.ok(value>=previous&&value<=1);previous=value;}
-  assert.equal(fast.advance(.7),1,'Short/rapidly typed sentences finish in one bounded flourish');
+  for(let now=0;now<3.6;now+=1/60){const value=fast.advance(now);assert.ok(value>=previous&&value<=1);previous=value;}
+  assert.equal(fast.advance(3.6),1,'Rapid typing catches up with a bounded, separately eased final ingredient');
   assert.equal(fast.busy,false);assert.equal(ingredientPrepPose(fast.progress,count-1,count).cut.transfer,1);
   const calm=new IngredientPrepTimeline(count);calm.unlock(count,0,true);
   assert.equal(calm.advance(0,true),1,'Reduced motion settles all unlocked ingredients immediately');
@@ -61,4 +71,4 @@ const clearance=JSON.parse(await readFile(new URL('../art-review/kitchen-v2-clea
 assert.equal(clearance.pendants.length,0);
 assert.equal(clearance.shelf_props.length,10);
 for(const prop of clearance.shelf_props){assert.ok(prop.front>=2.15&&prop.back<=3.47);assert.ok(prop.wall_clearance>.18);}
-console.log('Passed: smooth milestone preparation, idle/paused clocks, bounded final flourish, reduced motion, blade/split/transfer order, Blender export and shelf clearances.');
+console.log('Passed: smooth milestones, eased final landing, pause/duplicate completion, bounded catch-up, reduced motion, blade/split/transfer order, Blender export and shelf clearances.');
